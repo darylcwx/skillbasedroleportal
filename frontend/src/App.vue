@@ -5,7 +5,7 @@ export default { components: { Navbar } }
 </script>
 
 <template>
-  <Navbar />
+  <!-- <Navbar /> -->
   <div className="container mx-auto px-4">
     <router-view></router-view>
 
