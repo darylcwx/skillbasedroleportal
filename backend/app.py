@@ -11,10 +11,21 @@ user='root'
 password='password'
 host='localhost'
 port = 3306
-db='TEST'
+db='SBRP'
 connection = mysql.connector.connect(user=user, password=password, host=host, database=db)
 
 # Routes 
+@app.route('/api/roles', methods=['GET'])
+def get_roles():
+    try:
+        cursor = connection.cursor()
+        query = "SELECT * FROM role"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return jsonify(result)
+    except mysql.connector.Error as error:
+        print("Error: ", error)
+
 @app.route('/api/users', methods=['GET'])
 def get_user():
     try:

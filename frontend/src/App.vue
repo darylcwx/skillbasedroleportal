@@ -6,8 +6,9 @@ export default { components: { Navbar } }
 
 <template>
   <!-- <Navbar /> -->
-  <div className="container mx-auto px-4">
-    <router-view></router-view>
-
+  <div class="bg-neutral-800">
+    <div class="container mx-auto px-4">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
