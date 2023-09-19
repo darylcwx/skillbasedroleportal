@@ -1,14 +1,15 @@
-<script >
-//import HelloWorld from './components/HelloWorld.vue'
-import Navbar from './components/Navbar.vue'
-export default { components: { Navbar } }
-</script>
-
 <template>
-  <!-- <Navbar /> -->
-  <div class="bg-neutral-800">
-    <div class="container mx-auto px-4">
-      <router-view></router-view>
-    </div>
+  <div v-if="this.$store.state.user && this.$route.path !== '/'">
+    <Navbar />
+  </div>
+  <div class="bg-neutral-900">
+    <router-view></router-view>
   </div>
 </template>
+
+<script >
+import Navbar from './components/Navbar.vue'
+export default {
+  components: { Navbar },
+}
+</script>

@@ -1,34 +1,38 @@
 <template>
-    <div class="container h-screen w-full flex row justify-center items-center">
-        <div class="grid grid-cols-2 gap-8">
-            <div v-for="item in 4">
-                <div class="p-8 bg-accent rounded-xl text-black">
-                    <div class="pb-9">Name of Module {{ item }}</div>
-                    <div class="">Link here</div>
-                </div>
-            </div>
-            <div v-if="role == 'Human Resources'" class="p-8 bg-accent rounded-xl text-black">HR module </div>
-            <div v-if="role == 'Staff'" class="p-8 bg-accent rounded-xl text-black">staff module </div>
-            <div v-if="role == 'Manager'" class="p-8 bg-accent rounded-xl text-black">manager module </div>
+    <div class=" container mx-auto max-w-4xl h-screen w-full flex row justify-center items-center">
+        <!-- 0: admin, 1: user, 2: manager -->
+        <div v-if="user.accessRights == 0" class="grid grid-cols-2 gap-8">
+            <Module name="Admin module" description="" path="/listings" />
+            <Module name="Admin module" description="" path="/listings" />
+            <Module name="Admin module" description="" path="/listings" />
         </div>
+        <div v-if="user.accessRights == 1" class="grid grid-cols-2 gap-8">
+            <Module name="Admin module" description="" path="/listings" />
+        </div>
+        <div v-if="user.accessRights == 2" class="grid grid-cols-2 gap-8">
+            <Module name="Admin module" description="" path="/listings" />
+        </div>
+
 
     </div>
 </template>
 <script>
+import Module from "../components/Module.vue"
 export default {
-    props: ['role'],
+    components: { Module },
     data() {
         return {
+            user: this.$store.state.user,
+            // id, fname lname, dept, email, accessRights
         };
     },
     created() {
 
     },
     mounted() {
-
+        console.log(this.user);
     },
-    methods() {
-
+    methods: {
     }
 }
 </script>
