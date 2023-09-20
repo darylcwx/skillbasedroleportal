@@ -30,14 +30,13 @@ insert into `Staff` values(6, 'staff', '01', 'IT', 'staff.01@aio.com', 1) ;
 create table `Role` (
 	`Role_Name` varchar(20) NOT NULL,
 	`Role_Desc` longtext NOT NULL,
-    `Deadline` date NOT NULL,
 	constraint Role_PK primary key (`Role_Name`)
 );
 
-INSERT INTO `Role` VALUES ('IT Support', 'Assit in daily user technical problems and IT equipment maintenence.', '2023-10-25');
-INSERT INTO `Role` VALUES ('Clerk', 'Keyboard warrior.', '2023-10-28');
-INSERT INTO `Role` VALUES ('Human Resources', 'Any member of the Human Resources team', '2023-11-18');
-INSERT INTO `Role` VALUES ('Manager', 'Any manager', '2023-11-05');
+INSERT INTO `Role` VALUES ('IT Support', 'Assit in daily user technical problems and IT equipment maintenence.');
+INSERT INTO `Role` VALUES ('Clerk', 'Keyboard warrior.');
+INSERT INTO `Role` VALUES ('Human Resources', 'Any member of the Human Resources team');
+INSERT INTO `Role` VALUES ('Manager', 'Any manager');
 
 create table `Role_Skill` (
 	`Role_Name` varchar(20) NOT NULL,
@@ -55,25 +54,27 @@ create table `Staff_Skill` (
 	constraint Staff_Skill_FK2 foreign key (`Skill_Name`) references `Role_Skill` (`Skill_Name`)
 );
 
+create table `Listings` (
+	`listing_ID` int(10) NOT NULL AUTO_INCREMENT,
+    `Role_Name` varchar(20) NOT NULL,
+	`Deadline` date NOT NULL,
+    constraint Listings_PK primary key (`listing_ID`),
+    constraint Listings_FK foreign key (`Role_Name`) references `Role` (`Role_Name`)
+);
+
+insert into `Listings` values (1, 'IT Support', '2023-10-25');
+insert into `Listings` values (1, 'Clerk', '2023-10-28');
+insert into `Listings` values (1, 'Human Resources', '2023-11-18');
+insert into `Listings` values (1, 'Manager', '2023-11-05');
+
 create table `Staff_Application` (
 	`Application_ID` int(10) NOT NULL AUTO_INCREMENT,
 	`Staff_ID` int(10) NOT NULL,
-    `Role_Name` varchar(20) NOT NULL,
+    `listing_ID` int(10) NOT NULL,
     constraint Staff_Application_PK primary key (`Application_ID`),
     constraint Staff_Application_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`),
-    constraint Staff_Application_FK2 foreign key (`Role_Name`) references `Role` (`Role_Name`)
+    constraint Staff_Application_FK2 foreign key (`listing_ID`) references `Listings` (`listing_ID`)
 );
 
-INSERT INTO `Staff_Application` VALUES ('1', 6, 'Clerk');
-
-create table `Staff_Login` (
-    `Username` varchar(20) NOT NULL,
-    `Password` longtext NOT NULL,
-    `Staff_ID` int(10) NOT NULL,
-    constraint Staff_Login_PK primary key (`Username`),
-    constraint Staff_Login_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`)
-);
-
-INSERT INTO `Staff_Login` VALUES ('staff01', 'staff01password', 6);
-INSERT INTO `Staff_Login` VALUES ('jude', 'jude00password', 1);
-INSERT INTO `Staff_Login` VALUES ('king', 'king00password', 2);
+insert into `Staff_Application` values (1, 6, 'Clerk');
+insert into `Staff_Application` values (2, 1, 'Human Resources');
