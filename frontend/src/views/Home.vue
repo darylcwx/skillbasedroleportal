@@ -1,28 +1,22 @@
 <template>
-    <div class=" container mx-auto max-w-4xl h-screen w-full flex row justify-center items-center">
+    <div class="container mx-auto max-w-4xl h-screen mt-12">
         <!-- 0: admin, 1: user, 2: manager -->
-        <div v-if="user.accessRights == 0" class="grid grid-cols-2 gap-8">
-            <Module name="Admin module" description="" path="/listings" />
-            <Module name="Admin module" description="" path="/listings" />
-            <Module name="Admin module" description="" path="/listings" />
+        <div class="h-auto pt-4">
+            <RoleListing :role=roleObject />
+            <RoleListing :role=roleObject />
+            <RoleListing :role=roleObject />
         </div>
-        <div v-if="user.accessRights == 1" class="grid grid-cols-2 gap-8">
-            <Module name="Admin module" description="" path="/listings" />
-        </div>
-        <div v-if="user.accessRights == 2" class="grid grid-cols-2 gap-8">
-            <Module name="Admin module" description="" path="/listings" />
-        </div>
-
-
     </div>
 </template>
 <script>
-import Module from "../components/Module.vue"
+import RoleListing from "../components/RoleListing.vue"
 export default {
-    components: { Module },
+    components: { RoleListing },
     data() {
         return {
             user: this.$store.state.user,
+            roleListings: [],
+            roleObject: { roleName: "role name here", roleDesc: "lorem ipsum description of role listing here", roleDeadline: "27/04" }
             // id, fname lname, dept, email, accessRights
         };
     },
@@ -30,6 +24,9 @@ export default {
 
     },
     mounted() {
+        // get/RoleListings
+        // this.roleListings = response.data.roleListings
+
         console.log(this.user);
     },
     methods: {

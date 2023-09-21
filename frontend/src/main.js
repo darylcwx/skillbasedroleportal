@@ -3,14 +3,17 @@ import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
+import "./scss/custom.scss";
 import "./style.css";
+//import "bootstrap/dist/css/bootstrap.css";
+
+import "bootstrap/dist/js/bootstrap.bundle.js";
 
 import App from "./App.vue";
 import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
-import Listings from "./views/Listings.vue";
+import RoleListing from "./views/RoleListing.vue";
+1;
 
 const store = createStore({
 	state() {
@@ -30,7 +33,12 @@ const store = createStore({
 const routes = [
 	{ name: "Login", path: "/", component: Login },
 	{ name: "Home", path: "/home", component: Home },
-	{ name: "Listings", path: "/listings", component: Listings },
+	{
+		name: "Role",
+		path: "/role/:name",
+		component: RoleListing,
+		props: true,
+	},
 ];
 
 const router = createRouter({

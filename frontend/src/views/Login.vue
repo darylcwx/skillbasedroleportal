@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto max-w-lg h-screen flex row justify-center items-center">
-        <div class="bg-ghost px-16 py-12 rounded-xl shadow-md shadow-slate-400">
+        <div class="bg-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
 
             <div class="pb-4 text-h1">
                 Sign in to your account
@@ -43,12 +43,13 @@
             </div>
 
             <div class="">
-                <button class="btn btn-primary w-full text-btn" v-on:click="handleSSO">
+                <button class="btn btn-primary w-full text-sm fw-bold" v-on:click="handleSSO">
                     Sign in with single sign-on (SSO)
                 </button>
             </div>
-            <div v-if="showSSOError" class="absolute bottom-5 right-10">
-                <div class="alert alert-info fade show" role="alert">
+            <!-- <div v-if="showSSOError" class="absolute bottom-5 right-10"> -->
+            <div class="absolute bottom-5 right-10">
+                <div class="alert alert-warning fade show" role="alert">
                     <h4 class="alert-heading">Oh no!</h4>
                     SSO will only be implemented in future sprints.
                 </div>

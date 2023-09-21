@@ -1,0 +1,97 @@
+@import "bootstrap/scss/functions";
+
+// =================================================================
+// Styles for SBRP
+// 1) Theme colors (it follows bootstrap)
+// 2) Custom classes
+
+
+// =================================================================
+// 1) Theme Colors
+$primary: #274268;
+$secondary: #6d757d;
+$success: #218656;
+$danger: #da3849;
+$warning: #fec02f;
+$info: #27cbee;
+$navbar: #8091ba;
+$modal: #f2f4ff;
+$link: #27cbee;
+// =================================================================
+
+// Create your own map
+$custom-colors: (
+	"primary": $primary,
+	"secondary": $secondary,
+	"success": $success,
+	"danger": $danger,
+	"warning": $warning,
+	"info": $info,
+	"navbar": $navbar,
+	"modal": $modal,
+	"link": $link,
+);
+
+@import "bootstrap/scss/variables";
+// import fonts
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+
+$font-family-sans-serif: "Open Sans", system-ui, -apple-system, "Segoe UI",
+	Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+	"Liberation Mono", "Courier New", monospace;
+
+$font-family-base: var(--#{$variable-prefix}font-sans-serif);
+$font-family-code: var(--#{$variable-prefix}font-monospace);
+
+// $font-size-root affects the value of `rem`, which is used for as well font sizes, paddings, and margins
+// $font-size-base affects the font size of the body text
+$font-size-root: null;
+$font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-sm: $font-size-base * 0.875;
+$font-size-lg: $font-size-base * 1.25;
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/mixins";
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+@import "bootstrap/scss/bootstrap";
+
+// =================================================================
+// 2) Theme Colors
+.text-btn {
+	font-size: $font-size-sm;
+	font-weight: $font-weight-bold;
+}
+.text-h1 {
+	font-size: $font-size-lg;
+	font-weight: $font-weight-bold;
+}
+.text-h2 {
+}
+.text-h3 {
+	font-size: $font-size-base;
+	font-weight: $font-weight-bold;
+}
+// =================================================================

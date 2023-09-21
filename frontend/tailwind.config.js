@@ -1,22 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+	//prefix: "tw-",
 	corePlugins: { preflight: false },
 	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
 			colors: {
-				ghost: "#F2F4FF",
-				alice: "#EAF6FF",
-				oxford: "#0B132B",
-				snow: "#F6F4F3",
-				cadet: "#1C2541",
-				main: "#D5BDAF",
-				accent: "#F5EBE0",
-				sec: "#E3D5CA",
-				"accent-hover": "#977D35",
-				"accent-hover-outlined": "#EADFC3",
-				"accent-secondary": "#EAE0C3",
-				paper: "#3C3115",
+				info: "#d6ce2f",
+				//ghost: "#F2F4FF",
+				//fly: "#fec02f",
 			},
 			fontSize: {
 				xs: ".75rem", // Extra small font size
