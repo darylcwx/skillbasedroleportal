@@ -8,21 +8,19 @@ def getRoleSkillMatch():
     try:
         email = request.args.get('email')
         role = request.args.get('role')
-        # 'chicken.ninja@aio.com' 'Clerk'
+        # 'jude.smith@aio.com' 'IT Support'
 
-        staffskills = getStaffSkills(email)[0].get_json()
+        staffskills = getStaffSkills(email)[0].get_json() 
         roleskills = getRoleSkills(role)[0].get_json()
 
         matched_skills = []
-        for skill in staffskills:
-            if skill in roleskills:
+        for skill in staffskills['Staff skills']:
+            if skill['Skill_Name'] in roleskills['Role Skills']:
                 matched_skills.append(skill)
 
 
 
-        return jsonify({'Staff Matched Skills': matched_skills,
-                        'Staff Skills': staffskills,
-                        'Role Required Skills': roleskills}), 200
+        return jsonify({'Staff Matched Skills': matched_skills}), 200
 
          
     except Exception as error:

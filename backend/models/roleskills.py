@@ -5,7 +5,7 @@ class RoleSkills(db.Model):
     __tablename__ = 'Role_Skill'
  
     Role_Name = db.Column(db.String(50), primary_key=True, nullable=False)
-    Skill_Name = db.Column(db.String(50), nullable=False)
+    Skill_Name = db.Column(db.String(50), primary_key=True, nullable=False)
 
     def __init__(self, Role_Name, Skill_Name):
         self.Role_Name = Role_Name

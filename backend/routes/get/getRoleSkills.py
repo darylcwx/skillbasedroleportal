@@ -5,9 +5,10 @@ getRoleSkillsBP = Blueprint('getRoleSkills', __name__)
 @getRoleSkillsBP.route('/api/roleskills', methods=['GET'])
 def getRoleSkills(role):
     try:
+        # role = request.args.get('role')
         if role:
             roleskills = RoleSkills.query.filter_by(Role_Name=role).all()
-            skill_list = [roleskills.serialize() for skills in roleskills]
+            skill_list = [skills.Skill_Name for skills in roleskills]
 
             return jsonify({'Role Skills': skill_list}), 200
         
