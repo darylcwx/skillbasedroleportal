@@ -14,13 +14,26 @@ def getRoleSkillMatch():
         roleskills = getRoleSkills(role)[0].get_json()
 
         matched_skills = []
-        for skill in staffskills['Staff skills']:
-            if skill['Skill_Name'] in roleskills['Role Skills']:
+        missing_skills = []
+
+        for skill in roleskills['Role Skills']:
+            if skill in staffskills['Staff skills']:
                 matched_skills.append(skill)
 
+            else:
+                missing_skills.append(skill)
 
 
-        return jsonify({'Staff Matched Skills': matched_skills}), 200
+        
+
+        print(roleskills['Role Skills'])
+        percentage_match = str(round((len(matched_skills) / len(roleskills['Role Skills']))*100, 2)) + '%'
+
+
+
+        return jsonify({'Staff Matched Skills': matched_skills,
+                        'Staff Missing Skills': missing_skills,
+                        'Percentage Match': percentage_match}), 200
 
          
     except Exception as error:

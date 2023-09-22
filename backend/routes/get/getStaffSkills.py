@@ -12,7 +12,7 @@ def getStaffSkills(email):
         if user:
             sid = user.Staff_ID
             skills = StaffSkills.query.filter_by(Staff_ID = sid).all()
-            skill_list = [skill.serialize() for skill in skills]
+            skill_list = [skill.Skill_Name for skill in skills]
 
             return jsonify({'Staff skills': skill_list}), 200
         
