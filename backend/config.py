@@ -2,7 +2,7 @@ import os
 
 # Establish MySQL connection
 user='root'
-password='password'
+password='root'
 host='localhost'
 port = 3306
 db='SBRP_Ais_Kachang'
