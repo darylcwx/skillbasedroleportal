@@ -1,23 +1,40 @@
-# skillsbasedroleportal
+# skillbasedroleportal
 
-Skill Based Role Portal for SPM Project AY23/24
+Skill Based Role Portal: IS212 G2T2 - Ais Kachang
 
-# Backend setup
+## Backend setup
 
 cd backend
 
+**If no virtual environment**
+python -m venv venv
+
+**For mac:**
+source venv/bin/activate
+
+**For windows:**
+venv\Scripts\Activate
+
+**Venv is set up if you see**
+"(venv) C:\Users\..."
+
+**Install requirements**
 pip/pip3 install -r requirements.txt
 
+**Run application**
 flask run
 
-# Frontend setup
+## Frontend setup
 
 cd frontend
 
+**Install requirements**
 npm i
 
+**Run application**
 npm run dev
 
-# Temporary local DB
+## Temporary local DB
 
-Execute script in root/init.sql in MySQL Workbench
+Ensure local MySQL Server instance is running
+Execute init.sql
