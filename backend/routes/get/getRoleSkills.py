@@ -1,20 +1,18 @@
 from flask import Flask, Blueprint, jsonify, request
-from backend.models.staff import Staff
 from backend.models.roleskills import RoleSkills
-
+ 
 getRoleSkillsBP = Blueprint('getRoleSkills', __name__)
 @getRoleSkillsBP.route('/api/roleskills', methods=['GET'])
-def getRoleSkills():
+def getRoleSkills(role):
     try:
-        email = request.args.get('email')
-        user = Staff.query.filter_by(Email=email).first()
-        if user:
-            sid = user.Staff_ID
+        if role:
+            roleskills = RoleSkills.query.filter_by(Role_Name=role).all()
+            skill_list = [roleskills.serialize() for skills in roleskills]
 
-            skills = StaffSkills.query.filter_by(Staff_ID = sid).all()
-            skill_list = [skills.serialize() for skill in skills]
-
-            return jsonify({'skills': skill_list}), 200
+            return jsonify({'Role Skills': skill_list}), 200
+        
+        else:
+            return jsonify({'error': 'Invalid role name.'}), 404
 
         
     except Exception as error:

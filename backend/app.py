@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
 # app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 # db = SQLAlchemy(app)
-
+ 
 # =================================================================
 # Change connection details if required in models/connection.py
 # =================================================================
@@ -22,12 +22,15 @@ from backend.routes.get.getUsers import getUsersBP
 from backend.routes.get.getUser import getUserBP
 from backend.routes.get.getStaffSkills import getStaffSkillsBP
 from backend.routes.get.getRoleSkills import getRoleSkillsBP
+from backend.routes.get.getRoleSkillMatch import getRoleSkillMatchBP
 
 # 2) Register routes here
 app.register_blueprint(getUsersBP)
 app.register_blueprint(getUserBP)
 app.register_blueprint(getStaffSkillsBP)
 app.register_blueprint(getRoleSkillsBP)
+app.register_blueprint(getRoleSkillMatchBP)
+
 
 
 if __name__ == '__main__':
