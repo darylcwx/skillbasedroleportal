@@ -5,9 +5,14 @@ from backend.config import db_uri
 
 # Init flask instance
 app = Flask(__name__)
-cors = CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+CORS(app)
 db = SQLAlchemy(app)
+
+# cors = CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+# db = SQLAlchemy(app)
 
 # =================================================================
 # Change connection details if required in models/connection.py
