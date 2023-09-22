@@ -63,9 +63,9 @@ create table `Listings` (
 );
 
 insert into `Listings` values (1, 'IT Support', '2023-10-25');
-insert into `Listings` values (1, 'Clerk', '2023-10-28');
-insert into `Listings` values (1, 'Human Resources', '2023-11-18');
-insert into `Listings` values (1, 'Manager', '2023-11-05');
+insert into `Listings` values (2, 'Clerk', '2023-10-28');
+insert into `Listings` values (3, 'Human Resources', '2023-11-18');
+insert into `Listings` values (4, 'Manager', '2023-11-05');
 
 create table `Staff_Application` (
 	`Application_ID` int(10) NOT NULL AUTO_INCREMENT,
@@ -76,5 +76,5 @@ create table `Staff_Application` (
     constraint Staff_Application_FK2 foreign key (`listing_ID`) references `Listings` (`listing_ID`)
 );
 
-insert into `Staff_Application` values (1, 6, 'Clerk');
-insert into `Staff_Application` values (2, 1, 'Human Resources');
+insert into `Staff_Application` values (1, 6, 2);
+insert into `Staff_Application` values (2, 1, 3);
