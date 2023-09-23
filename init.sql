@@ -11,12 +11,12 @@ use SBRP_Ais_Kachang;
 # To add more dummy data for testing purposes.
 
 create table `Staff` (
-	`Staff_ID` int(10) NOT NULL AUTO_INCREMENT,
+	`Staff_ID` int NOT NULL AUTO_INCREMENT,
 	`Staff_FName` varchar(50) NOT NULL,
 	`Staff_LName` varchar(50) NOT NULL,
 	`Dept` varchar(50) NOT NULL,
 	`Email` varchar(50) NOT NULL,
-	`Access_Rights` int(2) NOT NULL, # 0 = admin, 1 = user, 2 = manager
+	`Access_Rights` int NOT NULL, # 0 = admin, 1 = user, 2 = manager
 	constraint Staff_PK primary key (`Staff_ID`)
 );
 
@@ -46,7 +46,7 @@ create table `Role_Skill` (
 );
 
 create table `Staff_Skill` (
-	`Staff_ID` int(10) NOT NULL,
+	`Staff_ID` int NOT NULL,
 	`Skill_Name` varchar(50) NOT NULL,
 	`Skill_Profile_Desc` longtext NULL,
 	constraint Staff_Skill_PK primary key (`Staff_ID`, `Skill_Name`),
@@ -55,7 +55,7 @@ create table `Staff_Skill` (
 );
 
 create table `Listings` (
-	`listing_ID` int(10) NOT NULL AUTO_INCREMENT,
+	`listing_ID` int NOT NULL AUTO_INCREMENT,
     `Role_Name` varchar(20) NOT NULL,
 	`Deadline` date NOT NULL,
     constraint Listings_PK primary key (`listing_ID`),
@@ -68,9 +68,9 @@ insert into `Listings` values (3, 'Human Resources', '2023-11-18');
 insert into `Listings` values (4, 'Manager', '2023-11-05');
 
 create table `Staff_Application` (
-	`Application_ID` int(10) NOT NULL AUTO_INCREMENT,
-	`Staff_ID` int(10) NOT NULL,
-    `listing_ID` int(10) NOT NULL,
+	`Application_ID` int NOT NULL AUTO_INCREMENT,
+	`Staff_ID` int NOT NULL,
+    `listing_ID` int NOT NULL,
     constraint Staff_Application_PK primary key (`Application_ID`),
     constraint Staff_Application_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`),
     constraint Staff_Application_FK2 foreign key (`listing_ID`) references `Listings` (`listing_ID`)
