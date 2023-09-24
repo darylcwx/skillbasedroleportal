@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 # db = SQLAlchemy(app)
  
 # =================================================================
-# Change connection details if required in models/connection.py
+# Change connection details if required in config.py
 # =================================================================
 # 1) Import and declare routes
 from backend.routes.get.getUsers import getUsersBP

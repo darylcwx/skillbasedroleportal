@@ -1,2 +1,9 @@
 # Virtual Environment
 venv/
+backend/.env
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
