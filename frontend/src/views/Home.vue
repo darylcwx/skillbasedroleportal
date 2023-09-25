@@ -3,22 +3,7 @@
         <!-- 0: admin, 1: user, 2: manager -->
         <div class="h-auto pt-4">
             <!-- Here should use v-for to iterate through roleListings -->
-            <!-- <RoleListing v-for"roleItem in roleListings" :key"roleItem.id" :role="roleItem"/> -->
-            <div v-for="roleItem in roleListings" :key="roleItem.id">
-                <!-- Displayed component when not expanded. -->
-                <h2>{{ roleItem.Role_Name }}</h2>
-                <p>{{ roleItem.Deadline }}</p>
-                <!-- Toogle Button Condition -->
-                <button @click="toggleDetails(roleItem)"> Toggle Button</button>
-                <!-- Displayed component when expanded -->
-                <div v-if="roleItem.expanded">
-                    <h2>{{roleItem.Role_Name}}</h2>
-                    <p>{{ roleItem.Deadline }}</p>
-                    <!--Description-->
-                    <!--Skills Sets Required-->
-                </div>
-            </div>
-            <!-- <RoleListing v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem"/> -->
+            <RoleListing v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem"/>
         </div>
     </div>
 </template>
