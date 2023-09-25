@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto h-screen">
+    <div class="container mx-auto h-screen max-w-3xl">
         <div class="pt-8">
             <div class="bg-modal p-6 rounded-lg mb-8">
                 <div class="flex justify-between items-center">

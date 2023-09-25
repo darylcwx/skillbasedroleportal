@@ -3,7 +3,7 @@
         <div class="p-6 bg-modal rounded-xl text-dark shadow-lg shadow-gray-900">
             <div class="flex justify-between items-center">
                 <div class="text-h1">{{ name }}</div>
-                <div class="">Ends: {{ deadline }}</div>
+                <div class="">Ends: <b>{{ deadline }}</b></div>
             </div>
             <div class="py-4">{{ desc }}</div>
             <div class="flex justify-end gap-4">

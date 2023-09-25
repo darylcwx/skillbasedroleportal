@@ -42,12 +42,10 @@
                     Sign in with single sign-on (SSO)
                 </button>
             </div>
-            <div v-if="showSSOError" class="absolute bottom-5 right-10">
-                <div class="absolute bottom-5 right-10">
-                    <div class="alert alert-warning fade show" role="alert">
-                        <h4 class="alert-heading">Oh no!</h4>
-                        SSO will only be implemented in future sprints.
-                    </div>
+            <div v-if="showSSOError" class="absolute bottom-3 right-5">
+                <div class="alert alert-warning fade show" role="alert">
+                    <h4 class="alert-heading">Oh no!</h4>
+                    SSO will only be implemented in future sprints.
                 </div>
             </div>
         </div>

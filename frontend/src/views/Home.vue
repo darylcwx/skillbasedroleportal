@@ -1,18 +1,18 @@
 <template>
-    <div class="container mx-auto h-screen">
+    <div class="container mx-auto h-screen max-w-3xl">
         <!-- 0: admin, 1: user, 2: manager -->
         <div class="h-auto pt-4">
             <!-- Here should use v-for to iterate through roleListings -->
-            <RoleListing v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem" />
+            <RoleListingPanel v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem" />
         </div>
     </div>
 </template>
 
 <script>
-import RoleListing from "../components/RoleListing.vue";
+import RoleListingPanel from "../components/RoleListingPanel.vue";
 
 export default {
-    components: { RoleListing },
+    components: { RoleListingPanel },
     data() {
         return {
             user: this.$store.state.user,
@@ -39,8 +39,8 @@ export default {
 
                 // Format the date in each role item
                 data.Listings.forEach(async (roleItem) => {
-                    roleItem.Deadline = new Date(roleItem.Deadline).toDateString();
-
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    roleItem.Deadline = new Date(roleItem.Deadline).toLocaleString("en-US", options);
                     // Make an additional API call to fetch the description based on roleName
                     await this.fetchDescription(roleItem);
                 });
