@@ -4,20 +4,23 @@ from backend.models.staffskills import StaffSkills
  
 getStaffSkillsBP = Blueprint('getStaffSkills', __name__)
 @getStaffSkillsBP.route('/api/staffskills', methods=['GET'])
-def getStaffSkills(email):
-    
+def getStaffSkills(sid = None):
+     
     try:
-        # email = request.args.get('email')
-        user = Staff.query.filter_by(Email=email).first()
+        if not sid:
+            sid = request.args.get('sid')
+
+        # check valid staff ID
+        user = Staff.query.filter_by(Staff_ID = sid).first()
+
         if user:
-            sid = user.Staff_ID
             skills = StaffSkills.query.filter_by(Staff_ID = sid).all()
             skill_list = [skill.Skill_Name for skill in skills]
 
-            return jsonify({'Staff skills': skill_list}), 200
+            return jsonify({'Staff Skills': skill_list}), 200
         
         else:
-            return jsonify({'error': 'Invalid email. Staff not found!'}), 404
+            return jsonify({'error': 'Invalid staff ID. Staff not found!'}), 404
 
          
     except Exception as error:

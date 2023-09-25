@@ -81,5 +81,5 @@ create table `Staff_Application` (
     constraint Staff_Application_FK2 foreign key (`listing_ID`) references `Listings` (`listing_ID`)
 );
 
-insert into `Staff_Application` values (1, 6, 'Clerk');
-insert into `Staff_Application` values (2, 1, 'Human Resources');
+insert into `Staff_Application` values (1, 6, 2);
+insert into `Staff_Application` values (2, 1, 3);
