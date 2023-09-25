@@ -40,13 +40,14 @@ const routes = [
 		component: RoleListing,
 		props: true,
 	},
-	// { name: "RoleDetails", 
-	// path:"/roledetails", 
+	// { name: "RoleDetails",
+	// path:"/roledetails",
 	// component: RoleDetails,
 	// props: true,
 	// },
 ];
 
+// <router-link/> doesn't work
 const router = createRouter({
 	history: createWebHashHistory(),
 	routes: routes,

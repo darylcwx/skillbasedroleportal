@@ -1,16 +1,11 @@
 <template>
-    <div
-        class="container mx-auto max-w-lg h-screen flex row justify-center items-center">
+    <div class="container mx-auto max-w-lg h-screen flex row justify-center items-center">
         <div class="bg-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
             <div class="pb-4 text-h1">Sign in to your account</div>
 
             <div class="pb-4">
                 <label for="email" class="form-label text-h3">Email</label>
-                <select
-                    id="email"
-                    v-model="userEmail"
-                    class="w-full rounded-lg form-select"
-                    required>
+                <select id="email" v-model="userEmail" class="w-full rounded-lg form-select" required>
                     <option selected>Choose a user</option>
                     <option v-for="user in users" :value="user.Email">
                         {{ user.Email }}
@@ -22,9 +17,7 @@
             </div>
             <div class="pb-4">
                 <div class="mb-3">
-                    <label for="basic-url" class="form-label text-h3"
-                        >Password</label
-                    >
+                    <label for="basic-url" class="form-label text-h3">Password</label>
                     <input type="text" disabled class="form-control is-valid" />
                     <div class="valid-feedback">
                         Disabled for mockup purposes
@@ -33,9 +26,7 @@
             </div>
 
             <div class="">
-                <button
-                    class="btn btn-primary w-full text-btn"
-                    v-on:click="handleLogin">
+                <button class="btn btn-primary w-full text-btn" v-on:click="handleLogin">
                     Login
                 </button>
             </div>
@@ -47,17 +38,16 @@
             </div>
 
             <div class="">
-                <button
-                    class="btn btn-primary w-full text-sm fw-bold"
-                    v-on:click="handleSSO">
+                <button class="btn btn-primary w-full text-sm fw-bold" v-on:click="handleSSO">
                     Sign in with single sign-on (SSO)
                 </button>
             </div>
-            <!-- <div v-if="showSSOError" class="absolute bottom-5 right-10"> -->
-            <div class="absolute bottom-5 right-10">
-                <div class="alert alert-warning fade show" role="alert">
-                    <h4 class="alert-heading">Oh no!</h4>
-                    SSO will only be implemented in future sprints.
+            <div v-if="showSSOError" class="absolute bottom-5 right-10">
+                <div class="absolute bottom-5 right-10">
+                    <div class="alert alert-warning fade show" role="alert">
+                        <h4 class="alert-heading">Oh no!</h4>
+                        SSO will only be implemented in future sprints.
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,7 +65,7 @@ export default {
             reload: true,
         };
     },
-    created() {},
+    created() { },
 
     mounted() {
         //console.log(this.$store.state.user);

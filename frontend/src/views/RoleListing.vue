@@ -1,37 +1,41 @@
 <template>
-    <div class="container mx-auto max-w-4xl h-screen w-full mt-12">
+    <div class="container mx-auto h-screen">
         <div class="pt-8">
             <div class="bg-modal p-6 rounded-lg mb-8">
                 <div class="flex justify-between items-center">
                     <div class="text-h1">{{ name }}</div>
                     <div class="">Ends: {{ deadline }}</div>
                 </div>
-                <div class="py-4">Lorem ipsum description</div>
+                <div class="py-4">{{ description }}</div>
 
                 <div class="container-fluid">
-                    <div class ="row">
+                    <div class="row">
                         <div class="col">
                             <span class="badge rounded-pill bg-success">Skills matched</span>
                         </div>
                     </div>
-                    <div class ="row">
+                    <div class="row">
                         <div class="col">
                             <span class="badge rounded-pill bg-secondary">skills mismatched</span>
                         </div>
                     </div>
 
-                    <div class ="row">
+                    <div class="row">
                         <div class="col">
                             <span class="badge rounded-pill" style="color:#274268 ;">percentage match</span>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-end" >
-                        <button v-if="user.accessRights == 0" class="btn btn-primary text-btn" @click="handleClick">Edit</button>
-                        <button class="btn btn-primary text-btn" @click="handleClick">Apply</button>
+                    <div class="d-flex justify-end gap-2">
+                        <button v-if="user.accessRights == 0" class="btn btn-primary text-btn" @click="handleEdit">
+                            Edit
+                        </button>
+                        <button class="btn btn-primary text-btn" @click="handleClick">
+                            Apply
+                        </button>
                     </div>
                 </div>
-                
+
 
 
             </div>
@@ -44,7 +48,7 @@
 
 <script>
 export default {
-    props: ['name', 'desc', 'description'],
+    props: ['name', 'description', 'deadline'],
     data() {
         return {
             user: this.$store.state.user,
@@ -55,9 +59,18 @@ export default {
     },
     mounted() {
         console.log(this.name)
+        // either push props into page or call getRole?id= ... again
+        // returning undefined, can only passed through params. name is ok, desc and deadline is not
+        console.log(this.description)
+        console.log(this.deadline)
     },
     methods: {
+        handleEdit() {
 
+        },
+        handleApply() {
+
+        }
     }
 }
 </script>

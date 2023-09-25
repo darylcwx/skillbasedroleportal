@@ -1,6 +1,6 @@
 <template>
     <div class="py-4">
-        <div class="p-6 bg-modal rounded-xl text-black">
+        <div class="p-6 bg-modal rounded-xl text-dark shadow-lg shadow-gray-900">
             <div class="flex justify-between items-center">
                 <div class="text-h1">{{ name }}</div>
                 <div class="">Ends: {{ deadline }}</div>
@@ -29,9 +29,11 @@ export default {
     },
     mounted() {
         // console.log(this.user);
+        // 
     },
     methods: {
         handleClick() {
+            // props not being pushed
             this.$router.push({ name: "Role", params: { name: this.name }, props: { desc: this.desc, deadline: this.deadline } })
         }
     }

@@ -5,7 +5,6 @@
 // 1) Theme colors (it follows bootstrap)
 // 2) Custom classes
 
-
 // =================================================================
 // 1) Theme Colors
 $primary: #274268;
@@ -14,9 +13,10 @@ $success: #218656;
 $danger: #da3849;
 $warning: #fec02f;
 $info: #27cbee;
-$navbar: #8091ba;
+$navbar: #1d2435;
 $modal: #f2f4ff;
 $link: #27cbee;
+$avatar: #f2f4ff;
 // =================================================================
 
 // Create your own map
@@ -30,6 +30,7 @@ $custom-colors: (
 	"navbar": $navbar,
 	"modal": $modal,
 	"link": $link,
+	"avatar": $avatar,
 );
 
 @import "bootstrap/scss/variables";
@@ -79,11 +80,17 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrap/scss/bootstrap";
 
 // =================================================================
-// 2) Theme Colors
+// 2) Custom Classes
+
+// For all buttons
 .text-btn {
 	font-size: $font-size-sm;
 	font-weight: $font-weight-bold;
 }
+*:focus {
+	box-shadow: none !important;
+}
+// Headers
 .text-h1 {
 	font-size: $font-size-lg;
 	font-weight: $font-weight-bold;
