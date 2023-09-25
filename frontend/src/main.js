@@ -13,7 +13,7 @@ import App from "./App.vue";
 import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
 import RoleListing from "./views/RoleListing.vue";
-import RoleDetails from "./views/RoleDetails.vue";
+// import RoleDetails from "./views/RoleDetails.vue";
 1;
 
 const store = createStore({
@@ -40,11 +40,11 @@ const routes = [
 		component: RoleListing,
 		props: true,
 	},
-	{ name: "RoleDetails", 
-	path:"/roledetails", 
-	component: RoleDetails,
-	props: true,
-	},
+	// { name: "RoleDetails", 
+	// path:"/roledetails", 
+	// component: RoleDetails,
+	// props: true,
+	// },
 ];
 
 const router = createRouter({
