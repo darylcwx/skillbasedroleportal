@@ -1,5 +1,5 @@
 from backend.app import db
-from role import Role
+from backend.models.role import Role
 
 class Listings(db.Model):
     __tablename__ = 'Listings'

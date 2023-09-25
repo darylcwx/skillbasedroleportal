@@ -23,6 +23,7 @@ from backend.routes.get.getUser import getUserBP
 from backend.routes.get.getStaffSkills import getStaffSkillsBP
 from backend.routes.get.getRoleSkills import getRoleSkillsBP
 from backend.routes.get.getRoleSkillMatch import getRoleSkillMatchBP
+from backend.routes.get.getRoleListings import getRoleListingsBP
 
 # 2) Register routes here
 app.register_blueprint(getUsersBP)
@@ -30,6 +31,7 @@ app.register_blueprint(getUserBP)
 app.register_blueprint(getStaffSkillsBP)
 app.register_blueprint(getRoleSkillsBP)
 app.register_blueprint(getRoleSkillMatchBP)
+app.register_blueprint(getRoleListingsBP)
 
 
 
