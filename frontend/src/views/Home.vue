@@ -18,7 +18,6 @@ export default {
             user: this.$store.state.user,
             roleListings: [],
             roleObject: { roleName: "role name here", roleDesc: "lorem ipsum description of role listing here", roleDeadline: "27/04" },
-            expanded: false,
             // id, fname lname, dept, email, accessRights
         };
     },
@@ -42,7 +41,6 @@ export default {
                 // Format the date in each role item
                 data.Listings.forEach((roleItem) => {
                     roleItem.Deadline = new Date(roleItem.Deadline).toDateString();
-                    roleItem.expanded = false;
                 });
 
                 this.roleListings = data.Listings;
@@ -53,10 +51,6 @@ export default {
                     error
                 );
             }
-        },
-
-        toggleDetails(roleItem) {
-            roleItem.expanded = !roleItem.expanded;
         },
     },
 };
