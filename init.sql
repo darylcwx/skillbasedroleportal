@@ -33,10 +33,10 @@ create table `Role` (
 	constraint Role_PK primary key (`Role_Name`)
 );
 
-INSERT INTO `Role` VALUES ('IT Support', 'Assit in daily user technical problems and IT equipment maintenence.');
-INSERT INTO `Role` VALUES ('Clerk', 'Keyboard warrior.');
-INSERT INTO `Role` VALUES ('Human Resources', 'Any member of the Human Resources team');
-INSERT INTO `Role` VALUES ('Manager', 'Any manager');
+insert into `Role` values ('IT Support', 'Assit in daily user technical problems and IT equipment maintenence.');
+insert into `Role` values ('Clerk', 'Keyboard warrior.');
+insert into `Role` values ('Human Resources', 'Any member of the Human Resources team');
+insert into `Role` values ('Manager', 'Any manager');
 
 create table `Role_Skill` (
 	`Role_Name` varchar(20) NOT NULL,
@@ -44,6 +44,11 @@ create table `Role_Skill` (
 	constraint Role_Skill_PK primary key (`Skill_Name`),
 	constraint Role_Skill_FK1 foreign key (`Role_Name`) references `Role` (`Role_Name`)
 );
+
+insert into `Role_Skill` values ('Clerk', 'Excel');
+insert into `Role_Skill` values ('Clerk', 'PowerPoint');
+insert into `Role_Skill` values ('Clerk', 'Words');
+insert into `Role_Skill` values ('Clerk', 'Outlook');
 
 create table `Staff_Skill` (
 	`Staff_ID` int NOT NULL,
