@@ -19,16 +19,16 @@ export default {
     data() {
         return {
             user: this.$store.state.user,
-            name: this.role.roleName,
-            desc: this.role.roleDesc,
-            deadline: this.role.roleDeadline,
+            name: this.role.Role_Name,
+            desc: this.role.Desc,
+            deadline: this.role.Deadline,
         };
     },
     created() {
 
     },
     mounted() {
-        console.log(this.user);
+        // console.log(this.user);
     },
     methods: {
         handleClick() {

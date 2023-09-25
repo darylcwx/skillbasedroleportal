@@ -2,9 +2,9 @@
     <div class="container mx-auto max-w-4xl h-screen mt-12">
         <!-- 0: admin, 1: user, 2: manager -->
         <div class="h-auto pt-4">
+            <!-- <RoleListing :role=roleObject />
             <RoleListing :role=roleObject />
-            <RoleListing :role=roleObject />
-            <RoleListing :role=roleObject />
+            <RoleListing :role=roleObject /> -->
             <!-- Here should use v-for to iterate through roleListings -->
             <RoleListing v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem"/>
         </div>
@@ -59,9 +59,24 @@ export default {
         // get/RoleListings
         // this.roleListings = response.data.roleListings
 
-        console.log(this.user);
+        // console.log(this.user);
+        this.fetchRoleListings();
     },
     methods: {
+        async fetchRoleListings() {
+            try {
+                const apiUrl = "http://localhost:5000/api/rolelistings";
+                const response = await fetch(apiUrl, { mode: "cors" });
+                const data = await response.json();
+                this.roleListings = data.Listings;
+                console.log(this.roleListings);
+            } catch (error) {
+                console.error(
+                    "There was a problem with the fetch operation:",
+                    error
+                );
+            }
+        }
     }
 }
 </script>
