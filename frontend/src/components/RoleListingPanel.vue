@@ -20,7 +20,7 @@ export default {
         return {
             user: this.$store.state.user,
             name: this.role.Role_Name,
-            desc: this.role.Desc,
+            // desc: this.role.description,
             deadline: this.role.Deadline,
         };
     },
@@ -34,7 +34,7 @@ export default {
     methods: {
         handleClick() {
             // props not being pushed
-            this.$router.push({ name: "Role", params: { name: this.name }, props: { desc: this.desc, deadline: this.deadline } })
+            this.$router.push({ name: "Role", params: { name: this.name }, props: { description: this.desc, deadline: this.deadline } })
         }
     }
 }

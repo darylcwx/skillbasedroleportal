@@ -30,7 +30,7 @@ def getRoleSkillMatch(sid = None, rolename = None):
                 else:
                     missing_skills.append(skill)
 
-            percentage_match = str(round((len(matched_skills) / len(roleskills['Role Skills']))*100, 2)) + '%'
+            percentage_match = str(round((len(matched_skills) / len(roleskills['Role Skills']))*100, 2))
 
         return jsonify({'Staff Matched Skills': matched_skills,
                         'Staff Missing Skills': missing_skills,

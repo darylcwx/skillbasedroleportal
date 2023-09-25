@@ -35,7 +35,7 @@ def getAllRoleSkillMatch(lid = None):
                         else:
                             missing_skills.append(skill)
 
-                    percentage_match = str(round((len(matched_skills) / len(roleskills))*100, 2)) + '%'
+                    percentage_match = str(round((len(matched_skills) / len(roleskills))*100, 2))
 
                 result.append({'Application_ID': applicant.Application_ID,
                                'Staff_ID': applicant.Staff_ID,
