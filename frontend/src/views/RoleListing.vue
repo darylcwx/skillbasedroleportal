@@ -33,8 +33,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <span v-for='s in roleskillmatch["Staff Matched Skills"]' class="badge rounded-pill bg-success">Skills matched</span>
-                            <span v-for='s in roleskillmatch["Staff Missing Skills"]' class="badge rounded-pill bg-secondary">skills mismatched</span>
+                            <span v-for='skillsMatched in roleskillmatch["Staff Matched Skills"]' class="badge rounded-pill bg-success">{{skillsMatched}}</span>
+                            <span v-for='skillsMismatched in roleskillmatch["Staff Missing Skills"]' class="badge rounded-pill bg-secondary">{{ skillsMismatched }}</span>
                         </div>
                     </div>
 
