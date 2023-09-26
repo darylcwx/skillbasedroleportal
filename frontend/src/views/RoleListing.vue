@@ -1,49 +1,44 @@
 <template>
-    <div class="container mx-auto h-screen max-w-3xl">
+    <div class="container mx-auto h-screen max-w-2xl">
         <div class="pt-8">
-            <div class="bg-modal p-6 rounded-lg mb-8">
+            <div class="custom-modal p-6 rounded-lg mb-8">
                 <div class="flex justify-between items-center">
-                    <div class="text-h1">{{ name }}</div>
+                    <div class="text-h1 mr-4">{{ name }}</div>
                     <div class="">Ends: {{ role.deadline }}</div>
                 </div>
-                <div class="py-4">{{ role.description }}</div>
-
-                <div class="container-fluid">
-                    <div class="d-flex justify-end gap-2">
-                        <button v-if="user.dept == 'HR'" class="btn btn-primary text-btn" @click="handleEdit">
-                            Edit
-                        </button>
-                        <button class="btn btn-primary text-btn" @click="handleClick">
-                            Apply
-                        </button>
-                    </div>
+                <div class="mt-4">{{ role.description }}</div>
+                <div class="flex justify-end gap-2 mt-4">
+                    <button v-if="user.accessRights == 0" class="btn btn-primary text-btn" @click="handleEdit">
+                        Edit
+                    </button>
+                    <button class="btn btn-primary text-btn" @click="handleClick">
+                        Apply
+                    </button>
                 </div>
-
-
-
             </div>
 
-            <!-- <div v-if="user.dept == 'HR'" class="bg-modal p-6 rounded-lg">
+            <!-- Skills Required -->
+            <div class="custom-modal p-6 rounded-lg">
+                <div class="flex items-center justify-between">
+                    <div class="text-h1 mr-4">Skills Required</div>
+                    <div name="percentage" class="">Percentage match: {{ roleskillmatch['Percentage Match'] }} %</div>
+                </div>
+                <div name="matched" class="mt-4 flex-col">
+                    <span v-for='skillsMatched in roleskillmatch["Staff Matched Skills"]'
+                        class="badge custom-pill bg-success mt-3 mr-3">{{
+                            skillsMatched }}
+                    </span>
+                    <span v-for='skillsMismatched in roleskillmatch["Staff Missing Skills"]'
+                        class="badge custom-pill bg-secondary mt-3 mr-3">{{
+                            skillsMismatched }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Applicants -->
+            <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg">
                 <div class="text-h1">Applicants</div>
                 add applicant component here to show applicant details and their individual role skill match
-            </div> -->
-
-            <div class="bg-modal p-6 rounded-lg">
-                <div class="text-h1">Skills Required</div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col">
-                            <span v-for='skillsMatched in roleskillmatch["Staff Matched Skills"]' class="badge rounded-pill bg-success">{{skillsMatched}}</span>
-                            <span v-for='skillsMismatched in roleskillmatch["Staff Missing Skills"]' class="badge rounded-pill bg-secondary">{{ skillsMismatched }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="badge rounded-pill" style="color:#274268 ;">percentage match: {{roleskillmatch['Percentage Match']}} %</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -65,19 +60,19 @@ export default {
     },
 
     mounted() {
-        console.log(this.name)
-        console.log(this.role)
-
         this.fetchRoleSkillMatch();
     },
 
     methods: {
         async fetchRoleSkillMatch() {
             try {
-                if (this.user.dept != 'HR'){
+                if (this.user.dept != 'HR') {
                     const apiURL = `http://localhost:5000/api/roleskillmatch?sid=${encodeURIComponent(this.user.id)}&rolename=${encodeURIComponent(this.name)}`;
-                    const response = await fetch(apiURL, {mode: "cors"});
-                    this.roleskillmatch = await response.json();
+                    const response = await fetch(apiURL, { mode: "cors" });
+                    let roleSkillMatchObject = await response.json();
+                    // percentage to 0 d.p.
+                    roleSkillMatchObject['Percentage Match'] = parseInt(roleSkillMatchObject['Percentage Match'])
+                    this.roleskillmatch = roleSkillMatchObject
                 };
 
             } catch (error) {

@@ -4,7 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import "./scss/custom.scss";
-import "./style.css";
+//import "./style.css";
 //import "bootstrap/dist/css/bootstrap.css";
 
 import "bootstrap/dist/js/bootstrap.bundle.js";

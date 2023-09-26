@@ -2,7 +2,7 @@
     <!-- This container will encapsulate all content-->
     <div class="container mx-auto max-w-4x1 h-screen w-full mt-12">
         <div class="pt-8">
-            <div class="bg-modal p-10 rounded-lg mb-8">
+            <div class="custom-modal p-10 rounded-lg mb-8">
                 <!-- Create a href at the top left, to go back previous listing page or "X" -->
                 <!-- Align items center -->
                 <div class="flex justify-between items-center pt-4">

@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto h-screen max-w-3xl">
+    <div class="container mx-auto h-screen max-w-2xl">
         <!-- 0: admin, 1: user, 2: manager -->
         <div class="h-auto pt-4">
             <!-- Here should use v-for to iterate through roleListings -->

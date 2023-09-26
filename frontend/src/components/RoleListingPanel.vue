@@ -1,6 +1,7 @@
 <template>
-    <div class="py-4">
-        <div class="p-6 bg-modal rounded-xl text-dark shadow-lg shadow-gray-900">
+    <div class="py-4 ">
+        <div
+            class="p-6 custom-modal rounded-xl text-dark hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500">
             <div class="flex justify-between items-center">
                 <div class="text-h1">{{ name }}</div>
                 <div class="">Ends: <b>{{ deadline }}</b></div>
@@ -38,12 +39,12 @@ export default {
         handleClick() {
             // props not being pushed
             this.$store.commit("setRole", {
-                    rolename: this.name,
-                    description: this.desc,
-                    deadline: this.deadline
-                });
+                rolename: this.name,
+                description: this.desc,
+                deadline: this.deadline
+            });
 
-            this.$router.push({ name: "Role", params: { name: this.name }})
+            this.$router.push({ name: "Role", params: { name: this.name } })
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto max-w-lg h-screen flex row justify-center items-center">
-        <div class="bg-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
+        <div class="custom-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
             <div class="pb-4 text-h1">Sign in to your account</div>
 
             <div class="pb-4">

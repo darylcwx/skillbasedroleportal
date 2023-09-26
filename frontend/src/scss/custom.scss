@@ -1,10 +1,18 @@
 @import "bootstrap/scss/functions";
 
-// =================================================================
-// Styles for SBRP
-// 1) Theme colors (it follows bootstrap)
-// 2) Custom classes
+/* =================================================================
+Styles for SBRP
 
+Notes: 
+- Tailwind takes precedence over Bootstrap
+
+Order:
+1) Theme colors - Bootstrap
+2) Fonts - Bootstrap
+3) Custom classes - Combination of both
+
+
+*/
 // =================================================================
 // 1) Theme Colors
 $primary: #274268;
@@ -50,8 +58,10 @@ $font-family-code: var(--#{$variable-prefix}font-monospace);
 // $font-size-base affects the font size of the body text
 $font-size-root: null;
 $font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-xs: $font-size-base * 0.75;
 $font-size-sm: $font-size-base * 0.875;
 $font-size-lg: $font-size-base * 1.25;
+$font-size-xl: $font-size-base * 1.5;
 
 $font-weight-lighter: lighter;
 $font-weight-light: 300;
@@ -79,6 +89,9 @@ $h6-font-size: $font-size-base;
 $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrap/scss/bootstrap";
 
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 // =================================================================
 // 2) Custom Classes
 
@@ -92,7 +105,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 }
 // Headers
 .text-h1 {
-	font-size: $font-size-lg;
+	font-size: $font-size-xl;
 	font-weight: $font-weight-bold;
 }
 .text-h2 {
@@ -100,5 +113,20 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .text-h3 {
 	font-size: $font-size-base;
 	font-weight: $font-weight-bold;
+}
+
+$custom-box-shadow-color: theme("colors.slate.700");
+.custom-pill {
+	font-size: $font-size-sm;
+	font-weight: $font-weight-bold;
+	border-radius: theme("borderRadius.full");
+	box-shadow: 0 4px 6px -1px $custom-box-shadow-color,
+		0 2px 4px -2px $custom-box-shadow-color;
+}
+
+//$custom-box-shadow-color: theme("colors.slate.600");
+.custom-modal {
+	background-color: $modal;
+	border-radius: theme("borderRadius.xl");
 }
 // =================================================================
