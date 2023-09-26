@@ -4,13 +4,12 @@
             <div class="bg-modal p-6 rounded-lg mb-8">
                 <div class="flex justify-between items-center">
                     <div class="text-h1">{{ name }}</div>
-                    <div class="">Ends: {{ deadline }}</div>
+                    <div class="">Ends: {{ role.deadline }}</div>
                 </div>
-                <div class="py-4">{{ description }}</div>
+                <div class="py-4">{{ role.description }}</div>
 
                 <div class="container-fluid">
                     <div class="d-flex justify-end gap-2">
-                        add description and # of positions available
                         <button v-if="user.dept == 'HR'" class="btn btn-primary text-btn" @click="handleEdit">
                             Edit
                         </button>
@@ -52,10 +51,11 @@
 
 <script>
 export default {
-    props: ['name', 'description', 'deadline'],
+    props: ['name'],
     data() {
         return {
             user: this.$store.state.user,
+            role: this.$store.state.role,
             roleskillmatch: {},
         };
     },
@@ -69,7 +69,7 @@ export default {
         // either push props into page or call getRole?id= ... again
         // returning undefined, can only passed through params. name is ok, desc and deadline is not
 
-        console.log(this.deadline)
+        console.log(this.role)
 
         this.fetchRoleSkillMatch();
     },
