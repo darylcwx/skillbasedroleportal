@@ -66,9 +66,6 @@ export default {
 
     mounted() {
         console.log(this.name)
-        // either push props into page or call getRole?id= ... again
-        // returning undefined, can only passed through params. name is ok, desc and deadline is not
-
         console.log(this.role)
 
         this.fetchRoleSkillMatch();
