@@ -20,12 +20,17 @@ const store = createStore({
 	state() {
 		return {
 			user: null,
+			role: null,
 			reloaded: false,
 		};
 	},
 	mutations: {
 		setUser(state, user) {
 			state.user = user;
+		},
+
+		setRole(state, role) {
+			state.role = role;
 		},
 	},
 	plugins: [createPersistedState({ storage: window.sessionStorage })],

@@ -14,13 +14,15 @@
 </template>
 
 <script>
+import { resolveTransitionHooks } from 'vue';
+
 export default {
     props: ['role'],
     data() {
         return {
             user: this.$store.state.user,
             name: this.role.Role_Name,
-            // desc: this.role.description,
+            desc: this.role.Description,
             deadline: this.role.Deadline,
         };
     },
@@ -29,12 +31,19 @@ export default {
     },
     mounted() {
         // console.log(this.user);
-        // 
+        // console.log(this.role)
+
     },
     methods: {
         handleClick() {
             // props not being pushed
-            this.$router.push({ name: "Role", params: { name: this.name }, props: { description: this.desc, deadline: this.deadline } })
+            this.$store.commit("setRole", {
+                    rolename: this.name,
+                    description: this.desc,
+                    deadline: this.deadline
+                });
+
+            this.$router.push({ name: "Role", params: { name: this.name }})
         }
     }
 }
