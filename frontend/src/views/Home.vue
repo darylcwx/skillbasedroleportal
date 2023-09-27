@@ -4,6 +4,8 @@
         <div class="h-auto pt-4">
             <!-- Here should use v-for to iterate through roleListings -->
             <RoleListingPanel v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem"/>
+            <!-- v-if to display error text <p> if roleListings is empty -->
+            <p v-if="roleListingsIsEmpty" class="text-center text-white">There are currently no listings available.</p>
         </div>
     </div>
 </template>
@@ -17,6 +19,7 @@ export default {
         return {
             user: this.$store.state.user,
             roleListings: [],
+            roleListingsIsEmpty: false,
             // listing_id, Role_Name, Description, Deadline
         };
     },
@@ -49,6 +52,7 @@ export default {
 
             } catch (error) {
                 console.error("There was a problem with the fetch operation:", error);
+                this.roleListingsIsEmpty = true;
             }
         },
 
