@@ -1,8 +1,24 @@
-# pip install mysql-connector-python
+# run 'python load_init_sql.py' to load the full SBRP database.
 import mysql.connector
 import os
 from dotenv import load_dotenv
+import subprocess
 
+# Define the package name
+package_name = 'mysql-connector-python'
+
+# Check if the package is installed
+try:
+    import mysql.connector
+    # print(f"{package_name} is already installed.")
+except ImportError:
+    # If the package is not installed, try to install it
+    try:
+        subprocess.check_call(['pip', 'install', package_name])
+        print(f"{package_name} has been installed.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing {package_name}: {e}")
+        
 load_dotenv('backend/.env')
 
 # Establish MySQL connection
