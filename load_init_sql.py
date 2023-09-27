@@ -1,11 +1,19 @@
-# pip install mysql-connector-python;
+# pip install mysql-connector-python
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv('backend/.env')
 
 # Establish MySQL connection
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+host = os.getenv("DB_HOST")
+
 db = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = ""
+    host = host,
+    user = user,
+    password = password
 )
 
 # Create cursor
