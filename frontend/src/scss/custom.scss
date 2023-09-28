@@ -112,6 +112,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	font-weight: $font-weight-bold;
 }
 .text-h2 {
+	font-size: $font-size-lg;
+	font-weight: $font-weight-normal;
 }
 .text-h3 {
 	font-size: $font-size-base;

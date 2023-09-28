@@ -66,20 +66,19 @@
             <!-- need to change the v-if -->
             <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
                 <div class="text-h1">Applicants</div>
-                add applicant component here to show applicant details and their individual role skill match
-
-
-                <!-- <div class="text-h3">Applicant ID  </div> -->
-                <!-- {{ applicants[0] }} -->
-                <!-- {{ applicants[0]["Application_ID"] }} --> 
+                <div v-for="applicant of this.applicants">
+                    <Application :application="applicant" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Application from '../components/Application.vue'
 export default {
     props: ['name'],
+    components: { Application },
     data() {
         return {
             user: this.$store.state.user,
@@ -116,16 +115,16 @@ export default {
             try {
                 const apiURL = `http://localhost:5000/api/allroleskillmatch?lid=${encodeURIComponent(this.role.listingID)}`;
                 const response = await fetch(apiURL, { mode: "cors" });
-                let applicantObject = await response.json(); 
+                let applicantObject = await response.json();
 
-                for (let i in applicantObject['Applicants'] ){
+                for (let i in applicantObject['Applicants']) {
                     applicantObject['Applicants'][i]['Percentage Match'] = parseInt(applicantObject['Applicants'][i]['Percentage Match'])
                 }
-    
-                this.applicants = applicantObject['Applicants'] 
+
+                this.applicants = applicantObject['Applicants']
                 // [ {'Application ID', 'Staff Name', 'Staff Dept',  
                 // 'Staff Matched Skills', 'Staff Mismatched Skills', 'Percentage Match'} ]
-
+                console.log(this.applicants)
             } catch (error) {
                 console.error(error);
             }
