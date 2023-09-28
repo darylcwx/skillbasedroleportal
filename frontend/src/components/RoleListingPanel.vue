@@ -39,6 +39,7 @@ export default {
         handleClick() {
             // props not being pushed
             this.$store.commit("setRole", {
+                listingID: this.role.Listing_ID,
                 roleName: this.name,
                 description: this.desc,
                 deadline: this.deadline

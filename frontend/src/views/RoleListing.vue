@@ -63,9 +63,15 @@
 
         <!-- Applicants -->
         <div class="pt-8">
+            <!-- need to change the v-if -->
             <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
                 <div class="text-h1">Applicants</div>
                 add applicant component here to show applicant details and their individual role skill match
+
+
+                <!-- <div class="text-h3">Applicant ID  </div> -->
+                <!-- {{ applicants[0] }} -->
+                <!-- {{ applicants[0]["Application_ID"] }} --> 
             </div>
         </div>
     </div>
@@ -79,6 +85,7 @@ export default {
             user: this.$store.state.user,
             role: this.$store.state.role,
             roleSkillMatch: {},
+            applicants: [],
         };
     },
 
@@ -88,18 +95,36 @@ export default {
 
     mounted() {
         this.fetchRoleSkillMatch();
+        this.fetchAllApplicants();
     },
 
     methods: {
         async fetchRoleSkillMatch() {
             try {
-                if (this.user.dept != 'HR') {
-                    const apiURL = `http://localhost:5000/api/roleskillmatch?sid=${encodeURIComponent(this.user.id)}&rolename=${encodeURIComponent(this.name)}`;
-                    const response = await fetch(apiURL, { mode: "cors" });
-                    let roleSkillMatchObject = await response.json();
-                    roleSkillMatchObject['Percentage Match'] = parseInt(roleSkillMatchObject['Percentage Match'])
-                    this.roleSkillMatch = roleSkillMatchObject
-                };
+                const apiURL = `http://localhost:5000/api/roleskillmatch?sid=${encodeURIComponent(this.user.id)}&rolename=${encodeURIComponent(this.name)}`;
+                const response = await fetch(apiURL, { mode: "cors" });
+                let roleSkillMatchObject = await response.json();
+                roleSkillMatchObject['Percentage Match'] = parseInt(roleSkillMatchObject['Percentage Match'])
+                this.roleSkillMatch = roleSkillMatchObject
+
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        async fetchAllApplicants() {
+            try {
+                const apiURL = `http://localhost:5000/api/allroleskillmatch?lid=${encodeURIComponent(this.role.listingID)}`;
+                const response = await fetch(apiURL, { mode: "cors" });
+                let applicantObject = await response.json(); 
+
+                for (let i in applicantObject['Applicants'] ){
+                    applicantObject['Applicants'][i]['Percentage Match'] = parseInt(applicantObject['Applicants'][i]['Percentage Match'])
+                }
+    
+                this.applicants = applicantObject['Applicants'] 
+                // [ {'Application ID', 'Staff Name', 'Staff Dept',  
+                // 'Staff Matched Skills', 'Staff Mismatched Skills', 'Percentage Match'} ]
 
             } catch (error) {
                 console.error(error);
