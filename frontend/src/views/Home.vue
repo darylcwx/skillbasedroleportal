@@ -1,5 +1,8 @@
 <template>
     <div class="container mx-auto max-w-2xl min-h-[calc(100vh-56px)] mt-14">
+        <div class="mt-4">
+            <SearchFilter></SearchFilter>
+        </div>
         <div class="">
             <RoleListingPanel v-for="roleItem in roleListings" :key="roleItem.id" :role="roleItem" />
         </div>
@@ -17,9 +20,10 @@
 
 <script>
 import RoleListingPanel from "../components/RoleListingPanel.vue";
+import SearchFilter from "../components/SearchFilter.vue";
 import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 export default {
-    components: { RoleListingPanel, ExclamationTriangleIcon },
+    components: { RoleListingPanel, ExclamationTriangleIcon, SearchFilter },
     data() {
         return {
             user: this.$store.state.user,
