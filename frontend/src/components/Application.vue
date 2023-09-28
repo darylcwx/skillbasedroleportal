@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#e4e7ff] rounded-lg mt-4 p-4">
+    <div class="bg-[#e7ecff] border border-2 rounded-lg mt-4 p-4">
         <!-- Admin -->
         <div class="flex justify-between">
             <div class="">

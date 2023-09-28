@@ -62,7 +62,7 @@
         </div>
 
         <!-- Applicants -->
-        <div class="pt-8">
+        <div class="pt-8 pb-8">
             <!-- need to change the v-if -->
             <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
                 <div class="text-h1">Applicants</div>
