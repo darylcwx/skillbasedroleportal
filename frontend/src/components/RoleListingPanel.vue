@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 ">
+    <div class="pt-8">
         <div
             class="p-6 custom-modal rounded-xl text-dark hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500">
             <div class="flex justify-between items-center">
@@ -39,7 +39,7 @@ export default {
         handleClick() {
             // props not being pushed
             this.$store.commit("setRole", {
-                rolename: this.name,
+                roleName: this.name,
                 description: this.desc,
                 deadline: this.deadline
             });

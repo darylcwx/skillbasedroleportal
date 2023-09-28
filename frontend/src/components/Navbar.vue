@@ -1,6 +1,6 @@
 <template>
     <div class="flex md:hidden">
-        <div class="navbar navbar-dark px-4 bg-navbar container-fluid">
+        <div class="navbar navbar-dark fixed-top px-4 bg-navbar container-fluid">
             <div class="flex flex-row justify-between w-full">
                 <button class="navbar-toggler border-none p-0" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,10 +26,10 @@
 
                 <!-- Profile -->
                 <div class="user" type="button" data-bs-toggle="dropdown">
-                    <div class="px-3 py-2 bg-avatar rounded-full">
-                        <span class="initials text-dark">{{ user.fName.slice(0, 1) }} {{ user.lName.slice(0,
-                            1)
-                        }}</span>
+                    <div class="w-10 h-10 bg-avatar rounded-full flex justify-center items-center">
+                        <span class="initials text-dark text-initials">
+                            {{ user.fName.slice(0, 1) }}<span class="pr-[1px]"></span>{{ user.lName.slice(0, 1) }}
+                        </span>
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -40,21 +40,21 @@
         </div>
     </div>
     <div class="hidden md:flex">
-        <div class="navbar navbar-dark px-4 bg-navbar text-white container-fluid">
+        <div class="navbar fixed-top px-4 bg-navbar text-white container-fluid">
             <div class="logo flex items-center cursor-pointer" @click="handleHome()">
                 <img src="/portal.png" width="40" height="40" />
                 <div class="ml-3 text-h1">Skill Based Role Portal</div>
             </div>
             <div class="flex">
                 <!-- Links -->
-                <div class="flex items-center justify-between pr-8">
-                    <!-- Admin -->
-                    <a v-if="user.accessRights == 0">admin link</a>
-                    <!-- Staff -->
-                    <a v-if="user.accessRights == 1">staff link</a>
-                    <!-- Manager -->
-                    <a v-if="user.accessRights == 2">manager link</a>
-                </div>
+                <!-- <div class="flex items-center justify-between pr-8"> -->
+                <!-- Admin -->
+                <!-- <a v-if="user.accessRights == 0">admin link</a> -->
+                <!-- Staff -->
+                <!-- <a v-if="user.accessRights == 1">staff link</a> -->
+                <!-- Manager -->
+                <!-- <a v-if="user.accessRights == 2">manager link</a> -->
+                <!-- </div> -->
                 <!-- Dev panel -->
                 <div @mouseover="showDevPanel = true" @mouseleave="showDevPanel = false" class="pr-8 flex items-center">
                     Dev
@@ -71,10 +71,10 @@
                 </div>
                 <!-- Profile -->
                 <div class="user" type="button" data-bs-toggle="dropdown">
-                    <div class="px-3 py-2 bg-avatar rounded-full">
-                        <span class="initials text-dark">{{ user.fName.slice(0, 1) }} {{ user.lName.slice(0,
-                            1)
-                        }}</span>
+                    <div class="w-10 h-10 bg-avatar rounded-full flex justify-center items-center">
+                        <span class="initials text-dark text-initials">
+                            {{ user.fName.slice(0, 1) }}<span class="pr-[1px]"></span>{{ user.lName.slice(0, 1) }}
+                        </span>
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
