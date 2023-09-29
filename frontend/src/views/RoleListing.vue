@@ -66,6 +66,15 @@
             <!-- need to change the v-if -->
             <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
                 <div class="text-h1">Applicants</div>
+                <div v-if="this.applicantsNotLoaded" class="placeholder-wave w-full h-72">
+                    <span
+                        class="placeholder bg-secondary text-secondary border border-2 rounded-lg mt-4 h-full w-full select-none">
+                        placeholder
+                    </span>
+                </div>
+                <div v-if="!this.applicantsNotLoaded && this.applicants.length == 0" class="">
+                    <div class="mt-4">No applicants found.</div>
+                </div>
                 <div v-for="applicant of this.applicants">
                     <Application :application="applicant" />
                 </div>
@@ -85,11 +94,11 @@ export default {
             role: this.$store.state.role,
             roleSkillMatch: {},
             applicants: [],
+            applicantsNotLoaded: true,
         };
     },
 
     created() {
-
     },
 
     mounted() {
@@ -116,17 +125,13 @@ export default {
                 const apiURL = `http://localhost:5000/api/allroleskillmatch?lid=${encodeURIComponent(this.role.listingID)}`;
                 const response = await fetch(apiURL, { mode: "cors" });
                 let applicantObject = await response.json();
-
                 for (let i in applicantObject['Applicants']) {
                     applicantObject['Applicants'][i]['Percentage Match'] = parseInt(applicantObject['Applicants'][i]['Percentage Match'])
                 }
-
-                this.applicants = applicantObject['Applicants']
-                // [ {'Application ID', 'Staff Name', 'Staff Dept',  
-                // 'Staff Matched Skills', 'Staff Mismatched Skills', 'Percentage Match'} ]
-                console.log(this.applicants)
+                this.applicants = applicantObject['Applicants'];
+                this.applicantsNotLoaded = false;
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         },
 
