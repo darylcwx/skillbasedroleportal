@@ -3,7 +3,8 @@
     <div class="flex-grow-1 mr-3">
       <div class="input-group rounded">
         <input
-          type="search"
+          @input="emitSearchtoParent()"
+          v-model="search"
           class="form-control rounded"
           placeholder="Search"
           aria-label="Search"
@@ -43,17 +44,15 @@
 
 <script>
 export default {
+  props: ['search'],
+  emits: ['changed'],
   data() {
     return {
       user: this.$store.state.user,
       showDevPanel: false,
       selectedItems: [],
       items: [],
-      //   items: [
-      //     { label: 'Java', value: 'Java', selected: false },
-      //     { label: 'C++', value: 'C++', selected: false },
-      //     { label: 'Python', value: 'Python', selected: false },
-      //   ],
+      search: '',
     };
   },
   computed: {
@@ -67,6 +66,10 @@ export default {
     },
   },
   methods: {
+    emitSearchtoParent() {
+      this.$emit('changed', this.search);
+      console.log(this.search);
+    },
     async getStaffSkillsbyID() {
       try {
         const apiUrl =

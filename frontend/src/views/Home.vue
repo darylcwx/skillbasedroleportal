@@ -1,15 +1,16 @@
 <template>
   <div class="container mx-auto max-w-2xl min-h-[calc(100vh-56px)] mt-14">
     <div class="mt-4">
-      <SearchFilter></SearchFilter>
+      <SearchFilter @changed="getSearchValue"></SearchFilter>
     </div>
     <div class="">
       <RoleListingPanel
-        v-for="roleItem in roleListings"
-        :key="roleItem.id"
+        v-for="roleItem in filteredList"
+        :key="componentKey"
         :role="roleItem"
       />
     </div>
+    <!-- :key="roleItem.id" -->
     <div
       v-if="roleListingsIsEmpty"
       class="h-[calc(100vh-56px)] grid place-content-center text-white"
@@ -29,6 +30,7 @@
 import RoleListingPanel from '../components/RoleListingPanel.vue';
 import SearchFilter from '../components/SearchFilter.vue';
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline';
+
 export default {
   components: { RoleListingPanel, ExclamationTriangleIcon, SearchFilter },
   data() {
@@ -36,6 +38,8 @@ export default {
       user: this.$store.state.user,
       roleListings: [],
       roleListingsIsEmpty: false,
+      search: '',
+      componentKey: 0,
       // listing_id, Role_Name, Description, Deadline
     };
   },
@@ -43,13 +47,23 @@ export default {
     // Remove static data from previous version;
   },
   mounted() {
-    // get/RoleListings
-    // this.roleListings = response.data.roleListings
-
-    // console.log(this.user);
     this.fetchRoleListings();
   },
+
+  computed: {
+    filteredList() {
+      return this.roleListings.filter((roleItem) => {
+        return roleItem.Role_Name.toLowerCase().includes(
+          this.search.toLowerCase()
+        );
+      });
+    },
+  },
   methods: {
+    forceRender() {
+      this.componentKey += 1;
+    },
+
     async fetchRoleListings() {
       try {
         const apiUrl = 'http://localhost:5000/api/rolelistings';
@@ -68,6 +82,13 @@ export default {
         this.roleListingsIsEmpty = true;
         console.error(error);
       }
+    },
+    getSearchValue(searchValue) {
+      this.search = searchValue;
+      console.log(this.filteredList);
+      console.log('serach in data is ' + this.search);
+      console.log('search value is ' + searchValue);
+      this.forceRender();
     },
   },
 };
