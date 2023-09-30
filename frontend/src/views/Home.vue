@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto max-w-2xl min-h-[calc(100vh-56px)] mt-14">
-    <div class="mt-4">
+    <div class="pt-4">
       <SearchFilter @changed="getSearchValue"></SearchFilter>
     </div>
     <div class="">
