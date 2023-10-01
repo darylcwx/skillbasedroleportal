@@ -32,7 +32,7 @@
               type="checkbox"
               :value="item"
               v-model="selectedItems"
-              @change="deletelater()"
+              @change="emitSearchtoParent()"
             />
             {{ item }}
           </label>
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     emitSearchtoParent() {
-      this.$emit('changed', this.search);
+      this.$emit('changed', this.search, this.selectedItems);
       console.log(this.search);
     },
     async getStaffSkillsbyID() {

@@ -40,7 +40,8 @@ export default {
       roleListingsIsEmpty: false,
       search: '',
       componentKey: 0,
-      // listing_id, Role_Name, Description, Deadline
+      filterSkills: [],
+      currentRole: '',
     };
   },
   created() {
@@ -52,16 +53,50 @@ export default {
 
   computed: {
     filteredList() {
+      function findSkill(roleSkills, filterSkills) {
+        if (filterSkills.length == 0) {
+          return true;
+        }
+        for (let filterSkill of filterSkills) {
+          if (roleSkills.includes(filterSkill)) {
+            return true;
+          }
+        }
+      }
+
       return this.roleListings.filter((roleItem) => {
-        return roleItem.Role_Name.toLowerCase().includes(
-          this.search.toLowerCase()
+        return (
+          roleItem.Role_Name.toLowerCase().includes(
+            this.search.toLowerCase()
+          ) &&
+          // && roleItem['skills'].includes(this.filterSkills) ;
+          findSkill(roleItem['skills'], this.filterSkills)
         );
       });
     },
   },
+
   methods: {
     forceRender() {
       this.componentKey += 1;
+    },
+
+    async fetchRoleSkills() {
+      try {
+        this.roleListings.forEach(async (role) => {
+          this.currentRole = role['Role_Name'];
+          console.log(role);
+          const apiUrl =
+            'http://localhost:5000/api/roleskills?rolename=' + this.currentRole;
+          const response = await fetch(apiUrl, { mode: 'cors' });
+          const data = await response.json();
+          console.log(data);
+          role['skills'] = data['Role Skills'];
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      console.log(this.roleListings);
     },
 
     async fetchRoleListings() {
@@ -78,15 +113,18 @@ export default {
           );
         });
         this.roleListings = data.Listings;
+        this.fetchRoleSkills();
       } catch (error) {
         this.roleListingsIsEmpty = true;
         console.error(error);
       }
     },
-    getSearchValue(searchValue) {
+    getSearchValue(searchValue, selectedSkillsValue) {
       this.search = searchValue;
+      this.filterSkills = selectedSkillsValue;
+      console.log(this.filterSkills);
       console.log(this.filteredList);
-      console.log('serach in data is ' + this.search);
+      console.log('search in data is ' + this.search);
       console.log('search value is ' + searchValue);
       this.forceRender();
     },
