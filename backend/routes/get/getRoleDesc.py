@@ -4,7 +4,7 @@ from backend.models.role import Role
 getRoleDescBP = Blueprint('getRoleDesc', __name__)
 # Get role description by role name
 @getRoleDescBP.route('/api/roledesc', methods=['GET'])
-def getRoleDesc(role_name):
+def getRoleDesc(role_name = None):
 
     if not role_name:
         role_name = request.args.get('role_name')
