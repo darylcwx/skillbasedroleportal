@@ -3,7 +3,10 @@
         <div
             class="p-6 custom-modal rounded-xl text-dark hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500">
             <div class="flex justify-between items-center">
-                <div class="text-h1">{{ name }}</div>
+                <div class="flex items-center">
+                    <div class="text-h1 mr-2">{{ name }}</div>
+                    <component :is="icons[this.name]" class="h-6 w-6" />
+                </div>
                 <div class="">Ends: <b>{{ deadline }}</b></div>
             </div>
             <div class="py-4">{{ desc }}</div>
@@ -15,8 +18,7 @@
 </template>
 
 <script>
-import { resolveTransitionHooks } from 'vue';
-
+import { ComputerDesktopIcon, CommandLineIcon, UserGroupIcon, UsersIcon } from "@heroicons/vue/24/solid";
 export default {
     props: ['role'],
     data() {
@@ -25,24 +27,27 @@ export default {
             name: this.role.Role_Name,
             desc: this.role.Description,
             deadline: this.role.Deadline,
+            icons: {
+                "Clerk": ComputerDesktopIcon,
+                "IT Support": CommandLineIcon,
+                "Human Resource": UserGroupIcon,
+                "Manager": UsersIcon,
+            }
         };
     },
     created() {
 
     },
     mounted() {
-        // console.log(this.user);
-        // console.log(this.role)
-
     },
     methods: {
         handleClick() {
-            // props not being pushed
             this.$store.commit("setRole", {
                 listingID: this.role.Listing_ID,
                 roleName: this.name,
                 description: this.desc,
-                deadline: this.deadline
+                deadline: this.deadline,
+                icons: this.icons,
             });
 
             this.$router.push({ name: "Role", params: { name: this.name } })

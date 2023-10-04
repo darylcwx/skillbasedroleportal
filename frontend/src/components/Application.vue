@@ -7,7 +7,7 @@
                 <span class="">{{ application["Application ID"] }}</span>
             </div>
             <div class="w-full md:w-1/2">
-                <span class="text-h3">Percentage Match (to role): </span>
+                <span class="text-h3">Applicant's Match: </span>
                 <span class="">{{ application["Percentage Match"] }}%</span>
             </div>
         </div>

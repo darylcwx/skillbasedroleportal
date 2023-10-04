@@ -4,7 +4,10 @@
         <div class="pt-8">
             <div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
                 <div class="flex justify-between items-center">
-                    <div class="text-h1 mr-4">{{ name }}</div>
+                    <div class="flex items-center">
+                        <div class="text-h1 mr-2">{{ name }}</div>
+                        <component :is="this.icons[name]" class="h-6 w-6" />
+                    </div>
                     <div class="">Ends: <b>{{ role.deadline }}</b></div>
                 </div>
                 <div class="mt-4">{{ role.description }}</div>
@@ -23,7 +26,10 @@
         <div class="pt-8">
             <div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
                 <div class="flex items-center justify-between">
-                    <div class="text-h1 mr-4">Skills Required</div>
+                    <div class="flex items-center">
+                        <div class="text-h1 mr-2">Skills Required</div>
+                        <SquaresPlusIcon class="h-6 w-6" />
+                    </div>
                     <div v-if="Object.keys(roleSkillMatch).length == 0" class="">
                         My percentage match: <b>... %</b>
                     </div>
@@ -70,7 +76,10 @@
         <div class="pt-8 pb-8">
             <!-- need to change the v-if -->
             <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
-                <div class="text-h1">Applicants</div>
+                <div class="flex items-center">
+                    <div class="text-h1 mr-2">Applicants</div>
+                    <QueueListIcon class="h-6 w-6" />
+                </div>
                 <div v-if="this.applicantsNotLoaded" class="placeholder-wave">
                     <span class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
                         placeholder
@@ -88,14 +97,22 @@
 </template>
 
 <script>
-import Application from '../components/Application.vue'
+import Application from '../components/Application.vue';
+import { ComputerDesktopIcon, CommandLineIcon, UserGroupIcon, UsersIcon } from "@heroicons/vue/24/solid";
+import { SquaresPlusIcon, QueueListIcon } from "@heroicons/vue/24/solid";
 export default {
     props: ['name'],
-    components: { Application },
+    components: { Application, SquaresPlusIcon, QueueListIcon },
     data() {
         return {
             user: this.$store.state.user,
             role: this.$store.state.role,
+            icons: {
+                "Clerk": ComputerDesktopIcon,
+                "IT Support": CommandLineIcon,
+                "Human Resource": UserGroupIcon,
+                "Manager": UsersIcon,
+            },
             roleSkillMatch: {},
             applicants: [],
             applicantsNotLoaded: true,

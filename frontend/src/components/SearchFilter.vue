@@ -24,9 +24,9 @@
         <!-- {{ dropdownButtonText }} -->
         Filter
       </button>
-      <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
+      <ul class="dropdown-menu px-2" aria-labelledby="multiSelectDropdown">
         <li v-for="(item, index) in items" :key="index">
-          <label class="ml-2">
+          <label class="whitespace-nowrap">
             <!-- <input type="checkbox" :value="item.value" v-model="item.selected" @change="handleCheckboxChange" /> -->
             <input
               type="checkbox"
