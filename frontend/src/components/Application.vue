@@ -1,24 +1,6 @@
 <template>
-    <div class="bg-[#e7ecff] border border-2 rounded-lg mt-4 p-4">
+    <div class="bg-[#DBDEE6] rounded-xl mt-4 p-6">
         <!-- Admin -->
-        <table>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        </table>
         <div class="flex flex-wrap">
             <div class="w-full md:w-1/2">
                 <span class="text-h3">Application ID: </span>
@@ -43,7 +25,7 @@
 
         <!-- Skills Details -->
         <div class="flex flex-col">
-            <div class="flex justify-between items-center mt-4">
+            <div class="flex justify-between items-center mt-6">
                 <div class="text-h3">Matched Skills:</div>
             </div>
             <div class="flex flex-wrap">
@@ -52,7 +34,7 @@
                         skillsMatched }}
                 </span>
             </div>
-            <div class="text-h3 mt-4">Mismatched Skills:</div>
+            <div class="text-h3 mt-6">Mismatched Skills:</div>
         </div>
         <div class="flex flex-wrap">
             <span v-for='skillsMismatched in application["Staff Mismatched Skills"]'

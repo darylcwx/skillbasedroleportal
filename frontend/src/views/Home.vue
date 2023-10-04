@@ -3,18 +3,21 @@
     <div class="pt-4">
       <SearchFilter @changed="getSearchValue"></SearchFilter>
     </div>
-    <div class="">
-      <RoleListingPanel
-        v-for="roleItem in filteredList"
-        :key="componentKey"
-        :role="roleItem"
-      />
+    <div v-if="this.roleListingsNotLoaded" class="placeholder-wave mt-8">
+      <div class="placeholder bg-placeholder text-placeholder rounded-xl h-44 w-full select-none">
+        placeholder
+      </div>
+      <div class="mt-8 placeholder bg-placeholder text-placeholder rounded-xl h-44 w-full select-none">
+        placeholder
+      </div>
+      <div class="mt-8 placeholder bg-placeholder text-placeholder rounded-xl h-44 w-full select-none">
+        placeholder
+      </div>
     </div>
-    <!-- :key="roleItem.id" -->
-    <div
-      v-if="roleListingsIsEmpty"
-      class="h-[calc(100vh-56px)] grid place-content-center text-white"
-    >
+    <div class="">
+      <RoleListingPanel v-for="roleItem in filteredList" :key="componentKey" :role="roleItem" />
+    </div>
+    <div v-if="roleListingsIsEmpty" class="h-[calc(100vh-56px)] grid place-content-center text-white">
       <div class="flex flex-col">
         <ExclamationTriangleIcon class="h-12 w-12 text-red-500 mx-auto" />
         <div>
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import { triggerRef } from 'vue';
 import RoleListingPanel from '../components/RoleListingPanel.vue';
 import SearchFilter from '../components/SearchFilter.vue';
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline';
@@ -37,6 +41,7 @@ export default {
     return {
       user: this.$store.state.user,
       roleListings: [],
+      roleListingsNotLoaded: true,
       roleListingsIsEmpty: false,
       search: '',
       componentKey: 0,
@@ -114,6 +119,7 @@ export default {
         });
         this.roleListings = data.Listings;
         this.fetchRoleSkills();
+        this.roleListingsNotLoaded = false;
       } catch (error) {
         this.roleListingsIsEmpty = true;
         console.error(error);

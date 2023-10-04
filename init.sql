@@ -130,6 +130,7 @@ insert into `Listings` values (1, 'IT Support', '2023-10-25');
 insert into `Listings` values (2, 'Clerk', '2023-10-28');
 insert into `Listings` values (3, 'Human Resource', '2023-11-18');
 insert into `Listings` values (4, 'Manager', '2023-11-05');
+insert into `Listings` values (5, 'Clerk', '2025-01-01');
 
 -- Staff_Application TABLE
 create table `Staff_Application` (

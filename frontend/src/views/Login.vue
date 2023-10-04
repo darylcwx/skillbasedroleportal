@@ -5,7 +5,7 @@
 
             <div class="pb-4">
                 <label for="email" class="form-label text-h3">Email</label>
-                <select id="email" v-model="userEmail" class="w-full rounded-lg form-select" required>
+                <select id="email" v-model="userEmail" class="w-full form-select" required>
                     <option selected>Choose a user</option>
                     <option v-for="user in users" :value="user.Email">
                         {{ user.Email }}

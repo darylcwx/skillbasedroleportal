@@ -6,7 +6,7 @@
           @input="emitSearchtoParent()"
           v-model="search"
           class="form-control rounded"
-          placeholder="Search"
+          placeholder="IT, human resources, finance"
           aria-label="Search"
           aria-describedby="search-addon"
         />

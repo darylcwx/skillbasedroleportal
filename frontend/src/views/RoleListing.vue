@@ -2,10 +2,10 @@
     <div class="container mx-auto max-w-2xl min-h-[calc(100vh-56px)] mt-14">
         <!-- Role details -->
         <div class="pt-8">
-            <div class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
+            <div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
                 <div class="flex justify-between items-center">
                     <div class="text-h1 mr-4">{{ name }}</div>
-                    <div class="">Ends: {{ role.deadline }}</div>
+                    <div class="">Ends: <b>{{ role.deadline }}</b></div>
                 </div>
                 <div class="mt-4">{{ role.description }}</div>
                 <div class="flex justify-end gap-2 mt-4">
@@ -21,31 +21,36 @@
 
         <!-- Skills Required -->
         <div class="pt-8">
-            <div class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
+            <div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
                 <div class="flex items-center justify-between">
                     <div class="text-h1 mr-4">Skills Required</div>
                     <div v-if="Object.keys(roleSkillMatch).length == 0" class="">
-                        Percentage match: ... %
+                        My percentage match: <b>... %</b>
                     </div>
                     <div v-else class="">
-                        Percentage match: {{ roleSkillMatch['Percentage Match'] }}%
+                        My percentage match: <b>{{ roleSkillMatch['Percentage Match'] }}%</b>
                     </div>
                 </div>
                 <div name="matched" class="mt-4 flex-col">
                     <div v-if="Object.keys(roleSkillMatch).length == 0" class="placeholder-wave">
-                        <span class="placeholder col-3 badge custom-pill-no-shadow bg-secondary text-secondary mt-3 mr-3">
+                        <span
+                            class="placeholder col-3 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
                             placeholder
                         </span>
-                        <span class="placeholder col-5 badge custom-pill-no-shadow bg-secondary text-secondary mt-3 mr-3">
+                        <span
+                            class="placeholder col-5 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
                             placeholder
                         </span>
-                        <span class="placeholder col-4 badge custom-pill-no-shadow bg-secondary text-secondary mt-3 mr-3">
+                        <span
+                            class="placeholder col-4 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
                             placeholder
                         </span>
-                        <span class="placeholder col-2 badge custom-pill-no-shadow bg-secondary text-secondary mt-3 mr-3">
+                        <span
+                            class="placeholder col-2 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
                             placeholder
                         </span>
-                        <span class="placeholder col-9 badge custom-pill-no-shadow bg-secondary text-secondary mt-3 mr-3">
+                        <span
+                            class="placeholder col-9 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
                             placeholder
                         </span>
                     </div>
@@ -64,11 +69,10 @@
         <!-- Applicants -->
         <div class="pt-8 pb-8">
             <!-- need to change the v-if -->
-            <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-lg shadow-lg shadow-gray-700">
+            <div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
                 <div class="text-h1">Applicants</div>
-                <div v-if="this.applicantsNotLoaded" class="placeholder-wave w-full h-72">
-                    <span
-                        class="placeholder bg-secondary text-secondary border border-2 rounded-lg mt-4 h-full w-full select-none">
+                <div v-if="this.applicantsNotLoaded" class="placeholder-wave">
+                    <span class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
                         placeholder
                     </span>
                 </div>

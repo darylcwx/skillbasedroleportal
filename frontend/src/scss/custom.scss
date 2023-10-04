@@ -15,16 +15,17 @@ Order:
 */
 // =================================================================
 // 1) Theme Colors
-$primary: #274268;
-$secondary: #6d757d;
-$success: #218656;
+$primary: #2F324C;
+$secondary: #687078;
+$success: #51A471;
 $danger: #da3849;
 $warning: #fec02f;
 $info: #27cbee;
-$navbar: #1d2435;
+$navbar: #2F324C;
 $modal: #f2f4ff;
 $link: #27cbee;
 $avatar: #f2f4ff;
+$placeholder: #3f3f3f;
 // =================================================================
 
 // Create your own map
@@ -39,6 +40,7 @@ $custom-colors: (
 	"modal": $modal,
 	"link": $link,
 	"avatar": $avatar,
+	"placeholder": $placeholder,
 );
 
 @import "bootstrap/scss/variables";
