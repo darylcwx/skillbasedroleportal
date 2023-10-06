@@ -24,13 +24,22 @@
 						data-bs-target="#editModal">
 						Edit
 					</button>
+					<!-- Open confirm modal -->
 					<button
+						type="button"
 						class="btn btn-primary text-btn"
-						@click="handleClick">
+						data-bs-toggle="modal"
+						data-bs-target="#confirmModal">
 						Apply
 					</button>
 				</div>
 			</div>
+		</div>
+		<div class="absolute top-1/2">
+		<ModalConfirmation
+			id="confirmModal"
+			modalName="editModal"
+			@confirmed="handleConfirm" />
 		</div>
 
 		<!-- Skills Required -->
@@ -164,7 +173,7 @@ export default {
 			},
 			roleSkillMatch: {},
 			roleSkillMatchNotLoaded: true,
-			applicants: [],
+			applicants: [], // [{}, {}, {}]
 			applicantsNotLoaded: true,
 			showEditModal: false,
 		};
@@ -218,7 +227,57 @@ export default {
 		handleEdit() {
 			this.showEditModal = true;
 		},
-		handleApply() {},
+		handleConfirm() {
+			this.message = "";
+			console.log("handleApply() clicked");
+
+			// use these values
+			console.log(this.user.id);
+			console.log(this.role.listingID);
+
+			let answer = "error";
+			answer = this.handleApply();
+
+			// error handling
+			if (answer == "success") {
+				this.success = true;
+				this.message = "Successfully inserted application into Staff_Application!";
+
+				setTimeout(() => {
+					this.success = false;
+				}, 3000);
+				// might need to force rerender here once data updated
+			} else {
+				this.error = true;
+				this.message = response.error;
+
+				setTimeout(() => {
+					this.error = false;
+				}, 3000);
+				//3000
+			}
+		},
+		handleApply() {
+			// check if current date is before deadline
+			let currentDate = new Date();
+			let deadline = new Date(this.role.deadline);
+			// console.log(currentDate);
+			// console.log(deadline);
+			if (currentDate > deadline) {
+				console.log("current date is after deadline.");
+				return "error";
+			}
+
+
+			// check if staff already applied for current role
+			for (let applicant of this.applicants) {
+				if (applicant["Staff ID"] == this.user.id) {
+					console.log("staff already applied for current role.")
+					return "error";
+				}
+			}
+			return "success"
+		},
 	},
 };
 </script>
