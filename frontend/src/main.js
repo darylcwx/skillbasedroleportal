@@ -58,4 +58,7 @@ const router = createRouter({
 	routes: routes,
 });
 
-createApp(App).use(router).use(store).mount("#app");
+const app = createApp(App);
+app.use(router);
+app.use(store);
+app.mount("#app");

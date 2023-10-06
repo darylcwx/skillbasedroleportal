@@ -5,11 +5,7 @@ export default {
 	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
-			colors: {
-				info: "#d6ce2f",
-				//ghost: "#F2F4FF",
-				//fly: "#fec02f",
-			},
+			colors: {},
 			fontSize: {
 				xs: ".75rem", // Extra small font size
 				sm: ".875rem", // Small font size
@@ -32,6 +28,15 @@ export default {
 				bold: "700", // Bold font weight
 				extrabold: "800", // Extra-bold font weight
 				black: "900", // Black font weight
+			},
+			spacing: {
+				76: "19rem",
+			},
+			height: {
+				104: "26rem",
+				112: "28rem",
+				120: "30rem",
+				128: "32rem",
 			},
 		},
 	},

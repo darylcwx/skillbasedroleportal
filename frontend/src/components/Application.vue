@@ -29,14 +29,20 @@
                 <div class="text-h3">Matched Skills:</div>
             </div>
             <div class="flex flex-wrap">
+                <div v-if="this.application['Staff Matched Skills'].length == 0" class="mt-3">
+                    Applicant has no matched skills.
+                </div>
                 <span v-for='skillsMatched in application["Staff Matched Skills"]'
                     class="badge custom-pill bg-success mt-3 mr-3">{{
                         skillsMatched }}
                 </span>
             </div>
-            <div class="text-h3 mt-6">Mismatched Skills:</div>
+            <div class="text-h3 mt-6">Other Skills:</div>
         </div>
         <div class="flex flex-wrap">
+            <div v-if="this.application['Staff Mismatched Skills'].length == 0" class="mt-3">
+                Applicant has no other skills.
+            </div>
             <span v-for='skillsMismatched in application["Staff Mismatched Skills"]'
                 class="badge custom-pill bg-secondary mt-3 mr-3">{{
                     skillsMismatched }}

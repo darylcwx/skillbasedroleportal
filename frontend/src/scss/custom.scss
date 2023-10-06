@@ -15,17 +15,18 @@ Order:
 */
 // =================================================================
 // 1) Theme Colors
-$primary: #2F324C;
+$primary: #2f324c;
 $secondary: #687078;
-$success: #51A471;
+$success: #51a471;
 $danger: #da3849;
 $warning: #fec02f;
 $info: #27cbee;
-$navbar: #2F324C;
+$navbar: #2f324c;
 $modal: #f2f4ff;
 $link: #27cbee;
 $avatar: #f2f4ff;
 $placeholder: #3f3f3f;
+$overlay: #000000;
 // =================================================================
 
 // Create your own map
@@ -41,11 +42,12 @@ $custom-colors: (
 	"link": $link,
 	"avatar": $avatar,
 	"placeholder": $placeholder,
+	"overlay": $overlay,
 );
 
 @import "bootstrap/scss/variables";
 // import fonts
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
 
 $font-family-sans-serif: "Open Sans", system-ui, -apple-system, "Segoe UI",
 	Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
@@ -68,6 +70,7 @@ $font-size-xl: $font-size-base * 1.5;
 $font-weight-lighter: lighter;
 $font-weight-light: 300;
 $font-weight-normal: 400;
+$font-weight-bit-bold: 500;
 $font-weight-bold: 700;
 $font-weight-bolder: bolder;
 
@@ -122,6 +125,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	font-weight: $font-weight-bold;
 }
 
+.text-h4 {
+	font-size: $font-size-lg;
+	font-weight: $font-weight-normal;
+}
+
 .text-initials {
 	font-size: $font-size-base;
 }
@@ -146,6 +154,9 @@ $custom-box-shadow-color: theme("colors.slate.700");
 .custom-modal {
 	background-color: $modal;
 	border-radius: theme("borderRadius.xl");
+}
+.overlay {
+	background-color: $overlay;
 }
 
 // =================================================================
