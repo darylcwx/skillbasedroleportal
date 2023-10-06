@@ -126,7 +126,7 @@ create table `Listings` (
     constraint Listings_FK foreign key (`Role_Name`) references `Role` (`Role_Name`)
 );
 
-insert into `Listings` values (1, 'IT Support', '2023-10-25');
+insert into `Listings` values (1, 'IT Support', '2023-09-25');
 insert into `Listings` values (2, 'Clerk', '2023-10-28');
 insert into `Listings` values (3, 'Human Resource', '2023-11-18');
 insert into `Listings` values (4, 'Manager', '2023-11-05');
