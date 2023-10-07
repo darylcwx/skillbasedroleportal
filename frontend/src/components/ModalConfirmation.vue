@@ -46,7 +46,6 @@
 import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 export default {
 	components: { ExclamationTriangleIcon },
-	props: ["modalName"],
 	methods: {
 		handleConfirm() {
 			this.$emit("confirmed");

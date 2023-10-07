@@ -78,7 +78,7 @@
 						type="button"
 						class="btn btn-primary text-btn"
 						data-bs-toggle="modal"
-						data-bs-target="#confirmModal">
+						data-bs-target="#confirmEditModal">
 						Save changes
 					</button>
 				</div>
@@ -87,8 +87,7 @@
 	</div>
 	<div class="absolute top-1/2">
 		<ModalConfirmation
-			id="confirmModal"
-			modalName="editModal"
+			id="confirmEditModal"
 			@confirmed="handleConfirm" />
 	</div>
 	<svgSuccess
@@ -108,7 +107,6 @@ import svgError from "../components/svgError.vue";
 export default {
 	components: { VueDatePicker, ModalConfirmation, svgSuccess, svgError },
 	props: ["role"],
-	setup() {},
 	data() {
 		return {
 			roleName: this.role.roleName,

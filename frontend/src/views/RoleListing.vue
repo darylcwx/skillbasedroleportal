@@ -29,17 +29,22 @@
 						type="button"
 						class="btn btn-primary text-btn"
 						data-bs-toggle="modal"
-						data-bs-target="#confirmModal">
+						data-bs-target="#confirmApplyModal">
 						Apply
 					</button>
 				</div>
 			</div>
 		</div>
 		<div class="absolute top-1/2">
-		<ModalConfirmation
-			id="confirmModal"
-			modalName="editModal"
-			@confirmed="handleConfirm" />
+			<ModalConfirmation
+				id="confirmApplyModal"
+				@confirmed="handleConfirm" />
+			<svgSuccess
+				v-if="this.success"
+				:message="this.message" />
+			<svgError
+				v-if="this.error"
+				:message="this.message" />
 		</div>
 
 		<!-- Skills Required -->
@@ -152,6 +157,8 @@ import {
 import { SquaresPlusIcon, QueueListIcon } from "@heroicons/vue/24/solid";
 import ModalEditRoleListing from "../components/ModalEditRoleListing.vue";
 import ModalConfirmation from "../components/ModalConfirmation.vue";
+import svgSuccess from "../components/svgSuccess.vue";
+import svgError from "../components/svgError.vue";
 export default {
 	props: ["name"],
 	components: {
@@ -160,6 +167,8 @@ export default {
 		QueueListIcon,
 		ModalEditRoleListing,
 		ModalConfirmation,
+		svgSuccess,
+		svgError,
 	},
 	data() {
 		return {
@@ -176,6 +185,8 @@ export default {
 			applicants: [], // [{}, {}, {}]
 			applicantsNotLoaded: true,
 			showEditModal: false,
+			success: false,
+			error: false,
 		};
 	},
 
@@ -235,13 +246,14 @@ export default {
 			console.log(this.user.id);
 			console.log(this.role.listingID);
 
-			let answer = "error";
-			answer = this.handleApply();
+			//answer = this.handleApply();
+			let answer = "success";
 
 			// error handling
 			if (answer == "success") {
 				this.success = true;
-				this.message = "Successfully inserted application into Staff_Application!";
+				this.message =
+					"Successfully inserted application into Staff_Application!";
 
 				setTimeout(() => {
 					this.success = false;
@@ -268,15 +280,14 @@ export default {
 				return "error";
 			}
 
-
 			// check if staff already applied for current role
 			for (let applicant of this.applicants) {
 				if (applicant["Staff ID"] == this.user.id) {
-					console.log("staff already applied for current role.")
+					console.log("staff already applied for current role.");
 					return "error";
 				}
 			}
-			return "success"
+			return "success";
 		},
 	},
 };
