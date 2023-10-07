@@ -114,6 +114,7 @@ export default {
 			roleName: this.role.roleName,
 			roleDescription: this.role.description,
 			roleDeadline: this.role.deadline,
+			listingID: this.role.listing_ID,
 			success: false,
 			error: false,
 			message: "",
