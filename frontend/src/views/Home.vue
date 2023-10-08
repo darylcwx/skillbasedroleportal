@@ -150,7 +150,7 @@ export default {
       }
     },
     getSearchValue(searchValue, selectedSkillsValue) {
-      this.search = searchValue;
+      this.search = searchValue.trim();
       this.filterSkills = selectedSkillsValue;
       console.log(this.filterSkills);
       console.log(this.filteredList);
