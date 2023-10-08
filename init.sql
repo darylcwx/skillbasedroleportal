@@ -6,6 +6,8 @@ drop database if exists SBRP_Ais_Kachang;
 create database SBRP_Ais_Kachang;
 use SBRP_Ais_Kachang;
 
+
+
 # ================== Created based on Project Specification ================== 
 # Can create more properties as needed for the project.
 # To add more dummy data for testing purposes.
@@ -75,8 +77,6 @@ create table `Staff_Skill` (
 	`Skill_Name` varchar(50) NOT NULL,
 	`Skill_Profile_Desc` longtext NULL,
 	constraint Staff_Skill_PK primary key (`Staff_ID`, `Skill_Name`),
-	constraint Staff_Skill_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`),
-	constraint Staff_Skill_FK2 foreign key (`Skill_Name`) references `Role_Skill` (`Skill_Name`)
 );
 
 INSERT INTO `Staff_Skill` VALUES (1, 'Attention to Detail', 'Known for an exceptional eye for detail, ensuring precision in HR processes.');
