@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from backend.app import db
 from backend.models.listings import Listings
 from backend.models.role import Role
+from datetime import datetime
 
 updateRoleListingBP = Blueprint('updateRoleListing', __name__)
 @updateRoleListingBP.route('/api/updateRoleListing', methods=['POST'])
@@ -12,8 +13,7 @@ def updateRoleListing():
         role = Role.query.get(data['name'])
         
         if listing and role:
-        #     listing.Deadline = data['deadline']
-        # need to format the deadline. 
+            listing.Deadline = data['deadline']
             role.Role_Desc = data['desc']
             db.session.commit()
 

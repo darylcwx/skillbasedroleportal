@@ -125,27 +125,30 @@ export default {
         handleConfirm() {
             this.message = "";
             console.log("second modal called and 'Confirm' clicked");
-
             this.updateRole();
-
-            // error handling
-            if (this.success == true) {
-                this.message = "Successfully updated role listing!";
-
-                setTimeout(() => {
-                    this.success = false;
-                }, 3000);
-                // might need to force rerender here once data updated
-            } else {
-                // this.message = response.error;
-
-                setTimeout(() => {
-                    this.error = false;
-                }, 3000);
-            }
         },
         async updateRole() {
+            console.log(this.roleDeadline);
             try {
+                const date = new Date(this.roleDeadline);
+                const monthNames = [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December",
+                ];
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const day = String(date.getDate()).padStart(2, "0");
+
                 const apiURL = `http://localhost:5000/api/updateRoleListing`;
                 const response = await fetch(apiURL, {
                     mode: "cors",
@@ -155,22 +158,30 @@ export default {
                         lid: this.listingID,
                         name: this.roleName,
                         desc: this.roleDescription,
-                        deadline: this.roleDeadline,
+                        deadline: `${year}-${month}-${day}`,
                     }),
                 });
                 let data = await response.json();
-                console.log(data.Status);
 
                 if (data.Status == "Data updated successfully.") {
+                    this.$emit(
+                        "update",
+                        this.roleDescription,
+                        `${monthNames[month-1]} ${day}, ${year}`
+                    );
                     this.success = true;
+                    setTimeout(() => {
+                        this.success = false;
+                    }, 3000);
                 } else {
                     this.error = true;
-					this.message = response.error
+                    this.message = response.error;
+                    setTimeout(() => {
+                        this.error = false;
+                    }, 3000);
                 }
             } catch (error) {
                 console.error(error);
-
-                console.log(error);
             }
         },
     },

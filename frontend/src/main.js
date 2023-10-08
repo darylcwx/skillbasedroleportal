@@ -32,6 +32,11 @@ const store = createStore({
 		setRole(state, role) {
 			state.role = role;
 		},
+
+		updateRole(state, data) {
+			state.role.description = data.desc;
+			state.role.deadline = data.deadline;
+		},
 	},
 	plugins: [createPersistedState({ storage: window.sessionStorage })],
 });
