@@ -1,18 +1,20 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from backend.app import db
 from backend.models.listings import Listings
 from backend.models.role import Role
 
 updateRoleListingBP = Blueprint('updateRoleListing', __name__)
 @updateRoleListingBP.route('/api/updateRoleListing', methods=['POST'])
-def updateRoleListing(lid, name, desc, deadline):
+def updateRoleListing():
     try:
-        listing = Listings.query.get(lid)
-        role = Role.query.get(name)
+        data = request.json
+        listing = Listings.query.get(data['lid'])
+        role = Role.query.get(data['name'])
         
         if listing and role:
-            listing.Deadline = deadline
-            role.Role_Desc = desc
+        #     listing.Deadline = data['deadline']
+        # need to format the deadline. 
+            role.Role_Desc = data['desc']
             db.session.commit()
 
             return jsonify({
