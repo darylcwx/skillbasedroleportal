@@ -21,21 +21,25 @@ const store = createStore({
 		return {
 			user: null,
 			role: null,
-			reloaded: false,
 		};
 	},
 	mutations: {
 		setUser(state, user) {
 			state.user = user;
 		},
+		clearUser(state) {
+			state.user = null;
+		},
 
 		setRole(state, role) {
 			state.role = role;
 		},
-
 		updateRole(state, data) {
 			state.role.description = data.desc;
 			state.role.deadline = data.deadline;
+		},
+		clearRole(state) {
+			state.role = null;
 		},
 	},
 	plugins: [createPersistedState({ storage: window.sessionStorage })],
