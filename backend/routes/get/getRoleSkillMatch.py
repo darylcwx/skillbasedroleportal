@@ -20,9 +20,9 @@ def getRoleSkillMatch(sid = None, rolename = None):
 
         matched_skills = []
         missing_skills = []
-        percentage_match = 0.0 # if both role skills and staff skills are empty, also 0% match
+        percentage_match = 0.0
 
-        if roleskills['Role Skills'] and staffskills['Staff Skills']:
+        if roleskills['Role Skills']:
             for skill in roleskills['Role Skills']:
                 if skill in staffskills['Staff Skills']:
                     matched_skills.append(skill)
