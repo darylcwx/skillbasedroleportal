@@ -278,6 +278,8 @@ export default {
 			let deadline = new Date(this.role.deadline);
 			console.log(currentDate);
 			console.log(deadline);
+			this.success = false
+			this.error = false
 			// console.log(currentDate);
 			// console.log(deadline);
 			let that = this;
