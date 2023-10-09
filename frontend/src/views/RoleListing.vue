@@ -6,9 +6,7 @@
 				<div class="flex justify-between items-center">
 					<div class="flex items-center">
 						<div class="text-h1 mr-2">{{ name }}</div>
-						<component
-							:is="this.icons[name]"
-							class="h-6 w-6" />
+						<component :is="this.icons[name]" class="h-6 w-6" />
 					</div>
 					<div class="">
 						Ends: <b>{{ role.deadline }}</b>
@@ -16,19 +14,12 @@
 				</div>
 				<div class="mt-4">{{ role.description }}</div>
 				<div class="flex justify-end gap-2 mt-4">
-					<button
-						v-if="user.accessRights == 0"
-						class="btn btn-primary text-btn"
-						@click="handleEdit"
-						data-bs-toggle="modal"
-						data-bs-target="#editModal">
+					<button v-if="user.accessRights == 0" class="btn btn-primary text-btn" @click="handleEdit"
+						data-bs-toggle="modal" data-bs-target="#editModal">
 						Edit
 					</button>
 					<!-- Open confirm modal -->
-					<button
-						type="button"
-						class="btn btn-primary text-btn"
-						data-bs-toggle="modal"
+					<button type="button" class="btn btn-primary text-btn" data-bs-toggle="modal"
 						data-bs-target="#confirmApplyModal">
 						Apply
 					</button>
@@ -36,15 +27,9 @@
 			</div>
 		</div>
 		<div class="absolute top-1/2">
-			<ModalConfirmation
-				id="confirmApplyModal"
-				@confirmed="handleConfirm" />
-			<svgSuccess
-				v-if="this.success"
-				:message="this.message" />
-			<svgError
-				v-if="this.error"
-				:message="this.message" />
+			<ModalConfirmation id="confirmApplyModal" @confirmed="handleConfirm" />
+			<svgSuccess v-if="this.success" :message="this.message" />
+			<svgError v-if="this.error" :message="this.message" />
 		</div>
 
 		<!-- Skills Required -->
@@ -55,24 +40,16 @@
 						<div class="text-h1 mr-2">Skills Required</div>
 						<SquaresPlusIcon class="h-6 w-6" />
 					</div>
-					<div
-						v-if="Object.keys(roleSkillMatch).length == 0"
-						class="">
+					<div v-if="Object.keys(roleSkillMatch).length == 0" class="">
 						My percentage match: <b>... %</b>
 					</div>
-					<div
-						v-else
-						class="">
+					<div v-else class="">
 						My percentage match:
 						<b>{{ roleSkillMatch["Percentage Match"] }}%</b>
 					</div>
 				</div>
-				<div
-					name="matched"
-					class="mt-4 flex-col">
-					<div
-						v-if="this.roleSkillMatchNotLoaded"
-						class="placeholder-wave">
+				<div name="matched" class="mt-4 flex-col">
+					<div v-if="this.roleSkillMatchNotLoaded" class="placeholder-wave">
 						<span
 							class="placeholder col-3 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
 							placeholder
@@ -94,19 +71,13 @@
 							placeholder
 						</span>
 					</div>
-					<span
-						v-for="skillsMatched in roleSkillMatch[
-							'Staff Matched Skills'
-						]"
-						class="badge custom-pill bg-success mt-3 mr-3"
-						>{{ skillsMatched }}
+					<span v-for="skillsMatched in roleSkillMatch[
+						'Staff Matched Skills'
+					]" class="badge custom-pill bg-success mt-3 mr-3">{{ skillsMatched }}
 					</span>
-					<span
-						v-for="skillsMismatched in roleSkillMatch[
-							'Staff Missing Skills'
-						]"
-						class="badge custom-pill bg-secondary mt-3 mr-3"
-						>{{ skillsMismatched }}
+					<span v-for="skillsMismatched in roleSkillMatch[
+						'Staff Missing Skills'
+					]" class="badge custom-pill bg-secondary mt-3 mr-3">{{ skillsMismatched }}
 					</span>
 				</div>
 			</div>
@@ -115,31 +86,21 @@
 		<!-- Applicants -->
 		<div class="pt-8 pb-8">
 			<!-- need to change the v-if -->
-			<div
-				v-if="user.dept == 'HR'"
-				class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
+			<div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
 				<div class="flex items-center">
 					<div class="text-h1 mr-2">Applicants</div>
 					<QueueListIcon class="h-6 w-6" />
 				</div>
-				<div
-					v-if="this.applicantsNotLoaded"
-					class="placeholder-wave">
-					<span
-						class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
+				<div v-if="this.applicantsNotLoaded" class="placeholder-wave">
+					<span class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
 						placeholder
 					</span>
 				</div>
-				<div
-					v-if="
-						!this.applicantsNotLoaded && this.applicants.length == 0
-					"
-					class="">
+				<div v-if="!this.applicantsNotLoaded && this.applicants.length == 0
+					" class="">
 					<div class="mt-4">No applicants found.</div>
 				</div>
-				<div
-					v-else
-					class="overflow-auto h-112">
+				<div v-else class="overflow-auto h-112">
 					<div v-for="applicant of this.applicants">
 						<Application :application="applicant" />
 					</div>
@@ -196,7 +157,7 @@ export default {
 		};
 	},
 
-	created() {},
+	created() { },
 
 	mounted() {
 		this.fetchRoleSkillMatch();
@@ -240,145 +201,79 @@ export default {
 				console.error(error);
 			}
 		},
-		handleConfirm() {
-			this.message = "";
-			console.log("handleApply() clicked");
-
+		async handleConfirm() {
 			// use these values
-			console.log(this.user.id);
-			console.log(this.role.listingID);
+			// console.log(this.user.id);
+			// console.log(this.role.listingID);
 
-			this.handleApply();
+			let result = await this.handleApply();
+			let status = result.status;
+			let displayMessage = result.displayMessage;
 
-			//   let answer = this.handleApply();
-			//   let answer = 'success';
-
-			//   error handling
-			//     if (answer == 'success') {
-			//       this.success = true;
-			//       this.message =
-			//         'Successfully inserted application into Staff_Application!';
-
-			//       setTimeout(() => {
-			//         this.success = false;
-			//       }, globalVars.svgTimeout);
-			//       // might need to force rerender here once data updated
-			//     } else {
-			//       this.error = true;
-			//       this.message = response.error;
-
-			//       setTimeout(() => {
-			//         this.error = false;
-			//       }, globalVars.svgTimeout);
-			//     }
+			if (status == "success") {
+				this.success = true;
+				this.message = displayMessage;
+				setTimeout(() => {
+					this.success = false;
+				}, globalVars.svgTimeout);
+			} else {
+				this.error = true;
+				this.message = displayMessage;
+				setTimeout(() => {
+					this.error = false;
+				}, globalVars.svgTimeout);
+			}
 		},
 		async handleApply() {
+			// refetch all applicants for updated data
+			await this.fetchAllApplicants();
 			// check if current date is before deadline
 			let currentDate = new Date();
 			let deadline = new Date(this.role.deadline);
-			console.log(currentDate);
-			console.log(deadline);
-			this.success = false
-			this.error = false
-			// console.log(currentDate);
-			// console.log(deadline);
-			let that = this;
 
-			function checkdate() {
-				if (currentDate > deadline) {
-					// failure
-					that.success = false;
-					that.error = true;
-					console.log("current date is after deadline.");
-					that.message = "current date is after deadline.";
-					setTimeout(() => {
-						that.error = false;
-					}, globalVars.svgTimeout);
-					return false;
+			// check if current date is before deadline
+			if (currentDate > deadline) {
+				return {
+					status: "error",
+					displayMessage: "Current date is after deadline.",
+				};
+			}
+
+			//check for duplicate application
+			for (let applicant of this.applicants) {
+				if (applicant["Staff ID"] == this.user.id) {
+					return {
+						status: "error",
+						displayMessage: "You have already applied for this role!",
+					};
+				}
+			}
+
+			// insert into staff_application table the application
+			try {
+				const apiURL = `http://localhost:5000/api/updateStaffApplication/${encodeURIComponent(
+					this.role.listingID
+				)}/${encodeURIComponent(this.user.id)}`;
+				const response = await fetch(apiURL, {
+					mode: "cors",
+					method: "POST",
+				});
+				let data = await response.json();
+				if (data["Status"] == "Data updated successfully.") {
+					return {
+						status: "success",
+						displayMessage: "Successfully Applied",
+					};
 				} else {
-					//success
-					that.success = true;
-					setTimeout(() => {
-						that.success = false;
-					}, globalVars.svgTimeout);
-					that.message = "successfully applied";
-					return true;
+					return { 
+						status: "error", 
+						displayMessage: data["Status"],
+					};
 				}
-			}
-
-			function checkDuplicateApply() {
-				// check if staff already applied for current role
-				for (let applicant of that.applicants) {
-					console.log(that.applicants);
-					if (applicant["Staff ID"] == that.user.id) {
-						that.success = false;
-						that.error = true;
-						console.log("You have already applied for this role!");
-						that.message =
-							"You have already applied for this role!";
-						setTimeout(() => {
-							that.error = false;
-						}, globalVars.svgTimeout);
-						return false;
-					} else {
-						//success
-						that.success = true;
-						setTimeout(() => {
-							that.success = false;
-						}, globalVars.svgTimeout);
-						that.message = "successfully applied";
-						return true;
-					}
-				}
-			}
-
-			console.log(checkdate());
-			console.log(checkDuplicateApply());
-
-			if (checkdate() && checkDuplicateApply()) {
-				try {
-					const apiURL = `http://localhost:5000/api/updateStaffApplication/${encodeURIComponent(
-						this.role.listingID
-					)}/${encodeURIComponent(this.user.id)}`;
-
-					const response = await fetch(apiURL, {
-						mode: "cors",
-						method: "POST",
-					});
-					let data = await response.json();
-					console.log(data);
-					this.fetchAllApplicants();
-					if (data["Status"] == "Data updated successfully.") {
-						console.log("data updated!");
-						this.success = true;
-						this.error = false;
-						setTimeout(() => {
-							that.success = false;
-						}, globalVars.svgTimeout);
-						this.message = "Applied Successfully";
-					} else {
-						console.log("data FAIL!");
-						this.success = false;
-						this.error = true;
-						setTimeout(() => {
-							that.error = false;
-						}, globalVars.svgTimeout);
-						this.message = data["Status"];
-					}
-				} catch (error) {
-					console.error(error);
-				}
-			} else {
-				console.log("FAILUREEEE");
+			} catch (error) {
+				console.error(error);
 			}
 		},
-		// handleUpdate(desc, deadline) {
-		// 	this.$store.commit("updateRole", {
-		// 		desc: desc,
-		// 		deadline: deadline,
-		// 	});
-		// 	this.role = this.$store.state.role;
-		// },
 	},
 };
 </script>
