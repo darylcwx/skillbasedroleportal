@@ -77,6 +77,7 @@ create table `Staff_Skill` (
 	`Skill_Name` varchar(50) NOT NULL,
 	`Skill_Profile_Desc` longtext NULL,
 	constraint Staff_Skill_PK primary key (`Staff_ID`, `Skill_Name`),
+    constraint Staff_Skill_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`)
 );
 
 INSERT INTO `Staff_Skill` VALUES (1, 'Attention to Detail', 'Known for an exceptional eye for detail, ensuring precision in HR processes.');
