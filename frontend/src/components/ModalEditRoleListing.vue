@@ -22,7 +22,9 @@
 				</div>
 				<div class="modal-body p-4">
 					<!-- Edit -->
-					<form class="flex flex-wrap md:justify-between">
+					<form
+						class="flex flex-wrap md:justify-between needs-validation"
+						novalidate>
 						<div class="w-full md:w-auto flex-col mb-6">
 							<label
 								for="roleName"
@@ -64,7 +66,14 @@
 						<textarea
 							id="roleDescription"
 							class="form-control"
-							v-model="this.roleDescription"></textarea>
+							v-model="this.roleDescription"
+							required>
+						</textarea>
+						<div
+							id="roleDescriptionValidationHelper"
+							class="invalid-feedback">
+							Role description cannot be empty.
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer border-0">
@@ -78,20 +87,16 @@
 					<button
 						type="button"
 						class="btn btn-primary text-btn"
-						data-bs-toggle="modal"
-						data-bs-target="#confirmModal">
-						Save changes
+						@click="handleSave">
+						Save Changes
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="absolute top-1/2">
-		<ModalConfirmation
-			id="confirmModal"
-			modalName="editModal"
-			@confirmed="handleConfirm" />
-	</div>
+	<ModalConfirmation
+		id="confirmModal"
+		@confirmed="handleConfirm" />
 	<svgSuccess
 		v-if="this.success"
 		:message="this.message" />
@@ -107,6 +112,7 @@ import ModalConfirmation from "../components/ModalConfirmation.vue";
 import svgSuccess from "../components/svgSuccess.vue";
 import svgError from "../components/svgError.vue";
 import { globalVars } from "../utils/globalVars.js";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
 export default {
 	components: { VueDatePicker, ModalConfirmation, svgSuccess, svgError },
 	props: ["role"],
@@ -132,6 +138,25 @@ export default {
 				day: "numeric",
 			});
 			return formatted;
+		},
+		handleSave() {
+			const roleDescription = document.getElementById("roleDescription");
+			const roleDescriptionValidationHelper = document.getElementById(
+				"roleDescriptionValidationHelper"
+			);
+			roleDescription.classList.remove("is-invalid");
+			roleDescriptionValidationHelper.classList.remove("was-validated");
+
+			if (this.roleDescription == "") {
+				roleDescription.classList.add("is-invalid");
+				roleDescription.value = "Role description cannot be empty.";
+				roleDescriptionValidationHelper.classList.add("was-validated");
+				return;
+			}
+			const editModal = bootstrap.Modal.getInstance("#editModal");
+			editModal.hide();
+			const confirmModal = new bootstrap.Modal("#confirmModal");
+			confirmModal.show();
 		},
 		handleConfirm() {
 			this.message = "";

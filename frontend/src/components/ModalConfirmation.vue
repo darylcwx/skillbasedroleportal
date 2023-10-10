@@ -1,11 +1,11 @@
 <template>
 	<div
 		class="modal fade"
-		id="confirmModal"
 		tabindex="-1"
 		aria-labelledby="confirmModalLabel"
 		aria-hidden="true">
-		<div class="modal-dialog modal-sm h-[calc(100vh-56px)] flex items-center">
+		<div
+			class="modal-dialog modal-sm h-[calc(100vh-56px)] flex items-center">
 			<div class="modal-content">
 				<div class="modal-header border-0 p-4">
 					<div class="text-h2">Confirmation</div>
@@ -17,7 +17,8 @@
 				</div>
 				<div class="modal-body p-4">
 					<div class="text-center">
-						<ExclamationTriangleIcon class="h-20 w-20 text-warning" />
+						<ExclamationTriangleIcon
+							class="h-20 w-20 text-warning" />
 						<div class="text-h4">Are you sure?</div>
 						<div class="">This action cannot be undone.</div>
 					</div>

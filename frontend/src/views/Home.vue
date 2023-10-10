@@ -36,6 +36,7 @@
 				v-for="roleItem in filteredList"
 				:key="componentKey"
 				:role="roleItem" />
+			<div class="pb-8"></div>
 		</div>
 		<div
 			v-if="roleListingsIsEmpty"
