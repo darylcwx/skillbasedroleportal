@@ -6,30 +6,64 @@
 				<div class="flex justify-between items-center">
 					<div class="flex items-center">
 						<div class="text-h1 mr-2">{{ name }}</div>
-						<component :is="this.icons[name]" class="h-6 w-6" />
+						<component
+							:is="this.icons[name]"
+							class="h-6 w-6" />
 					</div>
 					<div class="">
 						Ends: <b>{{ role.deadline }}</b>
 					</div>
 				</div>
 				<div class="mt-4">{{ role.description }}</div>
-				<div class="flex justify-end gap-2 mt-4">
-					<button v-if="user.accessRights == 0" class="btn btn-primary text-btn" @click="handleEdit"
-						data-bs-toggle="modal" data-bs-target="#editModal">
-						Edit
-					</button>
-					<!-- Open confirm modal -->
-					<button type="button" class="btn btn-primary text-btn" data-bs-toggle="modal"
-						data-bs-target="#confirmApplyModal">
-						Apply
-					</button>
+				<div class="flex justify-between items-center mt-4">
+					<div
+						v-if="new Date() > new Date(this.role.deadline)"
+						class="text-danger text-btn">
+						This listing has expired.
+					</div>
+					<div></div>
+					<div class="flex gap-2">
+						<button
+							v-if="user.accessRights == 0"
+							class="btn btn-primary text-btn"
+							:class="
+								new Date() > new Date(this.role.deadline)
+									? 'disabled'
+									: ''
+							"
+							@click="handleEdit"
+							data-bs-toggle="modal"
+							data-bs-target="#editModal">
+							Edit
+						</button>
+
+						<!-- Open confirm modal -->
+						<button
+							type="button"
+							class="btn btn-primary text-btn"
+							:class="
+								new Date() > new Date(this.role.deadline)
+									? 'disabled'
+									: ''
+							"
+							data-bs-toggle="modal"
+							data-bs-target="#confirmApplyModal">
+							Apply
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="absolute top-1/2">
-			<ModalConfirmation id="confirmApplyModal" @confirmed="handleConfirm" />
-			<svgSuccess v-if="this.success" :message="this.message" />
-			<svgError v-if="this.error" :message="this.message" />
+			<ModalConfirmation
+				id="confirmApplyModal"
+				@confirmed="handleConfirm" />
+			<svgSuccess
+				v-if="this.success"
+				:message="this.message" />
+			<svgError
+				v-if="this.error"
+				:message="this.message" />
 		</div>
 
 		<!-- Skills Required -->
@@ -40,16 +74,24 @@
 						<div class="text-h1 mr-2">Skills Required</div>
 						<SquaresPlusIcon class="h-6 w-6" />
 					</div>
-					<div v-if="Object.keys(roleSkillMatch).length == 0" class="">
+					<div
+						v-if="Object.keys(roleSkillMatch).length == 0"
+						class="">
 						My percentage match: <b>... %</b>
 					</div>
-					<div v-else class="">
+					<div
+						v-else
+						class="">
 						My percentage match:
 						<b>{{ roleSkillMatch["Percentage Match"] }}%</b>
 					</div>
 				</div>
-				<div name="matched" class="mt-4 flex-col">
-					<div v-if="this.roleSkillMatchNotLoaded" class="placeholder-wave">
+				<div
+					name="matched"
+					class="mt-4 flex-col">
+					<div
+						v-if="this.roleSkillMatchNotLoaded"
+						class="placeholder-wave">
 						<span
 							class="placeholder col-3 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
 							placeholder
@@ -71,13 +113,19 @@
 							placeholder
 						</span>
 					</div>
-					<span v-for="skillsMatched in roleSkillMatch[
-						'Staff Matched Skills'
-					]" class="badge custom-pill bg-success mt-3 mr-3">{{ skillsMatched }}
+					<span
+						v-for="skillsMatched in roleSkillMatch[
+							'Staff Matched Skills'
+						]"
+						class="badge custom-pill bg-success mt-3 mr-3"
+						>{{ skillsMatched }}
 					</span>
-					<span v-for="skillsMismatched in roleSkillMatch[
-						'Staff Missing Skills'
-					]" class="badge custom-pill bg-secondary mt-3 mr-3">{{ skillsMismatched }}
+					<span
+						v-for="skillsMismatched in roleSkillMatch[
+							'Staff Missing Skills'
+						]"
+						class="badge custom-pill bg-secondary mt-3 mr-3"
+						>{{ skillsMismatched }}
 					</span>
 				</div>
 			</div>
@@ -86,21 +134,31 @@
 		<!-- Applicants -->
 		<div class="pt-8 pb-8">
 			<!-- need to change the v-if -->
-			<div v-if="user.dept == 'HR'" class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
+			<div
+				v-if="user.dept == 'HR'"
+				class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
 				<div class="flex items-center">
 					<div class="text-h1 mr-2">Applicants</div>
 					<QueueListIcon class="h-6 w-6" />
 				</div>
-				<div v-if="this.applicantsNotLoaded" class="placeholder-wave">
-					<span class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
+				<div
+					v-if="this.applicantsNotLoaded"
+					class="placeholder-wave">
+					<span
+						class="placeholder bg-placeholder text-placeholder rounded-xl mt-4 h-72 w-full select-none">
 						placeholder
 					</span>
 				</div>
-				<div v-if="!this.applicantsNotLoaded && this.applicants.length == 0
-					" class="">
+				<div
+					v-if="
+						!this.applicantsNotLoaded && this.applicants.length == 0
+					"
+					class="">
 					<div class="mt-4">No applicants found.</div>
 				</div>
-				<div v-else class="overflow-auto h-112">
+				<div
+					v-else
+					class="overflow-auto h-112">
 					<div v-for="applicant of this.applicants">
 						<Application :application="applicant" />
 					</div>
@@ -157,11 +215,15 @@ export default {
 		};
 	},
 
-	created() { },
+	created() {},
 
 	mounted() {
 		this.fetchRoleSkillMatch();
 		this.fetchAllApplicants();
+		console.log(this.role);
+		console.log(new Date(this.role.deadline));
+		console.log(new Date());
+		console.log(new Date() > new Date(this.role.deadline));
 	},
 
 	methods: {
@@ -244,7 +306,8 @@ export default {
 				if (applicant["Staff ID"] == this.user.id) {
 					return {
 						status: "error",
-						displayMessage: "You have already applied for this role!",
+						displayMessage:
+							"You have already applied for this role!",
 					};
 				}
 			}
@@ -265,8 +328,8 @@ export default {
 						displayMessage: "Successfully Applied",
 					};
 				} else {
-					return { 
-						status: "error", 
+					return {
+						status: "error",
 						displayMessage: data["Status"],
 					};
 				}

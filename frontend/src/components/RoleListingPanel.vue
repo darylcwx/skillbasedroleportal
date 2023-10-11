@@ -1,7 +1,12 @@
 <template>
 	<div class="pt-8">
 		<div
-			class="p-6 custom-modal rounded-xl text-dark hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500">
+			class="p-6 custom-modal rounded-xl text-dark"
+			:class="
+				new Date() > new Date(this.deadline)
+					? 'custom-modal-expired'
+					: 'hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500'
+			">
 			<div class="flex justify-between items-center">
 				<div class="flex items-center">
 					<div class="text-h1 mr-2">{{ name }}</div>
@@ -13,8 +18,14 @@
 					Ends: <b>{{ deadline }}</b>
 				</div>
 			</div>
-			<div class="py-4">{{ desc }}</div>
-			<div class="flex justify-end gap-4">
+			<div class="mt-4">{{ desc }}</div>
+			<div class="flex justify-between items-center mt-4">
+				<div
+					v-if="new Date() > new Date(this.deadline)"
+					class="text-danger text-btn">
+					This listing has expired.
+				</div>
+				<div></div>
 				<button
 					class="btn btn-primary text-btn"
 					@click="handleClick">
@@ -49,7 +60,11 @@ export default {
 		};
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		console.log(new Date(this.deadline));
+		console.log(new Date());
+		console.log(new Date(this.deadline) >= new Date());
+	},
 	methods: {
 		handleClick() {
 			this.$store.commit("setRole", {

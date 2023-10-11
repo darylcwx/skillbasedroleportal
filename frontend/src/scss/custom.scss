@@ -23,6 +23,7 @@ $warning: #fec02f;
 $info: #27cbee;
 $navbar: #2f324c;
 $modal: #f2f4ff;
+$modal-expired: #d8dbeb;
 $link: #27cbee;
 $avatar: #f2f4ff;
 $placeholder: #3f3f3f;
@@ -39,6 +40,7 @@ $custom-colors: (
 	"info": $info,
 	"navbar": $navbar,
 	"modal": $modal,
+	"modal-expired": $modal-expired,
 	"link": $link,
 	"avatar": $avatar,
 	"placeholder": $placeholder,
@@ -153,6 +155,10 @@ $custom-box-shadow-color: theme("colors.slate.700");
 //$custom-box-shadow-color: theme("colors.slate.600");
 .custom-modal {
 	background-color: $modal;
+	border-radius: theme("borderRadius.xl");
+}
+.custom-modal-expired {
+	background-color: $modal-expired;
 	border-radius: theme("borderRadius.xl");
 }
 .overlay {
