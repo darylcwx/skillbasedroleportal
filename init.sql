@@ -37,10 +37,11 @@ create table `Role` (
 	constraint Role_PK primary key (`Role_Name`)
 );
 
-insert into `Role` values ('IT Support', 'Assist in daily user technical problems and IT equipment maintenance.');
-insert into `Role` values ('Clerk', 'Keyboard warrior.');
-insert into `Role` values ('Human Resource', 'Any member of the Human Resources team');
-insert into `Role` values ('Manager', 'Any manager');
+insert into `Role` values ('IT Support', 'Assist in daily user technical problems and IT equipment maintenance. Monitors and maintains the company computer systems, installs and configures hardware and software, and solves technical problems.');
+insert into `Role` values ('Clerk', 'Answering phones, taking messages, handling mail and scheduling appointments including collecting information, faxing, scanning, making copies and data entry.');
+insert into `Role` values ('Human Resource', 'Responsible for managing every aspect of the employment process, including orientation and training new staff members. Assist with payroll management, so employees receive their paychecks on time.');
+insert into `Role` values ('Manager', 'Ensures a safe, secure, and legal work environment. Develops personal growth opportunities. Accomplishes staff results by communicating job expectations, planning, monitoring, and appraising job results.');
+insert into `Role` values ('Sanitation Manager', 'Coordinates activities of and provides coaching and guidance to workers on the Sanitation team.');
 
 -- Role_Skill TABLE
 create table `Role_Skill` (
@@ -132,6 +133,7 @@ insert into `Listings` values (2, 'Clerk', '2023-10-28');
 insert into `Listings` values (3, 'Human Resource', '2023-11-18');
 insert into `Listings` values (4, 'Manager', '2023-11-05');
 insert into `Listings` values (5, 'Clerk', '2025-01-01');
+insert into `Listings` values (6, 'Sanitation Manager', '2024-03-01');
 
 -- Staff_Application TABLE
 create table `Staff_Application` (
