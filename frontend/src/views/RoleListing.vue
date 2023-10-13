@@ -31,7 +31,6 @@
 									? 'disabled'
 									: ''
 							"
-							@click="handleEdit"
 							data-bs-toggle="modal"
 							data-bs-target="#editModal">
 							Edit
@@ -80,6 +79,15 @@
 						My percentage match: <b>... %</b>
 					</div>
 					<div
+						v-else-if="
+							this.roleSkillMatch['Staff Matched Skills']
+								.length == 0 &&
+							this.roleSkillMatch['Staff Missing Skills']
+								.length == 0
+						">
+						My percentage match: <b>N/A</b>
+					</div>
+					<div
 						v-else
 						class="">
 						My percentage match:
@@ -112,6 +120,16 @@
 							class="placeholder col-9 badge custom-pill-no-shadow bg-placeholder text-placeholder mt-3 mr-3">
 							placeholder
 						</span>
+					</div>
+					<div
+						v-if="
+							!this.roleSkillMatchNotLoaded &&
+							this.roleSkillMatch['Staff Matched Skills']
+								.length == 0 &&
+							this.roleSkillMatch['Staff Missing Skills']
+								.length == 0
+						">
+						No skills required.
 					</div>
 					<span
 						v-for="skillsMatched in roleSkillMatch[
@@ -220,10 +238,6 @@ export default {
 	mounted() {
 		this.fetchRoleSkillMatch();
 		this.fetchAllApplicants();
-		console.log(this.role);
-		console.log(new Date(this.role.deadline));
-		console.log(new Date());
-		console.log(new Date() > new Date(this.role.deadline));
 	},
 
 	methods: {
