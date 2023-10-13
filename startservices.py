@@ -33,6 +33,7 @@ load_sql_thread.start()
 
 # Start up npm in a separate thread
 def start_npm():
+    subprocess.run("npm i", shell=True, cwd="frontend/")
     subprocess.run("npm run dev", shell=True, cwd="frontend/")
     print("Started the npm process in another directory.")
 
@@ -48,5 +49,5 @@ try:
     # load_sql_thread.kill()
     # print("Killed the load_init_sql.py thread.")
 except KeyboardInterrupt:
-    # print some elegant termination message
-    print("Terminated the process.")
+    subprocess.run(["sc", "stop", service_name])
+    print(f"Stopped the '{service_name}' service.")
