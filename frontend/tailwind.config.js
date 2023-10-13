@@ -5,7 +5,9 @@ export default {
 	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
-			colors: {},
+			colors: {
+				navbar: "#181818",
+			},
 			fontSize: {
 				xs: ".75rem", // Extra small font size
 				sm: ".875rem", // Small font size

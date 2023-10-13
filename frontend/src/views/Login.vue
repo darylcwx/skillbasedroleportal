@@ -1,7 +1,8 @@
 <template>
 	<div
-		class="container mx-auto max-w-lg h-screen flex row justify-center items-center">
-		<div class="custom-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
+		class="container mx-auto max-w-lg h-[calc(100vh-80px)] flex row justify-center items-center">
+		<div
+			class="custom-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
 			<div class="pb-4 text-h1">Sign in to your account</div>
 
 			<div class="pb-4">
@@ -19,7 +20,13 @@
 					<option
 						v-for="user in users"
 						:value="user.Email">
-						{{ user.Email }}
+						{{ user.Email }} ({{
+							user.Access_Rights == 0
+								? "admin"
+								: user.Access_Rights == 1
+								? "user"
+								: "manager"
+						}})
 					</option>
 				</select>
 				<div
@@ -39,7 +46,9 @@
 						type="text"
 						disabled
 						class="form-control is-valid" />
-					<div class="valid-feedback">Disabled for mockup purposes</div>
+					<div class="valid-feedback">
+						Disabled for mockup purposes
+					</div>
 				</div>
 			</div>
 
@@ -105,7 +114,10 @@ export default {
 				this.users = data.users;
 				console.log(this.users);
 			} catch (error) {
-				console.error("There was a problem with the fetch operation:", error);
+				console.error(
+					"There was a problem with the fetch operation:",
+					error
+				);
 			}
 		},
 		async handleLogin() {
@@ -115,7 +127,9 @@ export default {
 				.classList.remove("block");
 			if (this.userEmail === "Choose a user") {
 				document.getElementById("email").classList.add("is-invalid");
-				document.getElementById("emailValidationHelper").classList.add("block");
+				document
+					.getElementById("emailValidationHelper")
+					.classList.add("block");
 				return;
 			}
 			try {

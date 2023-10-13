@@ -21,13 +21,14 @@ $success: #51a471;
 $danger: #da3849;
 $warning: #fec02f;
 $info: #27cbee;
-$navbar: #2f324c;
+//$navbar: #181818;
 $modal: #f2f4ff;
 $modal-expired: #d8dbeb;
 $link: #27cbee;
 $avatar: #f2f4ff;
 $placeholder: #3f3f3f;
 $overlay: #000000;
+$background: #0f0f0f;
 // =================================================================
 
 // Create your own map
@@ -38,13 +39,14 @@ $custom-colors: (
 	"danger": $danger,
 	"warning": $warning,
 	"info": $info,
-	"navbar": $navbar,
+	//"navbar": $navbar,
 	"modal": $modal,
 	"modal-expired": $modal-expired,
 	"link": $link,
 	"avatar": $avatar,
 	"placeholder": $placeholder,
 	"overlay": $overlay,
+	"background": $background,
 );
 
 @import "bootstrap/scss/variables";
