@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="this.$store.state.user && this.$route.path !== '/'"
-		class="top-0 w-full z-10">
+		class="fixed top-0 w-full z-10">
 		<Navbar />
 	</div>
 	<div class="bg-background">

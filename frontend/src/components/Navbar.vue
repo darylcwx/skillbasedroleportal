@@ -1,7 +1,7 @@
 <template>
 	<!-- Mobile -->
 	<nav
-		class="flex md:hidden fixed navbar z-10 px-4 bg-navbar/[0.85] navbar-dark h-16 w-full border-0 border-solid border-b border-primary backdrop-blur-[3px]">
+		class="flex md:hidden navbar z-10 px-4 bg-navbar/[0.85] navbar-dark h-16 w-full border-0 border-solid border-b border-primary backdrop-blur-[3px]">
 		<div class="flex flex-row justify-between w-full">
 			<button
 				class="navbar-toggler border-none p-0"
@@ -76,7 +76,7 @@
 	</nav>
 	<!-- Web -->
 	<div
-		class="hidden md:flex fixed navbar z-10 px-4 bg-navbar/[0.85] text-white h-16 w-full border-0 border-solid border-b border-primary backdrop-blur-[3px]">
+		class="hidden md:flex navbar z-10 px-4 bg-navbar/[0.85] text-white h-16 w-full border-0 border-solid border-b border-primary backdrop-blur-[3px]">
 		<div
 			class="logo flex items-center cursor-pointer"
 			@click="handleHome()">

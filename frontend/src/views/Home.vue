@@ -1,7 +1,17 @@
 <template>
-	<div class="container mx-auto max-w-2xl min-h-[calc(100vh-56px)] mt-14">
-		<div class="pt-4">
+	<div class="container mx-auto max-w-2xl min-h-100vh pt-16">
+		<div class="flex flex-wrap-reverse sm:flex-nowrap pt-8 gap-3">
 			<SearchFilter @changed="getSearchValue"></SearchFilter>
+
+			<div class="w-full sm:w-auto">
+				<div
+					class="btn btn-success text-btn text-white flex items-center justify-center h-full full-width"
+					data-bs-toggle="modal"
+					data-bs-target="#createModal">
+					<PlusIcon class="h-4 w-4 stroke-[3px]" />
+					&nbsp; Create
+				</div>
+			</div>
 		</div>
 		<div
 			v-if="this.roleListingsNotLoaded"
@@ -49,16 +59,25 @@
 				</div>
 			</div>
 		</div>
+		<ModalCreateRoleListing />
 	</div>
 </template>
 
 <script>
+import ModalCreateRoleListing from "../components/ModalCreateRoleListing.vue";
 import RoleListingPanel from "../components/RoleListingPanel.vue";
 import SearchFilter from "../components/SearchFilter.vue";
 import { ExclamationCircleIcon } from "@heroicons/vue/24/outline";
+import { PlusIcon } from "@heroicons/vue/24/outline";
 
 export default {
-	components: { RoleListingPanel, ExclamationCircleIcon, SearchFilter },
+	components: {
+		ModalCreateRoleListing,
+		RoleListingPanel,
+		ExclamationCircleIcon,
+		SearchFilter,
+		PlusIcon,
+	},
 	data() {
 		return {
 			user: this.$store.state.user,
