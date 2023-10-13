@@ -1,6 +1,8 @@
 # run 'python load_init_sql.py' to load the full SBRP database.
+import sqlite3
 import mysql.connector
 import os
+import csv
 from dotenv import load_dotenv
 import subprocess
 
@@ -44,6 +46,53 @@ with open('init.sql', 'r') as sql_file:
             cursor.execute(command)
         except:
             print(f"Command skipped: {command}")
+
+# populate database with client provided data in CSV files
+# specify the path to the folder containing the CSV files
+folder_path = "./scheduler_data"
+
+placeholders = ""
+
+# iterate through all files in the folder
+for file_name in os.listdir(folder_path):
+    print("Loading data from", file_name, "into database.")
+    # check if the file is a CSV file
+    if file_name.endswith(".csv"):
+        # open the file
+        with open(os.path.join(folder_path, file_name), 'r') as csv_file:
+            # create a CSV reader object
+            csv_reader = csv.reader(csv_file)
+            # skip the header row
+            next(csv_reader)
+
+            # loop through the rows in the CSV file
+            for row in csv_reader:
+                # check if the row is not empty
+                if row:
+                    values = []
+                    for item in row:
+                        # check if the item is a string
+                        if isinstance(item, str):
+                            # add quotes around the item
+                            values.append(f'"{item}"')
+                        else:
+                            # add the item as is
+                            values.append(item)
+                    # create a string of placeholders for the SQL string
+                    placeholders = ','.join(values)
+
+                    # special table staff_skill - to append with a NULL column.
+                    if file_name[:-4] == "staff_skill":
+                        placeholders += ",NULL"
+
+                    # create the SQL string
+                    sql_string = f"INSERT INTO {file_name[:-4]} VALUES ({placeholders});"
+                    # execute the SQL string
+                    try:
+                        cursor.execute(sql_string)
+                    except sqlite3.Error as e:
+                        print(f"Error inserting data into {file_name[:-4]}: {placeholders}")
+            print(f"{file_name} data loaded successfully.\n")
 
 # Close cursor and connection
 cursor.close()
