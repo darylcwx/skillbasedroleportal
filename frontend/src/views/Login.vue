@@ -21,11 +21,13 @@
 						v-for="user in users"
 						:value="user.Email">
 						{{ user.Email }} ({{
-							user.Access_Rights == 0
+							user.Role == 1
 								? "admin"
-								: user.Access_Rights == 1
+								: user.Role == 2
 								? "user"
-								: "manager"
+								: user.Role == 3
+								? "manager"
+								: "HR"
 						}})
 					</option>
 				</select>
@@ -145,8 +147,9 @@ export default {
 					fName: user.Staff_FName,
 					lName: user.Staff_LName,
 					dept: user.Dept,
+					country: user.country,
 					email: user.Email,
-					accessRights: user.Access_Rights,
+					Role: user.Role,
 				});
 				this.$router.push({ name: "Home" });
 			} catch (error) {

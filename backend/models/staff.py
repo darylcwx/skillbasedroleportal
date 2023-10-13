@@ -8,16 +8,18 @@ class Staff(db.Model):
     Staff_FName = db.Column(db.String(50), nullable=False)
     Staff_LName = db.Column(db.String(50), nullable=False)
     Dept = db.Column(db.String(50), nullable=False)
+    Country = db.Column(db.Text, nullable=False)
     Email = db.Column(db.String(50), nullable=False, unique=True)
-    Access_Rights = db.Column(db.Integer, nullable=False)
+    Role = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, Staff_ID, Staff_FName, Staff_LName, Dept, Email, Access_Rights):
+    def __init__(self, Staff_ID, Staff_FName, Staff_LName, Dept, Country, Email, Role):
         self.Staff_ID = Staff_ID,
         self.Staff_FName = Staff_FName
         self.Staff_LName = Staff_LName
         self.Dept = Dept
+        self.Country = Country
         self.Email = Email
-        self.Access_Rights = Access_Rights
+        self.Role = Role
 
     def serialize(self):
         return {
@@ -25,6 +27,7 @@ class Staff(db.Model):
             'Staff_FName': self.Staff_FName,
             'Staff_LName': self.Staff_LName,
             'Dept': self.Dept,
+            'Country': self.Country, 
             'Email': self.Email,
-            'Access_Rights': self.Access_Rights
+            'Role': self.Role
         }

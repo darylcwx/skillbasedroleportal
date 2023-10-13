@@ -24,7 +24,7 @@
 					<div></div>
 					<div class="flex gap-2">
 						<button
-							v-if="user.accessRights == 0"
+							v-if="user.Role == 1 || user.Role == 4"
 							class="btn btn-primary text-btn"
 							:class="
 								new Date() > new Date(this.role.deadline)
