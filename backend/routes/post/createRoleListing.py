@@ -3,26 +3,29 @@ from backend.app import db
 from backend.models.listings import Listings
 from backend.models.role import Role
 
-updateRoleListingBP = Blueprint('updateRoleListing', __name__)
-@updateRoleListingBP.route('/api/updateRoleListing', methods=['POST'])
-def updateRoleListing():
+createRoleListingBP = Blueprint('createRoleListing', __name__)
+@createRoleListingBP.route('/api/createRoleListing', methods=['POST'])
+def createRoleListing():
     try:
         data = request.json
-        listing = Listings.query.get(data['lid'])
+        # print(data)
+
         role = Role.query.get(data['name'])
+        # print(role)
         
-        if listing and role:
-            listing.Deadline = data['deadline']
+        if role:
             role.Role_Desc = data['desc']
+            listing = Listings(None, data['name'], data['deadline'])
+            db.session.add(listing)
             db.session.commit()
 
             return jsonify({
-                    'Status': 'Data updated successfully.'
+                    'Status': 'Role Listing created successfully.'
                 }), 200
         
         else:
             return jsonify({
-                    'Status': 'Rolename or Listing ID invalid. Not found.'
+                    'Status': 'Rolename invalid. Not found.'
                 }), 404
         
 

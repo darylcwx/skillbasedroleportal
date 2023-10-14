@@ -235,8 +235,6 @@ export default {
 			this.message = "";
 
 			// pre-validation
-
-			// modify this to create new role listing and remove this comment
 			try {
 				const date = new Date(this.roleDeadline);
 				const monthNames = [
@@ -257,7 +255,7 @@ export default {
 				const month = String(date.getMonth() + 1).padStart(2, "0");
 				const day = String(date.getDate()).padStart(2, "0");
 
-				const apiURL = `http://localhost:5000/api`;
+				const apiURL = `http://localhost:5000/api/createRoleListing`;
 				const response = await fetch(apiURL, {
 					mode: "cors",
 					method: "POST",
@@ -272,12 +270,8 @@ export default {
 				});
 				let data = await response.json();
 				if (response.status == 200) {
-					// this.$store.commit("updateRole", {
-					// 	desc: this.roleDescription,
-					// 	deadline: `${monthNames[month - 1]} ${day}, ${year}`,
-					// });
 					this.success = true;
-					this.message = "Updated role listing successfully.";
+					this.message = "Created role listing successfully.";
 					setTimeout(() => {
 						this.success = false;
 					}, globalVars.svgTimeout);

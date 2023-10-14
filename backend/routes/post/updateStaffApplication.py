@@ -6,11 +6,7 @@ from backend.models.staffapplication import StaffApplication
 
 
 updateStaffApplicationBP = Blueprint("updateStaffApplication", __name__)
-
-
-@updateStaffApplicationBP.route(
-    "/api/updateStaffApplication/<listingID>/<staffID>", methods=["POST"]
-)
+@updateStaffApplicationBP.route("/api/updateStaffApplication/<listingID>/<staffID>", methods=["POST"])
 def updateStaffApplication(staffID, listingID):
     try:
         staff = Staff.query.get(staffID)
@@ -28,9 +24,7 @@ def updateStaffApplication(staffID, listingID):
                     400,
                 )
             else:
-                staff_application = StaffApplication(
-                    Staff_ID=staffID, Listing_ID=listingID
-                )
+                staff_application = StaffApplication(Staff_ID = staffID, Listing_ID = listingID)
                 db.session.add(staff_application)
 
                 db.session.commit()
