@@ -27,12 +27,14 @@ load_dotenv('backend/.env')
 user = os.getenv("DB_USER")
 password = os.getenv("DB_PASSWORD")
 host = os.getenv("DB_HOST")
+port = os.getenv("DB_PORT")
 
 db = mysql.connector.connect(
     host = host,
     user = user,
-    password = password
-)
+    password = password,
+    port = port
+) 
 
 # Create cursor
 cursor = db.cursor()
