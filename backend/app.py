@@ -28,6 +28,7 @@ from backend.routes.get.getRoleListings import getRoleListingsBP
 from backend.routes.get.getRoleDesc import getRoleDescBP
 from backend.routes.get.getApplicants import getApplicantsBP
 from backend.routes.get.getAllSkills import getAllSkillsBP
+from backend.routes.get.getRoles import getRolesBP
 
 from backend.routes.post.updateRoleListing import updateRoleListingBP
 from backend.routes.post.createRoleListing import createRoleListingBP
@@ -44,6 +45,7 @@ app.register_blueprint(getRoleListingsBP)
 app.register_blueprint(getRoleDescBP)
 app.register_blueprint(getApplicantsBP)
 app.register_blueprint(getAllSkillsBP)
+app.register_blueprint(getRolesBP)
 
 app.register_blueprint(updateRoleListingBP)
 app.register_blueprint(createRoleListingBP)

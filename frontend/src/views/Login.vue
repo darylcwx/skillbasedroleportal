@@ -112,7 +112,6 @@ export default {
 				const apiUrl = "http://localhost:5000/api/users";
 				const response = await fetch(apiUrl, { mode: "cors" });
 				const data = await response.json();
-				console.log(data);
 				this.users = data.users;
 				console.log(this.users);
 			} catch (error) {

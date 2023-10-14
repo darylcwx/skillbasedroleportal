@@ -37,10 +37,8 @@
 								class="w-full form-select"
 								required>
 								<option selected>Select a role</option>
-								<option
-									v-for="(roleDesc, roleName) in this
-										.roleObjects">
-									{{ roleName }}
+								<option v-for="role of this.roles">
+									{{ role.Role_Name }}
 								</option>
 							</select>
 							<div
@@ -77,6 +75,7 @@
 							id="roleDescription"
 							class="form-control"
 							v-model="this.roleDescription"
+							rows="10"
 							required>
 						</textarea>
 						<div
@@ -131,7 +130,7 @@ export default {
 			roleName: "Select a role",
 			roleDescription: "",
 			roleDeadline: new Date(),
-			roleObjects: {},
+			roles: {},
 			success: false,
 			error: false,
 			message: "",
@@ -140,15 +139,7 @@ export default {
 	},
 	mounted() {
 		// Get roles for roleName DDL
-		this.roleObjects = this.getAllRoles();
-		//this.roleObjects["Select a role"] = "";
-
-		// Hard code
-		this.roleObjects = {
-			"Account Manager": "The Account Manager...",
-			"Admin Executive": "Admin Executive will...",
-			"Call Centre": "Call Centre Executive...",
-		};
+		this.getRoles();
 
 		// Removes any validation
 		const roleName = document.getElementById("roleName");
@@ -176,25 +167,21 @@ export default {
 			return formatted;
 		},
 		populateDesc() {
-			this.roleDescription = this.roleObjects[this.roleName];
+			console.log(this.roles)
+			for (let i = 0; i < this.roles.length; i++) {
+				console.log(this.roles[i].Role_Name);
+				if (this.roles[i].Role_Name == this.roleName) {
+					this.roleDescription = this.roles[i].Role_Desc;
+				}
+			}
+			return;
 		},
-		async getAllRoles() {
-			const apiURL = `http://localhost:5000/api`;
-			const response = await fetch(apiURL, {
-				mode: "cors",
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					lid: this.listingID,
-					name: this.roleName,
-					desc: this.roleDescription,
-					deadline: `${year}-${month}-${day}`,
-				}),
-			});
+		async getRoles() {
+			const apiURL = `http://localhost:5000/api/roles`;
+			const response = await fetch(apiURL, { mode: "cors" });
 			let data = await response.json();
-			return data;
+			this.roles = data["roles"];
+			return;
 		},
 		handleSave() {
 			// Reset error variables and flag

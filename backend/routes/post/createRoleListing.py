@@ -8,14 +8,14 @@ createRoleListingBP = Blueprint('createRoleListing', __name__)
 def createRoleListing():
     try:
         data = request.json
-        # print(data)
+        print(data)
 
         role = Role.query.get(data['name'])
-        # print(role)
+        print(role)
         
         if role:
             role.Role_Desc = data['desc']
-            listing = Listings(None, data['name'], data['deadline'])
+            listing = Listings(Role_Name = data['name'], Deadline = data['deadline'])
             db.session.add(listing)
             db.session.commit()
 
@@ -31,5 +31,5 @@ def createRoleListing():
 
     except Exception as error:
         db.session.rollback()
-
+        print(error)
         return jsonify({'error': str(error)}), 500
