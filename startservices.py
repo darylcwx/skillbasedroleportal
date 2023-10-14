@@ -1,6 +1,7 @@
 import os
 import subprocess
 import threading
+from colorama import Fore, Style
 
 # Install Python dependencies from backend/requirements.txt
 try:
@@ -18,36 +19,34 @@ print(f"Started the '{service_name}' service.")
 def start_flask():
     os.environ['FLASK_APP'] = 'backend/app.py'
     subprocess.call(["python", "-m", "flask", "run"])
-    print("Started the Flask server.")
 
 flask_thread = threading.Thread(target=start_flask)
 flask_thread.start()
+print("Started the Flask server.")
 
 # Start up load_init_sql.py in a separate thread
 def start_load_init_sql():
     subprocess.call(["python", "load_init_sql.py"])
-    print("Started the load_init_sql.py script.")
 
 load_sql_thread = threading.Thread(target=start_load_init_sql)
 load_sql_thread.start()
+print("Started the load_init_sql.py script.")
 
 # Start up npm in a separate thread
 def start_npm():
     subprocess.run("npm i", shell=True, cwd="frontend/")
     subprocess.run("npm run dev", shell=True, cwd="frontend/")
-    print("Started the npm process in another directory.")
+    print(f"\n{Fore.YELLOW}Press Ctrl+C again to confirm exit.{Style.RESET_ALL}")
 
 npm_thread = threading.Thread(target=start_npm)
 npm_thread.start()
+print("Started the npm process in another directory.")
 
 try:
     # Wait for Flask thread to finish
     flask_thread.join()
     load_sql_thread.join()
     npm_thread.join()
-    # Kill the load_init_sql.py thread when Flask thread finishes
-    # load_sql_thread.kill()
-    # print("Killed the load_init_sql.py thread.")
 except KeyboardInterrupt:
     subprocess.run(["sc", "stop", service_name])
-    print(f"Stopped the '{service_name}' service.")
+    print(f"\n{Fore.YELLOW}startservices has terminated.{Style.RESET_ALL}")
