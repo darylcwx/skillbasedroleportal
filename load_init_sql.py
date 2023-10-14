@@ -55,8 +55,10 @@ folder_path = "./scheduler_data"
 
 placeholders = ""
 
+folder = ["Access_Control.csv", "staff.csv", "role.csv", "skill.csv", "role_skill.csv", "staff_skill.csv", "listings.csv", "staff_application.csv"]
+
 # iterate through all files in the folder
-for file_name in os.listdir(folder_path):
+for file_name in folder:
     print("Loading data from", file_name, "into database.")
     # check if the file is a CSV file
     if file_name.endswith(".csv"):
@@ -97,5 +99,6 @@ for file_name in os.listdir(folder_path):
             print(f"{file_name} data loaded successfully.\n")
 
 # Close cursor and connection
+db.commit()
 cursor.close()
 db.close()
