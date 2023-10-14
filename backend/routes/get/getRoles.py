@@ -1,9 +1,9 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify
 from backend.models.role import Role
  
 getRolesBP = Blueprint('getRoles', __name__)
 @getRolesBP.route('/api/roles', methods=['GET'])
-def getAllSkills():
+def getRoles():
     try:
         roles = Role.query.all()
         role_list = [role.serialize() for role in roles]

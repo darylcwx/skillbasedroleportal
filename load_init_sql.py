@@ -63,7 +63,8 @@ for file_name in folder:
     # check if the file is a CSV file
     if file_name.endswith(".csv"):
         # open the file
-        with open(os.path.join(folder_path, file_name), 'r') as csv_file:
+        # with open(os.path.join(folder_path, file_name), 'r') as csv_file:
+        with open(os.path.join(folder_path, file_name), encoding="ISO-8859-1") as csv_file:
             # create a CSV reader object
             csv_reader = csv.reader(csv_file)
             # skip the header row
