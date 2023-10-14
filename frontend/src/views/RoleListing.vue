@@ -1,5 +1,5 @@
 <template>
-	<div class="container mx-auto max-w-2xl min-h-100vh pt-16">
+	<div class="container mx-auto max-w-2xl min-h-[calc(100vh-80px)] pt-16">
 		<!-- Role details -->
 		<div class="pt-8">
 			<div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
