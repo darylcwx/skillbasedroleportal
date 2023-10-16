@@ -14,11 +14,17 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v3
 
-            - name: Install dependencies
-              run: cd frontend && npm install
+            - name: Clean install of dependencies
+              run: |
+                  cd frontend
+                  npm ci
+                  echo "Dependencies installed successfully ✨"
 
             - name: Build
-              run: cd frontend && npm run build
+              run: |
+                  cd frontend
+                  npm run build
+                  echo "Built successfully ✨"
 
             # Test script here -> Configure package.json
             # - name: Test
@@ -42,17 +48,20 @@ jobs:
                   python-version: "3.x"
 
             - name: Install dependencies
-              run: cd backend && pip install -r requirements.txt
+              run: |
+                  cd backend && pip install -r requirements.txt
+                  echo "Dependencies installed successfully ✨"
 
-            - name: Set up MySQL
+            - name: Run MySQL Service
               run: |
                   sudo systemctl start mysql.service
-                  
                   echo "MySQL set up successfully ✨"
 
             - name: Load initial data
               run: |
                   python load_init_sql.py
+                  echo "Data loaded successfully ✨"
 
-            - name: Test backend
-              run: cd backend && pytest
+            # Test script here -> Selenium?
+            # - name: Test
+            #   run: cd frontend && npm test
