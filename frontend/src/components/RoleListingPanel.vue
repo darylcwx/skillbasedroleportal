@@ -21,7 +21,7 @@
 			<div class="mt-4">{{ desc }}</div>
 			<div class="flex justify-between items-center mt-4">
 				<div
-					v-if="new Date() > new Date(this.deadline)"
+					v-if="isExpired()"
 					class="text-danger text-btn">
 					This listing has expired.
 				</div>
@@ -76,6 +76,20 @@ export default {
 			});
 
 			this.$router.push({ name: "Role", params: { name: this.name } });
+		},
+
+		isExpired() {
+			const today = new Date();
+			const roleDate = new Date(this.deadline);
+			roleDate.setDate(roleDate.getDate() + 1);
+			console.log(
+				this.role.Role_Name +
+					"today Date:" +
+					today +
+					"role expiry" +
+					roleDate
+			);
+			return today >= roleDate;
 		},
 	},
 };
