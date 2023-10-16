@@ -44,18 +44,11 @@ with open('init.sql', 'r') as sql_file:
     sql_as_string = sql_file.read()
     sql_commands = sql_as_string.split(';')
     for command in sql_commands:
-        print(command)
         try:
             cursor.execute(command)
         except Exception as e:
             print(f"Command skipped: {command}")
             print(e)
-
-
-cursor.execute("Show tables;")
-myresult = cursor.fetchall()
-for x in myresult:
-    print(x)
 
 # populate database with client provided data in CSV files
 # specify the path to the folder containing the CSV files
