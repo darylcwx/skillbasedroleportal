@@ -203,13 +203,15 @@ export default {
 			if (this.roleName == "Select a role") {
 				roleName.classList.add("is-invalid");
 				roleNameValidationHelper.classList.add("was-validated");
-				roleDescription.classList.add("is-invalid");
-				roleDescriptionValidationHelper.classList.add("was-validated");
-				return;
 			}
-			if (this.roleName && this.roleDescription == "") {
+			if (this.roleDescription == "") {
 				roleDescription.classList.add("is-invalid");
 				roleDescriptionValidationHelper.classList.add("was-validated");
+			}
+			if (
+				this.roleName == "Select a role" ||
+				this.roleDescription == ""
+			) {
 				return;
 			}
 
