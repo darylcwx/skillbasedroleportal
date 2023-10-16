@@ -12,9 +12,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                  node-version: 14
+              uses: actions/setup-node@v3
 
             - name: Install dependencies
               run: cd frontend && npm install
@@ -27,6 +25,11 @@ jobs:
 
     backend:
         runs-on: ubuntu-latest
+        env:
+            DB_USER: ${{secrets.DB_USER}}
+            DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+            DB_NAME: sbrp_ais_kachang
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
@@ -34,8 +37,8 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
-                  python-version: '3.x'
-                
+                  python-version: "3.x"
+
             - name: Install dependencies
               run: cd backend && pip install -r requirements.txt
 
@@ -44,8 +47,8 @@ jobs:
 
             - name: Create the database and load initial data
               run: |
-                  mysql -h localhost -u ${{secrets.DB_USER}} -p${{secrets.DB_PASSWORD}} -e "CREATE DATABASE sbrp_ais_kachang;"
-                  mysql -h localhost -u ${{secrets.DB_USER}} -p${{secrets.DB_PASSWORD}} sbrp_ais_kachang < init.sql
+                  mysql -h localhost -u$DB_USER -p$DB_PASSWORD -e "CREATE DATABASE $DB_NAME;"
+                  mysql -h localhost -u$DB_USER -p$DB_PASSWORD $DB_NAME < init.sql
                   python load_init_sql.py
 
             - name: Test backend
