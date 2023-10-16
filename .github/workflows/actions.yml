@@ -47,7 +47,7 @@ jobs:
             - name: Set up MySQL
               run: |
                   sudo systemctl start mysql.service
-                  sudo mysql -h localhost -e 'CREATE DATABASE ${{ env.MYSQL_DATABASE }};' -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }}
+                  sudo mysql -h 127.0.0.1 -e 'CREATE DATABASE $MYSQL_DATABASE;' -u$MYSQL_USER -p$MYSQL_PASSWORD
 
             - name: Load initial data
               run: |
