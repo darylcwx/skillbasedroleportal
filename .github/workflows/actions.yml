@@ -20,9 +20,6 @@ jobs:
             - name: Build
               run: cd frontend && npm run build
 
-            - name: Preview
-              run: cd frontend && npm run preview
-
             # Test script here -> Configure package.json
             # - name: Test
             #   run: cd frontend && npm test
@@ -32,7 +29,7 @@ jobs:
 
         env:
             MYSQL_USER: root
-            MYSQL_PASSWORD: password
+            MYSQL_PASSWORD: root
             MYSQL_DATABASE: sbrp_ais_kachang
 
         steps:
