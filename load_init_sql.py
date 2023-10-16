@@ -47,8 +47,9 @@ with open('init.sql', 'r') as sql_file:
         print(command)
         try:
             cursor.execute(command)
-        except:
+        except Exception as e:
             print(f"Command skipped: {command}")
+            print(e)
 
 
 cursor.execute("Show tables;")
