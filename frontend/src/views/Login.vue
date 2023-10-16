@@ -77,7 +77,7 @@
 			</div>
 			<div
 				v-if="showSSOError"
-				class="absolute bottom-3 right-5">
+				class="absolute bottom-3 right-5 z-10">
 				<div
 					class="alert alert-warning fade show"
 					role="alert">
@@ -105,6 +105,7 @@ export default {
 	mounted() {
 		//console.log(this.$store.state.user);
 		this.fetchUsers();
+		console.log(this.users);
 	},
 	methods: {
 		async fetchUsers() {
