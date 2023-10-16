@@ -9,12 +9,11 @@ createRoleListingBP = Blueprint('createRoleListing', __name__)
 def createRoleListing():
     try:
         data = request.json
-        role = Role.query.get(data['name'])
+        
+        if (data['deadline'] > datetime.now().strftime('%Y-%m-%d')) or (data['deadline'] == datetime.now().strftime('%Y-%m-%d') and datetime.now().strftime('%H:%M:%S') < '23:59:00'):
+            role = Role.query.get(data['name'])
 
-        if role:
-            deadline = datetime.strptime(data['deadline'] , '%Y-%m-%d')
-
-            if deadline >= datetime.now():
+            if role:
                 role.Role_Desc = data['desc']
                 listing = Listings(Role_Name = data['name'], Deadline = data['deadline'])
                 db.session.add(listing)
@@ -26,12 +25,12 @@ def createRoleListing():
             
             else:
                 return jsonify({
-                        'Status': 'Invalid deadline. Date has passed.'
+                        'Status': 'Rolename invalid. Not found.'
                     }), 404
         
         else:
             return jsonify({
-                    'Status': 'Rolename invalid. Not found.'
+                    'Status': 'Invalid deadline. Date has passed.'
                 }), 404
         
 

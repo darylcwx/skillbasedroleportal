@@ -153,7 +153,7 @@ export default {
       try {
         this.roleListings.forEach(async (role) => {
           this.currentRole = role['Role_Name'];
-          console.log(role);
+          // console.log(role);
           const apiUrl =
             'http://localhost:5000/api/roleskills?rolename=' + this.currentRole;
           const response = await fetch(apiUrl, { mode: 'cors' });

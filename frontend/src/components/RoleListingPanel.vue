@@ -61,9 +61,9 @@ export default {
 	},
 	created() {},
 	mounted() {
-		console.log(new Date(this.deadline));
-		console.log(new Date());
-		console.log(new Date(this.deadline) >= new Date());
+		// console.log(new Date(this.deadline));
+		// console.log(new Date());
+		// console.log(new Date(this.deadline) >= new Date());
 	},
 	methods: {
 		handleClick() {
