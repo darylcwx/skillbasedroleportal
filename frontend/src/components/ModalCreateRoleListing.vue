@@ -258,14 +258,14 @@ export default {
 				let data = await response.json();
 				if (response.status == 200) {
 					this.success = true;
-					this.message = data['Status'];
-					console.log(this.message);
+					this.message = data["Status"];
 					setTimeout(() => {
 						this.success = false;
+						location.reload();
 					}, globalVars.svgTimeout);
 				} else {
 					this.error = true;
-					this.message = data['error'];
+					this.message = data["error"];
 					console.log(this.message);
 					setTimeout(() => {
 						this.error = false;
