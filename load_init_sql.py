@@ -24,7 +24,7 @@ except ImportError:
 load_dotenv('backend/.env')
 
 # Establish MySQL connection
-user = os.getenv("DB_USER")
+user = os.getenv("DB_USER", "root")
 password = os.getenv("DB_PASSWORD", "root")
 host = os.getenv("DB_HOST")
 port = os.getenv("DB_PORT", 3306)
