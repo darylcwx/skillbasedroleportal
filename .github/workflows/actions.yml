@@ -29,7 +29,7 @@ jobs:
 
         env:
             MYSQL_USER: root
-            MYSQL_PASSWORD: root
+            MYSQL_PASSWORD: ""
             MYSQL_DATABASE: sbrp_ais_kachang
 
         steps:
@@ -47,8 +47,6 @@ jobs:
             - name: Set up MySQL
               run: |
                   sudo systemctl start mysql.service
-                  sudo mysql -h 127.0.0.1 -e 'flush privileges;'
-                  sudo mysql -h 127.0.0.1 -e 'ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';'
                   sudo mysql -h 127.0.0.1 -e 'CREATE DATABASE $MYSQL_DATABASE;' -u$MYSQL_USER
 
             - name: Load initial data
