@@ -44,11 +44,12 @@ with open('init.sql', 'r') as sql_file:
     sql_as_string = sql_file.read()
     sql_commands = sql_as_string.split(';')
     for command in sql_commands:
+        print(command)
         try:
             cursor.execute(command)
         except:
             print(f"Command skipped: {command}")
-db.commit()
+
 # populate database with client provided data in CSV files
 # specify the path to the folder containing the CSV files
 folder_path = "./scheduler_data"
