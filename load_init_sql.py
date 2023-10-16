@@ -99,7 +99,6 @@ for file_name in folder:
 
                     # create the SQL string
                     sql_string = f"INSERT INTO {file_name[:-4]} VALUES ({placeholders});"
-                    print(sql_string)
                     # execute the SQL string
                     try:
                         cursor.execute(sql_string)

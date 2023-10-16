@@ -8,13 +8,13 @@ use SBRP_Ais_Kachang;
 
 # ================== Created based on Project Specification ================== 
 
-create table `Access_Control` (
+create table `access_control` (
 	`Access_ID` int NOT NULL,
     `Access_Control_Name` varchar(50) NOT NULL,
     constraint Access_Control_PK primary key (`Access_ID`)
 );
 
-create table `Staff` (
+create table `staff` (
 	`Staff_ID` int NOT NULL AUTO_INCREMENT,
 	`Staff_FName` varchar(50) NOT NULL,
 	`Staff_LName` varchar(50) NOT NULL,
@@ -26,19 +26,19 @@ create table `Staff` (
     constraint Staff_FK1 foreign key (`Role`) references `Access_Control` (`Access_ID`)
 );
 
-create table `Role` (
+create table `role` (
 	`Role_Name` varchar(50) NOT NULL,
 	`Role_Desc` longtext NOT NULL,
 	constraint Role_PK primary key (`Role_Name`)
 );
 
-create table `Skill` (
+create table `skill` (
 	`Skill_Name` varchar(50) NOT NULL,
     `Skill_Desc` longtext NOT NULL,
     constraint Skill_PK primary key (`Skill_Name`)
 );
 
-create table `Role_Skill` (
+create table `role_skill` (
 	`Role_Name` varchar(50) NOT NULL,
 	`Skill_Name` varchar(50) NOT NULL,
 	constraint Role_Skill_PK primary key (`Role_Name`, `Skill_Name`),
@@ -46,7 +46,7 @@ create table `Role_Skill` (
     constraint Role_Skill_FK2 foreign key (`Skill_Name`) references `Skill` (`Skill_Name`)
 );
 
-create table `Staff_Skill` (
+create table `staff_skill` (
 	`Staff_ID` int NOT NULL,
 	`Skill_Name` varchar(50) NOT NULL,
 	`Skill_Profile_Desc` longtext NULL,
@@ -55,7 +55,7 @@ create table `Staff_Skill` (
 	constraint Staff_Skill_FK2 foreign key (`Skill_Name`) references `Skill` (`Skill_Name`)
 );
 
-create table `Listings` (
+create table `listings` (
 	`listing_ID` int NOT NULL AUTO_INCREMENT,
     `Role_Name` varchar(50) NOT NULL,
 	`Deadline` date NOT NULL,
@@ -63,7 +63,7 @@ create table `Listings` (
     constraint Listings_FK foreign key (`Role_Name`) references `Role` (`Role_Name`)
 );
 
-create table `Staff_Application` (
+create table `staff_application` (
 	`Application_ID` int NOT NULL AUTO_INCREMENT,
 	`Staff_ID` int NOT NULL,
     `listing_ID` int NOT NULL,
