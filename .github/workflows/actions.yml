@@ -20,8 +20,12 @@ jobs:
             - name: Build
               run: cd frontend && npm run build
 
-            - name: Test
-              run: cd frontend && npm test
+            - name: Preview
+              run: cd frontend && npm run preview
+
+            # Test script here -> Configure package.json
+            # - name: Test
+            #   run: cd frontend && npm test
 
     backend:
         runs-on: ubuntu-latest
