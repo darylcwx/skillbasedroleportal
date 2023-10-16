@@ -167,9 +167,9 @@ export default {
 			return formatted;
 		},
 		populateDesc() {
-			console.log(this.roles)
+			// console.log(this.roles)
 			for (let i = 0; i < this.roles.length; i++) {
-				console.log(this.roles[i].Role_Name);
+				// console.log(this.roles[i].Role_Name);
 				if (this.roles[i].Role_Name == this.roleName) {
 					this.roleDescription = this.roles[i].Role_Desc;
 				}
@@ -258,13 +258,15 @@ export default {
 				let data = await response.json();
 				if (response.status == 200) {
 					this.success = true;
-					this.message = "Created role listing successfully.";
+					this.message = data['Status'];
+					console.log(this.message);
 					setTimeout(() => {
 						this.success = false;
 					}, globalVars.svgTimeout);
 				} else {
 					this.error = true;
-					this.message = response.error;
+					this.message = data['error'];
+					console.log(this.message);
 					setTimeout(() => {
 						this.error = false;
 					}, globalVars.svgTimeout);
