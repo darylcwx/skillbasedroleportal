@@ -148,7 +148,7 @@ export default {
 					dept: user.Dept,
 					country: user.country,
 					email: user.Email,
-					Role: user.Role,
+					role: user.Role,
 				});
 				this.$router.push({ name: "Home" });
 			} catch (error) {

@@ -3,7 +3,7 @@
     <div class="flex flex-wrap-reverse sm:flex-nowrap pt-8 gap-3">
       <SearchFilter @changed="getSearchValue"></SearchFilter>
 
-      <div class="w-full sm:w-auto">
+      <div v-if="this.user.Role == 4" class="w-full sm:w-auto">
         <div
           class="btn btn-success text-btn text-white flex items-center justify-center h-full full-width"
           data-bs-toggle="modal"
