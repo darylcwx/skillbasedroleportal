@@ -50,13 +50,19 @@ with open('init.sql', 'r') as sql_file:
         except:
             print(f"Command skipped: {command}")
 
+
+cursor.execute("Show tables;")
+myresult = cursor.fetchall()
+for x in myresult:
+    print(x)
+
 # populate database with client provided data in CSV files
 # specify the path to the folder containing the CSV files
 folder_path = "./scheduler_data"
 
 placeholders = ""
 
-folder = ["Access_Control.csv", "staff.csv", "role.csv", "skill.csv", "role_skill.csv", "staff_skill.csv", "listings.csv", "staff_application.csv"]
+folder = ["access_control.csv", "staff.csv", "role.csv", "skill.csv", "role_skill.csv", "staff_skill.csv", "listings.csv", "staff_application.csv"]
 
 # iterate through all files in the folder
 for file_name in folder:
@@ -93,6 +99,7 @@ for file_name in folder:
 
                     # create the SQL string
                     sql_string = f"INSERT INTO {file_name[:-4]} VALUES ({placeholders});"
+                    print(sql_string)
                     # execute the SQL string
                     try:
                         cursor.execute(sql_string)
