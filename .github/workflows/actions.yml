@@ -25,10 +25,11 @@ jobs:
 
     backend:
         runs-on: ubuntu-latest
+
         env:
-            DB_USER: ${{secrets.DB_USER}}
-            DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-            DB_NAME: sbrp_ais_kachang
+            MYSQL_USER: ${{secrets.DB_USER}}
+            MY_SQL_PASSWORD: ${{secrets.DB_PASSWORD}}
+            MYSQL_DATABASE: sbrp_ais_kachang
 
         steps:
             - name: Checkout code
@@ -42,8 +43,10 @@ jobs:
             - name: Install dependencies
               run: cd backend && pip install -r requirements.txt
 
-            - name: Install MySQL client
-              run: sudo apt-get install -y mysql-client
+            - name: Set up MySQL
+              run: |
+                  sudo /etc/init.d/mysql start
+                  mysql -e 'CREATE DATABASE ${{ env.MYSQL_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
             - name: Create the database and load initial data
               run: |
