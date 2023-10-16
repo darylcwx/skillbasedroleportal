@@ -2,7 +2,13 @@
 	<div class="container mx-auto max-w-2xl min-h-[calc(100vh-80px)] pt-16">
 		<!-- Role details -->
 		<div class="pt-8">
-			<div class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700">
+			<div
+				class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700"
+				:class="
+					new Date() > new Date(this.role.deadline)
+						? 'custom-modal-expired'
+						: ''
+				">
 				<div class="flex justify-between items-center">
 					<div class="flex items-center">
 						<div class="text-h1 mr-2">{{ name }}</div>

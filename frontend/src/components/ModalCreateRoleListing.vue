@@ -203,13 +203,15 @@ export default {
 			if (this.roleName == "Select a role") {
 				roleName.classList.add("is-invalid");
 				roleNameValidationHelper.classList.add("was-validated");
-				roleDescription.classList.add("is-invalid");
-				roleDescriptionValidationHelper.classList.add("was-validated");
-				return;
 			}
-			if (this.roleName && this.roleDescription == "") {
+			if (this.roleDescription == "") {
 				roleDescription.classList.add("is-invalid");
 				roleDescriptionValidationHelper.classList.add("was-validated");
+			}
+			if (
+				this.roleName == "Select a role" ||
+				this.roleDescription == ""
+			) {
 				return;
 			}
 
@@ -258,14 +260,14 @@ export default {
 				let data = await response.json();
 				if (response.status == 200) {
 					this.success = true;
-					this.message = data['Status'];
-					console.log(this.message);
+					this.message = data["Status"];
 					setTimeout(() => {
 						this.success = false;
+						location.reload();
 					}, globalVars.svgTimeout);
 				} else {
 					this.error = true;
-					this.message = data['error'];
+					this.message = data["error"];
 					console.log(this.message);
 					setTimeout(() => {
 						this.error = false;
