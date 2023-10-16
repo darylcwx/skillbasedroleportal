@@ -47,7 +47,9 @@ jobs:
             - name: Set up MySQL
               run: |
                   sudo systemctl start mysql.service
-                  mysql -h 127.0.0.1 -u$MYSQL_USER -p"$MYSQL_PASSWORD" < init.sql
+                  
+                  echo "MySQL set up successfully ✨"
+
             - name: Load initial data
               run: |
                   python load_init_sql.py
