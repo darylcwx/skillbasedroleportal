@@ -3,7 +3,7 @@
 		<div
 			class="p-6 custom-modal rounded-xl text-dark"
 			:class="
-				new Date() > new Date(this.deadline)
+				isExpired()
 					? 'custom-modal-expired'
 					: 'hover:scale-105 transition duration-200 ease-in-out hover:shadow-lg hover:shadow-gray-500'
 			">
@@ -77,18 +77,11 @@ export default {
 
 			this.$router.push({ name: "Role", params: { name: this.name } });
 		},
-
 		isExpired() {
 			const today = new Date();
 			const roleDate = new Date(this.deadline);
 			roleDate.setDate(roleDate.getDate() + 1);
-			console.log(
-				this.role.Role_Name +
-					"today Date:" +
-					today +
-					"role expiry" +
-					roleDate
-			);
+			console.log(this.role.Role_Name, today >= roleDate);
 			return today >= roleDate;
 		},
 	},

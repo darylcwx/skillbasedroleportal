@@ -4,11 +4,7 @@
 		<div class="pt-8">
 			<div
 				class="custom-modal p-6 rounded-xl shadow-lg shadow-gray-700"
-				:class="
-					new Date() > new Date(this.role.deadline)
-						? 'custom-modal-expired'
-						: ''
-				">
+				:class="isExpired() ? 'custom-modal-expired' : ''">
 				<div class="flex justify-between items-center">
 					<div class="flex items-center">
 						<div class="text-h1 mr-2">{{ name }}</div>
@@ -23,20 +19,16 @@
 				<div class="mt-4">{{ role.description }}</div>
 				<div class="flex justify-between items-center mt-4">
 					<div
-						v-if="new Date() > new Date(this.role.deadline)"
+						v-if="isExpired()"
 						class="text-danger text-btn">
 						This listing has expired.
 					</div>
 					<div></div>
 					<div class="flex gap-2">
 						<button
-							v-if="user.Role == 1 || user.Role == 4"
+							v-if="user.role == 1 || user.role == 4"
 							class="btn btn-primary text-btn"
-							:class="
-								new Date() > new Date(this.role.deadline)
-									? 'disabled'
-									: ''
-							"
+							:class="isExpired() ? 'disabled' : ''"
 							data-bs-toggle="modal"
 							data-bs-target="#editModal">
 							Edit
@@ -46,11 +38,7 @@
 						<button
 							type="button"
 							class="btn btn-primary text-btn"
-							:class="
-								new Date() > new Date(this.role.deadline)
-									? 'disabled'
-									: ''
-							"
+							:class="isExpired() ? 'disabled' : ''"
 							data-bs-toggle="modal"
 							data-bs-target="#confirmApplyModal">
 							Apply
@@ -356,6 +344,13 @@ export default {
 			} catch (error) {
 				console.error(error);
 			}
+		},
+		isExpired() {
+			const today = new Date();
+			const roleDate = new Date(this.role.deadline);
+			roleDate.setDate(roleDate.getDate() + 1);
+			console.log(this.role.roleName, today >= roleDate);
+			return today >= roleDate;
 		},
 	},
 };
