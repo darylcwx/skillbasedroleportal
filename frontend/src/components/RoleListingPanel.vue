@@ -11,7 +11,7 @@
 				<div class="flex items-center">
 					<div class="text-h1 mr-2">{{ name }}</div>
 					<component
-						:is="icons[this.name]"
+						:is="icons[name]"
 						class="h-6 w-6" />
 				</div>
 				<div class="">
@@ -37,12 +37,7 @@
 </template>
 
 <script>
-import {
-	ComputerDesktopIcon,
-	CommandLineIcon,
-	UserGroupIcon,
-	UsersIcon,
-} from "@heroicons/vue/24/solid";
+import { iconsObject } from "../utils/icons.js";
 export default {
 	props: ["role"],
 	data() {
@@ -51,20 +46,11 @@ export default {
 			name: this.role.Role_Name,
 			desc: this.role.Description,
 			deadline: this.role.Deadline,
-			icons: {
-				Clerk: ComputerDesktopIcon,
-				"IT Support": CommandLineIcon,
-				"Human Resource": UserGroupIcon,
-				Manager: UsersIcon,
-			},
+			icons: iconsObject,
 		};
 	},
 	created() {},
-	mounted() {
-		// console.log(new Date(this.deadline));
-		// console.log(new Date());
-		// console.log(new Date(this.deadline) >= new Date());
-	},
+	mounted() {},
 	methods: {
 		handleClick() {
 			this.$store.commit("setRole", {
@@ -81,7 +67,6 @@ export default {
 			const today = new Date();
 			const roleDate = new Date(this.deadline);
 			roleDate.setDate(roleDate.getDate() + 1);
-			console.log(this.role.Role_Name, today >= roleDate);
 			return today >= roleDate;
 		},
 	},

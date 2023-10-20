@@ -9,7 +9,7 @@
 					<div class="flex items-center">
 						<div class="text-h1 mr-2">{{ name }}</div>
 						<component
-							:is="this.icons[name]"
+							:is="icons[role.roleName]"
 							class="h-6 w-6" />
 					</div>
 					<div class="">
@@ -185,12 +185,7 @@
 
 <script>
 import Application from "../components/Application.vue";
-import {
-	ComputerDesktopIcon,
-	CommandLineIcon,
-	UserGroupIcon,
-	UsersIcon,
-} from "@heroicons/vue/24/solid";
+import { iconsObject } from "../utils/icons.js";
 import { SquaresPlusIcon, QueueListIcon } from "@heroicons/vue/24/solid";
 import ModalEditRoleListing from "../components/ModalEditRoleListing.vue";
 import ModalConfirmation from "../components/ModalConfirmation.vue";
@@ -212,18 +207,13 @@ export default {
 		return {
 			user: this.$store.state.user,
 			role: this.$store.state.role,
-			icons: {
-				Clerk: ComputerDesktopIcon,
-				"IT Support": CommandLineIcon,
-				"Human Resource": UserGroupIcon,
-				Manager: UsersIcon,
-			},
 			roleSkillMatch: {},
 			roleSkillMatchNotLoaded: true,
 			applicants: [], // [{}, {}, {}]
 			applicantsNotLoaded: true,
 			success: false,
 			error: false,
+			icons: iconsObject,
 		};
 	},
 
@@ -285,6 +275,7 @@ export default {
 				this.message = displayMessage;
 				setTimeout(() => {
 					this.success = false;
+					location.reload();
 				}, globalVars.svgTimeout);
 			} else {
 				this.error = true;
@@ -349,7 +340,6 @@ export default {
 			const today = new Date();
 			const roleDate = new Date(this.role.deadline);
 			roleDate.setDate(roleDate.getDate() + 1);
-			console.log(this.role.roleName, today >= roleDate);
 			return today >= roleDate;
 		},
 	},
