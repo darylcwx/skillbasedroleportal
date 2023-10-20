@@ -168,7 +168,9 @@ export default {
 
 		async fetchRoleListings() {
 			try {
-				const apiUrl = "http://localhost:5000/api/rolelistings";
+				const apiUrl = `http://localhost:5000/api/rolelistings?sid=${encodeURIComponent(
+					this.user.id
+				)}`;
 				const response = await fetch(apiUrl, { mode: "cors" });
 				const data = await response.json();
 				// Format the date in each role item

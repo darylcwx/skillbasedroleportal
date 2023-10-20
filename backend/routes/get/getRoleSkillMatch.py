@@ -5,15 +5,12 @@ from backend.routes.get.getRoleSkills import getRoleSkills
 getRoleSkillMatchBP = Blueprint('getRoleSkillMatch', __name__)
 @getRoleSkillMatchBP.route('/api/roleskillmatch', methods=['GET'])
 def getRoleSkillMatch(sid = None, rolename = None):
-    # Staff
-    # get the role skill match for a given role and staff 
     try:
         if not sid:
             sid = request.args.get('sid')
 
         if not rolename:
             rolename = request.args.get('rolename')
-        # 'jude.smith@aio.com' 'IT Support'
 
         staffskills = getStaffSkills(sid)[0].get_json() 
         roleskills = getRoleSkills(rolename)[0].get_json()

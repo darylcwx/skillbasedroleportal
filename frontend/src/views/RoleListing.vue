@@ -207,8 +207,8 @@ export default {
 		return {
 			user: this.$store.state.user,
 			role: this.$store.state.role,
-			roleSkillMatch: {},
-			roleSkillMatchNotLoaded: true,
+			roleSkillMatch: this.$store.state.roleskillmatch,
+			roleSkillMatchNotLoaded: false,
 			applicants: [], // [{}, {}, {}]
 			applicantsNotLoaded: true,
 			success: false,
@@ -220,27 +220,27 @@ export default {
 	created() {},
 
 	mounted() {
-		this.fetchRoleSkillMatch();
+		// this.fetchRoleSkillMatch();
 		this.fetchAllApplicants();
 	},
 
 	methods: {
-		async fetchRoleSkillMatch() {
-			try {
-				const apiURL = `http://localhost:5000/api/roleskillmatch?sid=${encodeURIComponent(
-					this.user.id
-				)}&rolename=${encodeURIComponent(this.name)}`;
-				const response = await fetch(apiURL, { mode: "cors" });
-				let roleSkillMatchObject = await response.json();
-				roleSkillMatchObject["Percentage Match"] = parseInt(
-					roleSkillMatchObject["Percentage Match"]
-				);
-				this.roleSkillMatch = roleSkillMatchObject;
-				this.roleSkillMatchNotLoaded = false;
-			} catch (error) {
-				console.error(error);
-			}
-		},
+		// async fetchRoleSkillMatch() {
+		// 	try {
+		// 		const apiURL = `http://localhost:5000/api/roleskillmatch?sid=${encodeURIComponent(
+		// 			this.user.id
+		// 		)}&rolename=${encodeURIComponent(this.name)}`;
+		// 		const response = await fetch(apiURL, { mode: "cors" });
+		// 		let roleSkillMatchObject = await response.json();
+		// 		roleSkillMatchObject["Percentage Match"] = parseInt(
+		// 			roleSkillMatchObject["Percentage Match"]
+		// 		);
+		// 		this.roleSkillMatch = roleSkillMatchObject;
+		// 		this.roleSkillMatchNotLoaded = false;
+		// 	} catch (error) {
+		// 		console.error(error);
+		// 	}
+		// },
 
 		async fetchAllApplicants() {
 			try {

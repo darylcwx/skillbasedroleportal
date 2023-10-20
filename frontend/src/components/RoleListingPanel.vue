@@ -50,7 +50,9 @@ export default {
 		};
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		console.log(this.role)
+	},
 	methods: {
 		handleClick() {
 			this.$store.commit("setRole", {
@@ -58,10 +60,17 @@ export default {
 				roleName: this.name,
 				description: this.desc,
 				deadline: this.deadline,
+
 				icons: this.icons,
 			});
 
 			this.$router.push({ name: "Role", params: { name: this.name } });
+
+			this.$store.commit("setRoleSkillMatch", {
+				'Staff Matched Skills': this.role['Staff Matched Skills'],
+				'Staff Missing Skills': this.role['Staff Missing Skills'],
+				'Percentage Match': this.role['Percentage Match']
+			});
 		},
 		isExpired() {
 			const today = new Date();

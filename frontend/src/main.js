@@ -21,6 +21,7 @@ const store = createStore({
 		return {
 			user: null,
 			role: null,
+			roleskillmatch: null,
 		};
 	},
 	mutations: {
@@ -41,6 +42,12 @@ const store = createStore({
 		clearRole(state) {
 			state.role = null;
 		},
+		setRoleSkillMatch(state, roleskillmatch) {
+			state.roleskillmatch = roleskillmatch;
+		},
+		clearRoleSkillMatch(state) {
+			state.roleskillmatch = null;
+		}
 	},
 	plugins: [createPersistedState({ storage: window.sessionStorage })],
 });
