@@ -23,32 +23,34 @@ except ImportError:
 load_dotenv('backend/.env')
 
 # Establish MySQL connection
-user = os.getenv("DB_USER")
-password = os.getenv("DB_PASSWORD")
+user = os.getenv("DB_USER", "root")
+password = os.getenv("DB_PASSWORD", "root")
 host = os.getenv("DB_HOST")
-database_name = 'SBRP_Ais_Kachang'
+port = os.getenv("DB_PORT", 3306)
 table_name = 'Listings'
 
 db = mysql.connector.connect(
     host = host,
     user = user,
     password = password,
-    database = database_name
+    port = port
 )
 cursor = db.cursor()
 
-# Read entire SQL file and execute with error checking
-with open('init.sql', 'r') as sql_file:
-    sql_as_string = sql_file.read()
-    sql_commands = sql_as_string.split(';')
-    for command in sql_commands:
-        try:
-            cursor.execute(command)
-        except:
-            print(f"Command skipped: {command}")
+# # Read entire SQL file and execute with error checking
+# with open('init.sql', 'r') as sql_file:
+#     sql_as_string = sql_file.read()
+#     sql_commands = sql_as_string.split(';')
+#     for command in sql_commands:
+#         try:
+#             cursor.execute(command)
+#         except:
+#             print(f"Command skipped: {command}")
 
 # remove all rows from Listings table
+cursor.execute(f"use SBRP_Ais_Kachang")
 cursor.execute(f"DELETE FROM {table_name}")
+
 db.commit()
 
 # Close cursor and connection
