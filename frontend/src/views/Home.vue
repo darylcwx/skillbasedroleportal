@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<div
-			v-if="this.roleListingsNotLoaded"
+			v-if="this.roleListingsNotLoaded && !this.status500"
 			class="placeholder-wave mt-8">
 			<div
 				class="placeholder bg-placeholder text-placeholder rounded-xl h-44 w-full select-none">
@@ -33,7 +33,11 @@
 		</div>
 		<div class="">
 			<div
-				v-if="!this.roleListingsNotLoaded && filteredList.length == 0"
+				v-if="
+					!this.roleListingsNotLoaded &&
+					!this.status500 &&
+					filteredList.length == 0
+				"
 				class="h-[calc(100vh-126px)] grid place-content-center text-white text-center">
 				<div class="flex flex-col">
 					<ExclamationCircleIcon
@@ -51,13 +55,28 @@
 			<div class="pb-8"></div>
 		</div>
 		<div
-			v-if="roleListingsIsEmpty"
+			v-if="
+				!this.roleListingsNotLoaded &&
+				!this.status500 &&
+				this.roleListingsIsEmpty
+			"
 			class="h-[calc(100vh-126px)] grid place-content-center text-white text-center">
 			<div class="flex flex-col">
 				<ExclamationCircleIcon class="h-20 w-20 text-info mx-auto" />
 				<div>
 					Oops! There are currently no listings available. <br />
 					Please check with HR or try again later.
+				</div>
+			</div>
+		</div>
+		<div
+			v-if="this.status500"
+			class="h-[calc(100vh-126px)] grid place-content-center text-white text-center">
+			<div class="flex flex-col">
+				<ExclamationCircleIcon class="h-20 w-20 text-danger mx-auto" />
+				<div>
+					Oops! Internal Server Error occurred. <br />
+					Please try again later.
 				</div>
 			</div>
 		</div>
@@ -90,6 +109,7 @@ export default {
 			componentKey: 0,
 			filterSkills: [],
 			currentRole: "",
+			status500: false,
 		};
 	},
 	created() {
@@ -167,6 +187,7 @@ export default {
 		},
 
 		async fetchRoleListings() {
+			this.status500 = false;
 			try {
 				const apiUrl = `http://localhost:5000/api/rolelistings?sid=${encodeURIComponent(
 					this.user.id
@@ -188,8 +209,7 @@ export default {
 				this.fetchRoleSkills();
 				this.roleListingsNotLoaded = false;
 			} catch (error) {
-				this.roleListingsIsEmpty = true;
-				console.error(error);
+				this.status500 = true;
 			}
 		},
 		getSearchValue(searchValue, selectedSkillsValue) {
