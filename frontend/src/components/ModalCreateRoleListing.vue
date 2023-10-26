@@ -174,10 +174,10 @@ export default {
 					this.roleDescription = this.roles[i].Role_Desc;
 				}
 			}
-			return;
+			return; 
 		},
 		async getRoles() {
-			const apiURL = `http://localhost:5000/api/roles`;
+			const apiURL = `http://localhost:5000/api/availableroles`;
 			const response = await fetch(apiURL, { mode: "cors" });
 			let data = await response.json();
 			this.roles = data["roles"];
