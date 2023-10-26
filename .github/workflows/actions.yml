@@ -1,67 +1,86 @@
 name: CI/CD
 run-name: ${{ github.actor }} just pushed code 🤩
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 jobs:
-    frontend:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out code
-              uses: actions/checkout@v4
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
 
-            - name: Clean install of dependencies
-              run: |
-                  cd frontend
-                  npm ci
-                  echo "Dependencies installed successfully ✨"
+      - name: Clean install of dependencies
+        run: |
+          cd frontend
+          npm ci
+          echo "Dependencies installed successfully ✨"
 
-            - name: Build
-              run: |
-                  cd frontend
-                  npm run build
-                  echo "Built successfully ✨"
+      - name: Build
+        run: |
+          cd frontend
+          npm run build
+          echo "Built successfully ✨"
 
-            # Test script here -> Configure package.json
-            # - name: Test
-            #   run: cd frontend && npm test
+      # Test script here -> Configure package.json
+      # - name: Test
+      #   run: cd frontend && npm test
 
-    backend:
-        runs-on: ubuntu-latest
+  backend:
+    runs-on: ubuntu-latest
 
-        env:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
-            MYSQL_DATABASE: sbrp_ais_kachang
+    env:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: sbrp_ais_kachang
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                  python-version: "3.x"
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
 
-            - name: Install dependencies
-              run: |
-                  cd backend && pip install -r requirements.txt
-                  echo "Dependencies installed successfully ✨"
+      - name: Install dependencies
+        run: |
+          cd backend && pip install -r requirements.txt
+          pip install flake8
+          echo "Dependencies installed successfully ✨"
 
-            - name: Run MySQL Service
-              run: |
-                  sudo systemctl start mysql.service
-                  echo "MySQL set up successfully ✨"
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          echo "Linted successfully ✨"
 
-            - name: Load initial data
-              run: |
-                  python load_init_sql.py
-                  echo "Data loaded successfully ✨"
+      - name: Run MySQL Service
+        run: |
+          sudo systemctl start mysql.service
+          echo "MySQL set up successfully ✨"
 
-            # Test script here -> Selenium?
-            # - name: Test
-            #   run: cd frontend && npm test
+      # - name: Load initial data
+      #   run: |
+      #     python load_init_sql.py
+      #     echo "Data loaded successfully ✨"
+
+      - name: Run unit tests
+        run: |
+          flask/unit_tests.py
+          echo "Unit testing run successfully ✨"
+
+      - name: Run integration tests
+        run: |
+          python flask/integration_tests.py
+          echo "Integration testing run successfully ✨"
+
+      # Test script here -> Selenium?
+      # - name: Test
+      #   run: cd frontend && npm test
