@@ -17,7 +17,7 @@ Skill Based Role Portal: IS212 G2T2 - Ais Kachang
 
 ## Description
 
-![Homepage](images/home.png)
+![Homepage](images/Home.png)
 
 This project aims to be a skill based role portal that allows users to upskill themselves by searching and applying for company-internal roles based on their skills and experience. It is built with the frontend using Vue.JS and the backend using Python Flask. The database used is MySQL.
 
@@ -80,7 +80,7 @@ python load_init_sql.py
 
 For development, you may run both the frontend and backend concurrently on separate terminals. On frontend you should see this:
 
-```javascript
+```bash
   VITE v4.4.9  ready in XXX ms
 
   ➜  Local:   http://localhost:5173/
@@ -90,7 +90,7 @@ For development, you may run both the frontend and backend concurrently on separ
 
 And on the backend you should see this:
 
-```python
+```bash
  * Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on http://127.0.0.1:5000
