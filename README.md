@@ -23,11 +23,11 @@ This project aims to be a skill based role portal that allows users to upskill t
 
 ### Built With
 
-- [![Vue](images/vue.png)](https://vuejs.org/)
-- [![Python Flask](images/flask.png)](https://flask.palletsprojects.com/en/3.0.x/)
-- [![MySQL](images/sql.png)](https://www.mysql.com/)
-- [![Bootstrap](images/bootstrap.png)](https://getbootstrap.com/)
-- [![TailwindCSS](images/tailwind.png)](https://tailwindcss.com/)
+- <a href="https://vuejs.org/"><img src="images/vue.png" alt="Vue" width="50"></a>
+- <a href="https://flask.palletsprojects.com/en/3.0.x/"><img src="images/flask.png" alt="Python Flask" width="50"></a>
+- <a href="https://www.mysql.com/"><img src="images/sql.png" alt="MySQL" width="50"></a>
+- <a href="https://getbootstrap.com/"><img src="images/bootstrap.png" alt="Bootstrap" width="50"></a>
+- <a href="https://tailwindcss.com/"><img src="images/tailwind.png" alt="TailwindCSS" width="50"></a>
 
 ## Getting Started
 
@@ -41,7 +41,7 @@ This project aims to be a skill based role portal that allows users to upskill t
 
 For the frontend, simply run the commands below.
 
-```bash
+```
 # In root directory
 cd frontend
 npm install
@@ -52,7 +52,7 @@ npm run dev
 
 For the backend, we will be using Python Flask and a local MySQL server. No API keys are required for this application.
 
-```bash
+```
 # In root directory
 cd backend
 pip/pip3 install -r requirements.txt
@@ -61,7 +61,7 @@ flask run
 
 Next, create a .env file with the following contents:
 
-```bash
+```python
 # In backend directory
 DB_USER=root
 DB_PASSWORD=password
@@ -71,7 +71,7 @@ DB_PORT=3306
 
 For the sample data, it is not stored in the repo, but you may use execute [init.sql](https://github.com/darylcwx/skillbasedroleportal/blob/main/init.sql) as the schema for the database, then load a .csv with their respective SQL table columns like so:
 
-```
+```bash
 # In root directory
 python load_init_sql.py
 ```
@@ -80,7 +80,7 @@ python load_init_sql.py
 
 For development, you may run both the frontend and backend concurrently on separate terminals. On frontend you should see this:
 
-```bash
+```javascript
   VITE v4.4.9  ready in XXX ms
 
   ➜  Local:   http://localhost:5173/
@@ -90,7 +90,7 @@ For development, you may run both the frontend and backend concurrently on separ
 
 And on the backend you should see this:
 
-```bash
+```python
  * Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on http://127.0.0.1:5000
@@ -103,16 +103,16 @@ This means that once you load the data in correctly, the application will be ful
 
 Tentatively, this application was done up for a school project and will not be maintained in the future.
 
-- [] First release (v1.0.0 - 07/11/23)
-- [] Upcoming release (TBC 😢)
+- [ ] First release (v1.0.0 - 07/11/23)
+- [ ] Upcoming release (TBC 😢)
 
 ## Acknowledgements
 
-- ![Chris Poskitt](https://cposkitt.github.io/)
-- ![Lee Kok Khing](https://www.linkedin.com/in/lee-kok-khing-b074b69/)
-- ![SQL Alchemy](https://www.sqlalchemy.org/)
-- ![Vue 3 Datepicker](https://vue3datepicker.com/)
-- ![Hero icons](https://heroicons.dev/)
+- [Chris Poskitt](https://cposkitt.github.io/)
+- [Lee Kok Khing](https://www.linkedin.com/in/lee-kok-khing-b074b69/)
+- [SQL Alchemy](https://www.sqlalchemy.org/)
+- [Vue 3 Datepicker](https://vue3datepicker.com/)
+- [Hero icons](https://heroicons.dev/)
 
 ## Authors
 
