@@ -17,7 +17,7 @@ Skill Based Role Portal: IS212 G2T2 - Ais Kachang
 
 ## Description
 
-![Homepage](Home.png)
+![Homepage](images/home.png)
 
 This project aims to be a skill based role portal that allows users to upskill themselves by searching and applying for company-internal roles based on their skills and experience. It is built with the frontend using Vue.JS and the backend using Python Flask. The database used is MySQL.
 
