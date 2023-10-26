@@ -108,11 +108,15 @@
 					<span class="text-h3 text-lg">User details:</span><br />
 					accessRights:
 					{{
-						user.accessRights == 0
+						user.role == 1
 							? "admin"
-							: user.accessRights == 1
+							: user.role == 2
 							? "user"
-							: "manager"
+							: user.role == 3
+							? "manager"
+							: user.role == 4
+							? "HR"
+							: "error"
 					}}<br />
 					userID: {{ user.id }}<br />
 					email: {{ user.email }}<br />
@@ -163,7 +167,9 @@ export default {
 		};
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		console.log(this.user);
+	},
 	methods: {
 		handleLogout() {
 			sessionStorage.clear();

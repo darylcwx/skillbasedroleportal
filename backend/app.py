@@ -20,6 +20,7 @@ db = SQLAlchemy(app)
 # 1) Import and declare routes
 from backend.routes.get.getUsers import getUsersBP
 from backend.routes.get.getUser import getUserBP
+from backend.routes.get.getUserByID import getUserByIDBP
 from backend.routes.get.getAllRoleSkillMatch import getAllRoleSkillMatchBP
 from backend.routes.get.getStaffSkills import getStaffSkillsBP
 from backend.routes.get.getRoleSkills import getRoleSkillsBP
@@ -37,6 +38,7 @@ from backend.routes.post.updateStaffApplication import updateStaffApplicationBP
 # 2) Register routes here
 app.register_blueprint(getUsersBP)
 app.register_blueprint(getUserBP)
+app.register_blueprint(getUserByIDBP)
 app.register_blueprint(getAllRoleSkillMatchBP)
 app.register_blueprint(getStaffSkillsBP)
 app.register_blueprint(getRoleSkillsBP)

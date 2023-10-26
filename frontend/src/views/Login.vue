@@ -5,32 +5,44 @@
 			class="custom-modal px-16 py-12 rounded-xl shadow-md shadow-slate-400">
 			<div class="pb-4 text-h1">Sign in to your account</div>
 
-			<div class="pb-4">
+			<div class="pb-4 relative">
 				<label
 					for="email"
 					class="form-label text-h3"
 					>Email</label
 				>
-				<select
+				<input
+					type="text"
 					id="email"
-					v-model="userEmail"
-					class="w-full form-select"
-					required>
-					<option selected>Choose a user</option>
-					<option
-						v-for="user in users"
-						:value="user.Email">
-						{{ user.Email }} ({{
-							user.Role == 1
+					class="form-control"
+					placeholder="id / name / dept / role"
+					v-model="search" />
+				<div
+					v-if="filteredUsers.length"
+					name="autocomplete"
+					class="absolute max-h-48 max-w-full overflow-y-scroll form-control z-10">
+					<div>
+						Showing {{ filteredUsers.length }} of
+						{{ users.length }} users
+					</div>
+					<hr class="my-1" />
+					<div
+						v-for="user of filteredUsers"
+						@click="selectUser(user.Email, user.Staff_ID)">
+						{{ user.Staff_FName }}&nbsp;{{ user.Staff_LName }} [
+						dept: {{ user.Dept }}, rights:
+						{{
+							user.Role === 1
 								? "admin"
-								: user.Role == 2
+								: user.Role === 2
 								? "user"
-								: user.Role == 3
+								: user.Role === 3
 								? "manager"
 								: "HR"
-						}})
-					</option>
-				</select>
+						}}
+						]
+					</div>
+				</div>
 				<div
 					id="emailValidationHelper"
 					class="invalid-feedback">
@@ -89,15 +101,17 @@
 	</div>
 </template>
 <script>
-import { resolveTransitionHooks } from "vue";
+import { ref } from "vue";
 
 export default {
 	data() {
 		return {
-			userEmail: "Choose a user",
 			users: [],
 			showSSOError: false,
 			reload: true,
+			search: "",
+			filteredUsers: [],
+			selectedUserId: 0,
 		};
 	},
 	created() {},
@@ -106,6 +120,35 @@ export default {
 		//console.log(this.$store.state.user);
 		this.fetchUsers();
 		console.log(this.users);
+	},
+	computed: {
+		filteredUsers() {
+			if (this.search === "") return [];
+			if (this.search.includes("@")) return [];
+			const searchLower = this.search.toLowerCase();
+			return this.users.filter((user) => {
+				const roleMap = { admin: 1, user: 2, manager: 3, hr: 4 };
+				for (let role of Object.keys(roleMap)) {
+					if (role.includes(searchLower)) {
+						var userRole = roleMap[role];
+					}
+				}
+				if (
+					user.Staff_ID.toString().includes(searchLower) ||
+					user.Staff_FName.toLowerCase().includes(searchLower) ||
+					user.Staff_LName.toLowerCase().includes(searchLower) ||
+					(
+						user.Staff_FName.toLowerCase() +
+						" " +
+						user.Staff_LName.toLowerCase()
+					).includes(searchLower) ||
+					user.Dept.toLowerCase().includes(searchLower) ||
+					user.Role === userRole
+				) {
+					return user;
+				}
+			});
+		},
 	},
 	methods: {
 		async fetchUsers() {
@@ -122,12 +165,17 @@ export default {
 				);
 			}
 		},
+		selectUser(email, id) {
+			this.search = email;
+			this.selectedUserId = id;
+			this.filteredUsers = [];
+		},
 		async handleLogin() {
 			document.getElementById("email").classList.remove("is-invalid");
 			document
 				.getElementById("emailValidationHelper")
 				.classList.remove("block");
-			if (this.userEmail === "Choose a user") {
+			if (this.search === "") {
 				document.getElementById("email").classList.add("is-invalid");
 				document
 					.getElementById("emailValidationHelper")
@@ -135,8 +183,8 @@ export default {
 				return;
 			}
 			try {
-				const apiUrl = `http://localhost:5000/api/user?email=${encodeURIComponent(
-					this.userEmail
+				const apiUrl = `http://localhost:5000/api/userID?id=${encodeURIComponent(
+					this.selectedUserId
 				)}`;
 				const response = await fetch(apiUrl);
 				const data = await response.json();
