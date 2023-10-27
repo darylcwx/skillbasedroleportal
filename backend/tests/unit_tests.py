@@ -1,18 +1,33 @@
 import unittest
 import requests
 import json
+import subprocess
+import os
 
 BASE_URL = "http://localhost:5000/api/"
 
-# GET requests; 22 tests.
-class TestSkill(unittest.TestCase):
+null_device = "nul" if os.name == "nt" else "/dev/null"
+
+class TestApp(unittest.TestCase):
+    """To be used for tests that do not modify the database."""
+    pass
+
+class TestAppModDB(unittest.TestCase):
+    """To be used for tests that modify the database."""
+    def tearDown(self):
+        # reset database and redirects output to null device to not flood terminal
+        with open(null_device, 'w') as devnull:
+            subprocess.run("python load_init_sql.py", shell=True, cwd="../..", stdout=devnull, stderr=subprocess.STDOUT)
+
+# # GET requests; 22 tests.
+class TestSkill(TestApp):
     # test for getAllSkills.py
     def test_getAllSkills(self):
         response = requests.get(BASE_URL + "allskills").status_code
         expected = 200
         self.assertEqual(response, expected)
 
-class TestApplicant(unittest.TestCase):
+class TestApplicant(TestApp):
     # test for getApplicants.py
     def test_getApplicants(self):
         response = requests.get(BASE_URL + "applicants?lid=1").json()
@@ -43,7 +58,7 @@ class TestApplicant(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestRoleListing(unittest.TestCase):
+class TestRoleListing(TestApp):
     # test for getRoleListings.py
     def test_getRoleListings(self):
         response = requests.get(BASE_URL + "rolelistings?staff_ID=130001").status_code
@@ -57,7 +72,7 @@ class TestRoleListing(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestRole(unittest.TestCase):
+class TestRole(TestApp):
     # test for getRoles.py
     def test_getRoles(self):
         response = requests.get(BASE_URL + "roles").status_code
@@ -85,7 +100,7 @@ class TestRole(unittest.TestCase):
         expected = 200
         self.assertEqual(response, expected)
 
-class TestRoleSkill(unittest.TestCase):
+class TestRoleSkill(TestApp):
     # test for getRoleSkills.py
     def test_getRoleSkills(self):
         response = requests.get(BASE_URL + "roleskills?rolename=Admin%20Executive").json()
@@ -109,7 +124,7 @@ class TestRoleSkill(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestRoleSkillMatch(unittest.TestCase):
+class TestRoleSkillMatch(TestApp):
         # test for getAllRoleSkillMatch.py
     def test_getAllRoleSkillMatch(self):
         response = requests.get(BASE_URL + "allroleskillmatch?lid=1").json()
@@ -184,7 +199,7 @@ class TestRoleSkillMatch(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestUser(unittest.TestCase):
+class TestUser(TestApp):
     # test for getUser.py
     def test_getUser(self):
         response = requests.get(BASE_URL + "user?email=jack.sim@allinone.com.sg").json()
@@ -233,7 +248,7 @@ class TestUser(unittest.TestCase):
         expected = 200
         self.assertEqual(response, expected)
 
-class TestStaffSkill(unittest.TestCase):
+class TestStaffSkill(TestApp):
     # test for getStaffSkills.py
     def test_getStaffSkills(self):
         response = requests.get(BASE_URL + "staffskills?sid=140001").json()
@@ -259,7 +274,7 @@ class TestStaffSkill(unittest.TestCase):
         self.assertEqual(response, expected)
 
 # POST requests; 9 tests.
-class TestCreateRoleListing(unittest.TestCase):
+class TestCreateRoleListing(TestAppModDB):
     # test for createRoleListing.py
     def test_createRoleListing(self):
         request_body = {'name': 'HR Director', 
@@ -300,7 +315,7 @@ class TestCreateRoleListing(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestUpdateRoleListing(unittest.TestCase):
+class TestUpdateRoleListing(TestAppModDB):
     # test for updateRoleListing.py
     def test_updateRoleListing(self):
         request_body = {
@@ -350,7 +365,7 @@ class TestUpdateRoleListing(unittest.TestCase):
                     }
         self.assertEqual(response, expected)
 
-class TestUpdateStaffApplication(unittest.TestCase):
+class TestUpdateStaffApplication(TestAppModDB):
     # test for updateStaffApplication.py
     def test_updateStaffApplication(self):
         response = requests.post(BASE_URL + "updateStaffApplication/1/130001").json()
@@ -374,4 +389,6 @@ class TestUpdateStaffApplication(unittest.TestCase):
         self.assertEqual(response, expected)
 
 if __name__ == '__main__':
+    print("=== Unit Tests Started ===")
     unittest.main()
+    print("=== Unit Tests Completed ===")
