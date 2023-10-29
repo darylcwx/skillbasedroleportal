@@ -1,12 +1,15 @@
 import pytest
 import time
-from unittest.mock import MagicMock
+from datetime import timedelta  # Import timedelta
 from selenium.webdriver.common.action_chains import ActionChains
-from datetime import datetime
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from freezegun import freeze_time
+from datetime import datetime
+from selenium.common.exceptions import ElementClickInterceptedException
+
 
 class TestNegativeScenarios:
     
@@ -103,8 +106,7 @@ class TestNegativeScenarios:
 
     @pytest.mark.time
     def test_timeScenario(self, driver):
-        current_time = datetime.now().replace(hour=23, minute=59, second=59)
-        mock_time = MagicMock(return_value=current_time)
+        # Set the current_time to "2024-03-01 23:59:55"
         driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
@@ -137,15 +139,33 @@ class TestNegativeScenarios:
         driver.execute_script('document.getElementsByTagName("html")[0].style.scrollBehavior = "auto"')
         confirm_role_listing_locator.click()
 
-        # Change the time
-        datetime.datetime.now = mock_time
-        time.sleep(10)
+        # To incremenet the time by 5 seconds -- to make it march 2nd
+        with freeze_time("2024-03-02 00:00:01"):
 
-        # Check for Apply button 
-        driver.switch_to.active_element
-        apply_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Apply')]")))
-        apply_button_locator.click()
+             # Log the current time after the 'with' block
+            current_time_after = datetime.now()
+            print("Current time after freeze_time:", current_time_after)
+            time.sleep(20)
 
-        # Switch to the modal element
-        modal_locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//button[contains(., 'Confirm')]")))
-        assert modal_locator.is_displayed()
+            # Check for Apply button 
+            driver.switch_to.active_element
+            # Check for Apply button
+            apply_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'btn btn-primary text-btn') and contains(text(), 'Apply')]")))
+
+            # Handle overlay or other elements that may be intercepting the button
+            try:
+                apply_button_locator.click()
+            except ElementClickInterceptedException:
+                # If the button click is intercepted, you can wait for the overlay to disappear or for a specific condition to be met
+                # For example, if it's a modal, you can wait for it to be invisible:
+                wait.until_not(EC.visibility_of_element_located((By.XPATH, "//div[@id='confirmApplyModal']")))
+                # Then, try clicking the button again
+                apply_button_locator.click()
+
+            # Waits for the confirmation button to appear
+            cfm_btn_locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//button[contains(., 'Confirm')]")))
+            cfm_btn_locator.click()
+
+            # Waits for the confirmation message to appear
+            confirmation_msg_locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(., 'Role listing has expired')]")))
+            assert confirmation_msg_locator.is_displayed()
