@@ -75,15 +75,17 @@ class TestNegativeScenarios:
 
         # Secondary verification by checking the text on the page
         # Looks for first role listings
-        role_listing_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(., 'Admin Executive')]/following-sibling::div//button[contains(., 'See more')]")))
+        role_listing_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(., 'Consultant')]/following-sibling::div//button[contains(., 'See more')]")))
+        driver.execute_script('document.getElementsByTagName("html")[0].style.scrollBehavior = "auto"')
         role_listing_locator.click()
 
         # Verifies the new URL after clikcing on the "see more" button
         current_url = driver.current_url
-        assert current_url == "http://127.0.0.1:5173/#/role/Admin%20Executive"
+        assert current_url == "http://127.0.0.1:5173/#/role/Consultant"
 
         # Verfies "Edit" and "Apply" button are present
         edit_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Edit')]")))
+        time.sleep(3)
         assert edit_button_locator.is_displayed()
         edit_button_locator.click()
 
@@ -103,6 +105,7 @@ class TestNegativeScenarios:
         
         # Error message locator
         error_message_locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(., 'Role description cannot be empty.')]")))
+        assert error_message_locator.is_displayed()
 
     @pytest.mark.time
     def test_timeScenario(self, driver):
