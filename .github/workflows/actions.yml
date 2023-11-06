@@ -90,8 +90,9 @@ jobs:
 
       - name: Move files
         run: | 
-          ls 
-          cd sbrp-data
+          cd backend
+          mkdir scheduler_data
+          cd ../sbrp-data
           mv * /backend/scheduler_data/
           echo "Files moved successfully ✨"
 
