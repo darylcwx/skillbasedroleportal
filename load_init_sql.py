@@ -52,7 +52,7 @@ with open('init.sql', 'r') as sql_file:
 
 # populate database with client provided data in CSV files
 # specify the path to the folder containing the CSV files
-folder_path = "/scheduler_data"
+folder_path = "./scheduler_data"
 
 placeholders = ""
 
@@ -65,6 +65,7 @@ for file_name in folder:
     if file_name.endswith(".csv"):
         # open the file
         # with open(os.path.join(folder_path, file_name), 'r') as csv_file:
+        print(os.path.join(folder_path, file_name))
         with open(os.path.join(folder_path, file_name), encoding="ISO-8859-1") as csv_file:
             # create a CSV reader object
             csv_reader = csv.reader(csv_file)
