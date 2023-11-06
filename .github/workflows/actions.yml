@@ -76,6 +76,7 @@ jobs:
           cd backend
           ls
 
+      # this is wrong cause it runs infinitely.
       - name: Run flask service
         run: |
           cd backend
