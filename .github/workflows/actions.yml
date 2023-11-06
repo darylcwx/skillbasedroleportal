@@ -98,10 +98,12 @@ jobs:
       
       - name: Load initial data
         run: |
-          ls 
-          cd backend
           ls
 
+          - name: Load initial data
+          run: |
+            cd backend
+            ls
 
       - name: Load initial data
         run: |
