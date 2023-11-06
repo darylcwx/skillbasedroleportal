@@ -72,22 +72,29 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           echo "Linted successfully ✨"
 
-      - name: Run MySQL Service
+      - name: Run MySQL service
         run: |
           sudo systemctl start mysql.service
           echo "MySQL set up successfully ✨"
       
-      - name: Create Database and Load Initial Data
+      - name: Create Database and Tables
         run: |
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" -e "CREATE DATABASE ${{ env.MYSQL_DATABASE }};"
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < init.sql
           echo "Database and tables created ✨"
       
-      - name: Clone Private Repo
+      - name: Clone private repo
         run: |
           git clone https://${{ env.PAT }}@github.com/darylcwx/sbrp-data.git
-          mv backend/sbrp-data/*.csv backend/scheduler_data/
+         
           echo "Cloned successfully ✨"
+
+      - name: Move files
+        run: | 
+          ls
+          ls backend/sbrp-data
+          mv *.csv backend/scheduler_data/
+          working-directory: ./backend/sbrp-data
 
       - name: Load initial data
         run: |
