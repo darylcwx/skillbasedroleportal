@@ -81,10 +81,10 @@ jobs:
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < init.sql
           echo "Database and tables created ✨"
 
-      # - name: Load initial data
-      #   run: |
-      #     python load_init_sql.py
-      #     echo "Data loaded successfully ✨"
+      - name: Load initial data
+        run: |
+          python load_init_sql.py
+          echo "Data loaded successfully ✨"
 
       # - name: Run unit tests
       #   run: |
