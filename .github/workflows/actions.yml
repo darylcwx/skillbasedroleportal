@@ -77,8 +77,9 @@ jobs:
 
       - name: Create Database and Load Initial Data
         run: |
+          cd ../
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" -e "CREATE DATABASE ${{ env.MYSQL_DATABASE }};"
-          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < ../../init.sql
+          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < init.sql
           echo "Database and tables created ✨"
 
       # - name: Load initial data
