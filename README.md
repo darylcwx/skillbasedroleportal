@@ -19,7 +19,7 @@ Skill Based Role Portal: IS212 G2T2 - Ais Kachang
 
 ![Homepage](images/Home.png)
 
-This project aims to be a skill based role portal that allows users to upskill themselves by searching and applying for company-internal roles based on their skills and experience. It is built with the frontend using Vue.JS and the backend using Python Flask. The database used is MySQL.
+This project aims to be a skill based role portal that allows users to upskill themselves by searching and applying for company-internal roles based on their skills and experience. HR/admins of the portal will be able to add new role listings. It is built with the frontend using Vue.JS and the backend using Python Flask. The database used is MySQL.
 
 ### Built With
 
@@ -41,7 +41,7 @@ This project aims to be a skill based role portal that allows users to upskill t
 
 For the frontend, simply run the commands below.
 
-```
+```bash
 # In root directory
 cd frontend
 npm install
@@ -52,7 +52,7 @@ npm run dev
 
 For the backend, we will be using Python Flask and a local MySQL server. No API keys are required for this application.
 
-```
+```bash
 # In root directory
 cd backend
 pip/pip3 install -r requirements.txt
@@ -69,6 +69,7 @@ DB_HOST=localhost
 DB_PORT=3306
 ```
 
+### Local MySQL database
 For the sample data, it is not stored in the repo, but you may use execute [init.sql](https://github.com/darylcwx/skillbasedroleportal/blob/main/init.sql) as the schema for the database, then load a .csv with their respective SQL table columns like so:
 
 ```bash
@@ -98,6 +99,10 @@ Press CTRL+C to quit
 ```
 
 This means that once you load the data in correctly, the application will be fully functional.
+
+For styling, refer to :
+- [/frontend/vite.config.js](https://github.com/darylcwx/skillbasedroleportal/blob/main/frontend/vite.config.js)
+- [/frontend/src/scss/custom.scss](https://github.com/darylcwx/skillbasedroleportal/blob/main/frontend/src/scss/custom.scss)
 
 ## Roadmap
 
