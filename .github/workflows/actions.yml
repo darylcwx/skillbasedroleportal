@@ -75,6 +75,7 @@ jobs:
       - name: Run flask service
         run: |
           cd backend
+          export FLASK_APP=app.py
           flask run
           echo "Flask running successfully ✨"
 
