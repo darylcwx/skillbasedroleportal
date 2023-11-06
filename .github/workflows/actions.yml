@@ -110,7 +110,8 @@ jobs:
           python load_init_sql.py
           echo "Data loaded successfully ✨"
 
-      # - name: Run unit tests
-      #   run: |
-      #     python backend/tests/unit_tests.py
-      #     echo "Unit testing run successfully ✨"
+      - name: Run unit tests
+        run: |
+          cd tests
+          python unit_tests.py
+          echo "Unit testing run successfully ✨"
