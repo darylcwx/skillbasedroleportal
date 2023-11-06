@@ -46,6 +46,8 @@ jobs:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: sbrp_ais_kachang
+      PAT: ${{ secrets.PAT }}
+
 
     steps:
       - name: Checkout code
@@ -74,12 +76,18 @@ jobs:
         run: |
           sudo systemctl start mysql.service
           echo "MySQL set up successfully ✨"
-
+      
       - name: Create Database and Load Initial Data
         run: |
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" -e "CREATE DATABASE ${{ env.MYSQL_DATABASE }};"
           mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < init.sql
           echo "Database and tables created ✨"
+      
+      - name: Clone Private Repo
+        run: |
+          git clone https://${{ env.PAT }}@github.com/darylcwx/sbrp-data.git
+          mv backend/sbrp-data/*.csv backend/scheduler_data/
+          echo "Cloned successfully ✨"
 
       - name: Load initial data
         run: |
