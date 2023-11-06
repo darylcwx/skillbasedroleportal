@@ -95,6 +95,13 @@ jobs:
           cd ../sbrp-data
           mv * ../backend/scheduler_data/
           echo "Files moved successfully ✨"
+      
+      - name: Load initial data
+        run: |
+          ls 
+          cd backend
+          ls
+
 
       - name: Load initial data
         run: |
