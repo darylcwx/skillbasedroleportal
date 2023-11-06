@@ -74,7 +74,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          backend/tests/unit_tests.py
+          python backend/tests/unit_tests.py
           echo "Unit testing run successfully ✨"
 
       # - name: Run integration tests (NOT YET COMPLETE)
