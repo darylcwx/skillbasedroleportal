@@ -72,6 +72,12 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           echo "Linted successfully ✨"
 
+          
+      - name: List1
+        run: |
+          cd backend
+          ls
+
       - name: Run flask service
         run: |
           cd backend
@@ -103,10 +109,6 @@ jobs:
           mv * ../backend/scheduler_data/
           echo "Files moved successfully ✨"
 
-      - name: List1
-        run: |
-          cd backend
-          ls
 
       - name: Load initial data
         run: |
