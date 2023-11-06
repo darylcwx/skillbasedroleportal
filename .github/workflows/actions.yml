@@ -86,15 +86,14 @@ jobs:
       - name: Clone private repo
         run: |
           git clone https://${{ env.PAT }}@github.com/darylcwx/sbrp-data.git
-         
           echo "Cloned successfully ✨"
 
       - name: Move files
         run: | 
-          ls
-          ls backend/sbrp-data
-          mv *.csv backend/scheduler_data/
-          working-directory: ./backend/sbrp-data
+          ls 
+          mv *.csv /backend/scheduler_data/
+          echo "Files moved successfully ✨"
+        working-directory: ./backend
 
       - name: Load initial data
         run: |
