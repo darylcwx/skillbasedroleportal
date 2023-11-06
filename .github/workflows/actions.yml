@@ -93,7 +93,7 @@ jobs:
           cd backend
           mkdir scheduler_data
           cd ../sbrp-data
-          mv * /backend/scheduler_data/
+          mv * ../backend/scheduler_data/
           echo "Files moved successfully ✨"
 
       - name: Load initial data
