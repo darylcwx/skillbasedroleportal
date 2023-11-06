@@ -74,14 +74,10 @@ jobs:
 
       - name: Run unit tests
         run: |
-          flask/unit_tests.py
+          backend/tests/unit_tests.py
           echo "Unit testing run successfully ✨"
 
-      - name: Run integration tests
-        run: |
-          python flask/integration_tests.py
-          echo "Integration testing run successfully ✨"
-
-      # Test script here -> Selenium?
-      # - name: Test
-      #   run: cd frontend && npm test
+      # - name: Run integration tests (NOT YET COMPLETE)
+      #   run: |
+      #     selenium_tests
+      #     echo "Integration testing run successfully ✨"
