@@ -91,9 +91,9 @@ jobs:
       - name: Move files
         run: | 
           ls 
-          mv *.csv /backend/scheduler_data/
+          cd sbrp-data
+          mv * /backend/scheduler_data/
           echo "Files moved successfully ✨"
-        working-directory: ./backend
 
       - name: Load initial data
         run: |
