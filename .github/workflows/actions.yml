@@ -107,11 +107,12 @@ jobs:
 
       - name: Load initial data
         run: |
+          cd backend
           python load_init_sql.py
           echo "Data loaded successfully ✨"
 
       - name: Run unit tests
         run: |
-          cd tests
+          cd backend/tests
           python unit_tests.py
           echo "Unit testing run successfully ✨"
