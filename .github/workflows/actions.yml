@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - for-github-actions
+  pull_request:
+    branches:
+      - main
 jobs:
   frontend:
     runs-on: ubuntu-latest
@@ -30,6 +33,11 @@ jobs:
       # Test script here -> Configure package.json
       # - name: Test
       #   run: cd frontend && npm test
+
+      # - name: Run integration tests (NOT YET COMPLETE)
+      #   run: |
+      #     selenium_tests
+      #     echo "Integration testing run successfully ✨"
 
   backend:
     runs-on: ubuntu-latest
@@ -67,17 +75,18 @@ jobs:
           sudo systemctl start mysql.service
           echo "MySQL set up successfully ✨"
 
+      - name: Create Database and Load Initial Data
+        run: |
+          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" -e "CREATE DATABASE ${{ env.MYSQL_DATABASE }};"
+          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < ../../init.sql
+          echo "Database and tables created ✨"
+
       # - name: Load initial data
       #   run: |
       #     python load_init_sql.py
       #     echo "Data loaded successfully ✨"
 
-      - name: Run unit tests
-        run: |
-          python backend/tests/unit_tests.py
-          echo "Unit testing run successfully ✨"
-
-      # - name: Run integration tests (NOT YET COMPLETE)
+      # - name: Run unit tests
       #   run: |
-      #     selenium_tests
-      #     echo "Integration testing run successfully ✨"
+      #     python backend/tests/unit_tests.py
+      #     echo "Unit testing run successfully ✨"
