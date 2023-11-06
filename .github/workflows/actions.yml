@@ -72,6 +72,12 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           echo "Linted successfully ✨"
 
+      - name: Run flask service
+        run: |
+          cd backend
+          flask run
+          echo "Flask running successfully ✨"
+
       - name: Run MySQL service
         run: |
           sudo systemctl start mysql.service
@@ -99,11 +105,6 @@ jobs:
       - name: List1
         run: |
           cd backend
-          ls
-
-      - name: List sched
-        run: |
-          cd backend/tests
           ls
 
       - name: Load initial data
