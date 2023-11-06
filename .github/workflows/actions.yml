@@ -98,16 +98,16 @@ jobs:
 
       - name: List1
         run: |
+          cd backend
           ls
 
       - name: List sched
         run: |
-          cd backend/scheduler_data
+          cd backend/tests
           ls
 
       - name: Load initial data
         run: |
-          cd backend
           python load_init_sql.py
           echo "Data loaded successfully ✨"
 
