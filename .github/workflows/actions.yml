@@ -96,13 +96,13 @@ jobs:
           mv * ../backend/scheduler_data/
           echo "Files moved successfully ✨"
       
-      - name: Load initial data
+      - name: List1
         run: |
           ls
 
-      - name: Load initial data
+      - name: List sched
         run: |
-          cd backend
+          cd backend/scheduler_data
           ls
 
       - name: Load initial data
