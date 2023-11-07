@@ -8,8 +8,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 def driver():
         print("Creating chrome driver")
         options = webdriver.ChromeOptions()
-        options.binary_location = "/usr/bin/google-chrome"
-        my_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options, executable_path="/usr/local/bin/chromedriver")
+        options.add_argument("--headless=new")
+        my_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
         yield my_driver
         print("Closing chrome driver")
         my_driver.quit()
