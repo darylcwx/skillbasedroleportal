@@ -31,11 +31,7 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      - name: Start Vite dev
-        run: |
-          cd frontend
-          nohup npm run dev &
-          echo "App running successfully ✨"
+     
 
   backend:
     runs-on: ubuntu-latest
@@ -118,9 +114,16 @@ jobs:
       - name: Prepare Selenium
         # https://github.com/marketplace/actions/setup-chromedriver
         uses: nanasess/setup-chromedriver@master
-
+      
+      - name: Start Vite dev
+        run: |
+          cd frontend
+          nohup npm run dev &
+          echo "App running successfully ✨"
+          
       - name: Run integration tests
         run: |
+          cd frontend
           cd selenium_tests
           pytest -m positive
           pytest -m boundary
