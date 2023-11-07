@@ -111,12 +111,6 @@ jobs:
       - name: Prepare Selenium
         # https://github.com/marketplace/actions/setup-chromedriver
         uses: nanasess/setup-chromedriver@master
-      
-      - name: Start Vite dev
-        run: |
-          cd frontend
-          nohup npm run dev &
-          echo "App running successfully ✨"
 
       - name: Run integration tests
         run: |
