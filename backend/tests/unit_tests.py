@@ -4,7 +4,7 @@ import json
 import subprocess
 import os
 
-BASE_URL = "http://localhost:5000/api/"
+BASE_URL = "http://127.0.0.1:5000/api/"
 
 null_device = "nul" if os.name == "nt" else "/dev/null"
 
@@ -31,6 +31,7 @@ class TestApplicant(TestApp):
     # test for getApplicants.py
     def test_getApplicants(self):
         response = requests.get(BASE_URL + "applicants?lid=1").json()
+        print(response)
         expected = {
                         "Applicants": [
                             {
