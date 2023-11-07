@@ -30,20 +30,6 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      - name: Set up ChromeDriver
-        run: |
-          cd selenium_tests
-          python conftest.py
-
-      - name: Run integration tests
-        run: |
-          cd selenium_tests
-          pytest -m positive
-          pytest -m boundary
-          pytest -m negative
-          echo "Integration testing run successfully ✨"
-
-
   backend:
     runs-on: ubuntu-latest
 
@@ -121,3 +107,17 @@ jobs:
           cd backend/tests
           python unit_tests.py
           echo "Unit testing run successfully ✨"
+
+      - name: Set up ChromeDriver
+        run: |
+          cd selenium_tests
+          python conftest.py
+  
+      - name: Run integration tests
+        run: |
+          cd selenium_tests
+          pytest -m positive
+          pytest -m boundary
+          pytest -m negative
+          echo "Integration testing run successfully ✨"
+  
