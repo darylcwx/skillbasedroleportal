@@ -60,7 +60,7 @@ if "load_init_sql.py" in os.listdir():
 
 placeholders = ""
 
-folder = ["access_control.csv", "staff.csv", "role.csv", "skill.csv", "role_skill.csv", "staff_skill.csv", "listings.csv", "staff_application.csv"]
+folder = ["Access_Control.csv", "Staff.csv", "Role.csv", "Skill.csv", "Role_Skill.csv", "Staff_Skill.csv", "Listings.csv", "Staff_Application.csv"]
 
 # iterate through all files in the folder
 for file_name in folder:
