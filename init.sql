@@ -23,7 +23,7 @@ create table `Staff` (
 	`Email` varchar(50) NOT NULL,
 	`Role` int NOT NULL,
 	constraint Staff_PK primary key (`Staff_ID`),
-    constraint Staff_FK1 foreign key (`Role`) references `access_control` (`Access_ID`)
+    constraint Staff_FK1 foreign key (`Role`) references `Access_Control` (`Access_ID`)
 );
 
 create table `Role` (
@@ -42,8 +42,8 @@ create table `Role_Skill` (
 	`Role_Name` varchar(50) NOT NULL,
 	`Skill_Name` varchar(50) NOT NULL,
 	constraint Role_Skill_PK primary key (`Role_Name`, `Skill_Name`),
-	constraint Role_Skill_FK1 foreign key (`Role_Name`) references `role` (`Role_Name`),
-    constraint Role_Skill_FK2 foreign key (`Skill_Name`) references `skill` (`Skill_Name`)
+	constraint Role_Skill_FK1 foreign key (`Role_Name`) references `Role` (`Role_Name`),
+    constraint Role_Skill_FK2 foreign key (`Skill_Name`) references `Skill` (`Skill_Name`)
 );
 
 create table `Staff_Skill` (
@@ -51,8 +51,8 @@ create table `Staff_Skill` (
 	`Skill_Name` varchar(50) NOT NULL,
 	`Skill_Profile_Desc` longtext NULL,
 	constraint Staff_Skill_PK primary key (`Staff_ID`, `Skill_Name`),
-	constraint Staff_Skill_FK1 foreign key (`Staff_ID`) references `staff` (`Staff_ID`),
-	constraint Staff_Skill_FK2 foreign key (`Skill_Name`) references `skill` (`Skill_Name`)
+	constraint Staff_Skill_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`),
+	constraint Staff_Skill_FK2 foreign key (`Skill_Name`) references `Skill` (`Skill_Name`)
 );
 
 create table `Listings` (
@@ -60,7 +60,7 @@ create table `Listings` (
     `Role_Name` varchar(50) NOT NULL,
 	`Deadline` date NOT NULL,
     constraint Listings_PK primary key (`listing_ID`),
-    constraint Listings_FK foreign key (`Role_Name`) references `role` (`Role_Name`)
+    constraint Listings_FK foreign key (`Role_Name`) references `Role` (`Role_Name`)
 );
 
 create table `Staff_Application` (
@@ -68,6 +68,6 @@ create table `Staff_Application` (
 	`Staff_ID` int NOT NULL,
     `listing_ID` int NOT NULL,
     constraint Staff_Application_PK primary key (`Application_ID`),
-    constraint Staff_Application_FK1 foreign key (`Staff_ID`) references `staff` (`Staff_ID`),
-    constraint Staff_Application_FK2 foreign key (`listing_ID`) references `listings` (`listing_ID`)
+    constraint Staff_Application_FK1 foreign key (`Staff_ID`) references `Staff` (`Staff_ID`),
+    constraint Staff_Application_FK2 foreign key (`listing_ID`) references `Listings` (`listing_ID`)
 );
