@@ -27,7 +27,8 @@ user = os.getenv("DB_USER", "root")
 password = os.getenv("DB_PASSWORD", "root")
 host = os.getenv("DB_HOST")
 port = os.getenv("DB_PORT", 3306)
-table_name = 'Listings'
+listings = 'Listings'
+staff_application = 'Staff_Application'
 
 db = mysql.connector.connect(
     host = host,
@@ -49,7 +50,8 @@ cursor = db.cursor()
 
 # remove all rows from Listings table
 cursor.execute(f"use SBRP_Ais_Kachang")
-cursor.execute(f"DELETE FROM {table_name}")
+cursor.execute(f"DELETE FROM {staff_application}")
+cursor.execute(f"DELETE FROM {listings}")
 
 db.commit()
 
