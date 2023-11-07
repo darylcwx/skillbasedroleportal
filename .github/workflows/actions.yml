@@ -31,10 +31,10 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      - name: Build
+      - name: Start Vite dev
         run: |
           cd frontend
-          npm run dev
+          nohup npm run dev &
           echo "App running successfully ✨"
 
   backend:
