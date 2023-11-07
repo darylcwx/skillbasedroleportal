@@ -128,7 +128,7 @@ jobs:
 
       - name: Load initial data
         run: |
-          python load_empty_listing_sql.py
+          python load_empty_listings_sql.py
           echo "Data loaded successfully ✨"
 
       - name: Run BOUNDARY integration tests
