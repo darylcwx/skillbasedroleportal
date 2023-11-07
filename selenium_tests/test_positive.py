@@ -8,7 +8,6 @@ class TestPositiveScenarios:
     
     # View Navigation Options (IS212-G2-NAV-001)
     @pytest.mark.positive
-    
     def test_positive_hr_view_navigation(self, driver):
         # Go to webpage
         driver.get("http://127.0.0.1:5173/")
