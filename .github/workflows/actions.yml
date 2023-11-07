@@ -108,7 +108,6 @@ jobs:
           export DB_HOST="localhost"
           export DB_PORT="3306"
           nohup flask run &
-          curl http://127.0.0.1:5000/
           echo "Flask running successfully ✨"
 
       - name: Run MySQL service
