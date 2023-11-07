@@ -117,7 +117,7 @@ you may run both the frontend Selenium testing for positive, negative, and bound
 
 ```bash
 # In root directory
-pytest -k "positive or negative" -m boundary
+pytest -k "positve or negative or boundary" --html=report.html —self-contained-html
 ```
 
 You may run the backend unit and integration tests for positive, negative and boundary as the following:
