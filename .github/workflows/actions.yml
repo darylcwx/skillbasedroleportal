@@ -39,7 +39,6 @@ jobs:
       #     selenium_tests
       #     echo "Integration testing run successfully ✨"
 
-
   # flask:
   #   runs-on: ubuntu-latest
   #   env:
@@ -61,7 +60,7 @@ jobs:
   #         cd backend && pip install -r requirements.txt
   #         pip install flake8
   #         echo "Dependencies installed successfully ✨"
-  
+
   backend:
     runs-on: ubuntu-latest
 
@@ -98,6 +97,7 @@ jobs:
         run: |
           cd backend
           ls
+          curl http://127.0.0.1:5000/
 
       # this is wrong cause it runs infinitely.
       - name: Run flask service
@@ -108,7 +108,8 @@ jobs:
           export DB_PASSWORD=${{ env.MYSQL_PASSWORD }}
           export DB_HOST="localhost"
           export DB_PORT="3306"
-          nohup flask run
+          nohup flask run &
+          curl http://127.0.0.1:5000/
           echo "Flask running successfully ✨"
 
       - name: Run MySQL service
