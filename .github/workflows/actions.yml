@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      - for-github-actions
+  pull_request:
+    branches:
+      - main
 jobs:
   frontend:
     runs-on: ubuntu-latest
@@ -26,9 +30,11 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      # Test script here -> Configure package.json
-      # - name: Test
-      #   run: cd frontend && npm test
+      # - name: Run integration tests (NOT YET COMPLETE)
+      #   run: |
+      #     selenium_tests
+      #     echo "Integration testing run successfully ✨"
+
 
   backend:
     runs-on: ubuntu-latest
@@ -36,7 +42,8 @@ jobs:
     env:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: sbrp_ais_kachang
+      MYSQL_DATABASE: SBRP_Ais_Kachang
+      PAT: ${{ secrets.PAT }}
 
     steps:
       - name: Checkout code
@@ -45,7 +52,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10.13"
+          python-version: "3.11.6"
 
       - name: Install dependencies
         run: |
@@ -61,26 +68,48 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           echo "Linted successfully ✨"
 
-      - name: Run MySQL Service
+      - name: Run flask service
+        run: |
+          cd backend
+          export FLASK_APP=app.py
+          export DB_USER=${{ env.MYSQL_USER }}
+          export DB_PASSWORD=${{ env.MYSQL_PASSWORD }}
+          export DB_HOST="localhost"
+          export DB_PORT="3306"
+          nohup flask run &
+          echo "Flask running successfully ✨"
+
+      - name: Run MySQL service
         run: |
           sudo systemctl start mysql.service
           echo "MySQL set up successfully ✨"
 
-      # - name: Load initial data
-      #   run: |
-      #     python load_init_sql.py
-      #     echo "Data loaded successfully ✨"
+      - name: Create Database and Tables
+        run: |
+          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" -e "CREATE DATABASE ${{ env.MYSQL_DATABASE }};"
+          mysql -u ${{ env.MYSQL_USER }} -p"${{ env.MYSQL_PASSWORD }}" ${{ env.MYSQL_DATABASE }} < init.sql
+          echo "Database and tables created ✨"
+
+      - name: Clone private repo
+        run: |
+          git clone https://${{ env.PAT }}@github.com/darylcwx/sbrp-data.git
+          echo "Cloned successfully ✨"
+
+      - name: Move files
+        run: |
+          cd backend
+          mkdir scheduler_data
+          cd ../sbrp-data
+          mv * ../backend/scheduler_data/
+          echo "Files moved successfully ✨"
+
+      - name: Load initial data
+        run: |
+          python load_init_sql.py
+          echo "Data loaded successfully ✨"
 
       - name: Run unit tests
         run: |
-          flask/unit_tests.py
+          cd backend/tests
+          python unit_tests.py
           echo "Unit testing run successfully ✨"
-
-      - name: Run integration tests
-        run: |
-          python flask/integration_tests.py
-          echo "Integration testing run successfully ✨"
-
-      # Test script here -> Selenium?
-      # - name: Test
-      #   run: cd frontend && npm test

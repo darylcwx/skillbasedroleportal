@@ -10,7 +10,4 @@ host = os.getenv("DB_HOST")
 port = os.getenv("DB_PORT")
 
 db= 'SBRP_Ais_Kachang'
-
 db_uri = f"mysql+pymysql://{user}:{password}@{host}:{port}/{db}"
-
-

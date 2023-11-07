@@ -52,11 +52,15 @@ with open('init.sql', 'r') as sql_file:
 
 # populate database with client provided data in CSV files
 # specify the path to the folder containing the CSV files
+
 folder_path = "./scheduler_data"
+if "load_init_sql.py" in os.listdir():
+    folder_path = "./backend/scheduler_data"
+
 
 placeholders = ""
 
-folder = ["access_control.csv", "staff.csv", "role.csv", "skill.csv", "role_skill.csv", "staff_skill.csv", "listings.csv", "staff_application.csv"]
+folder = ["Access_Control.csv", "Staff.csv", "Role.csv", "Skill.csv", "Role_Skill.csv", "Staff_Skill.csv", "Listings.csv", "Staff_Application.csv"]
 
 # iterate through all files in the folder
 for file_name in folder:
@@ -88,7 +92,7 @@ for file_name in folder:
                     placeholders = ','.join(values)
 
                     # special table staff_skill - to append with a NULL column.
-                    if file_name[:-4] == "staff_skill":
+                    if file_name[:-4] == "Staff_Skill":
                         placeholders += ",NULL"
 
                     # create the SQL string

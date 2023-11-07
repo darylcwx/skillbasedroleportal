@@ -4,7 +4,7 @@ import json
 import subprocess
 import os
 
-BASE_URL = "http://localhost:5000/api/"
+BASE_URL = "http://127.0.0.1:5000/api/"
 
 null_device = "nul" if os.name == "nt" else "/dev/null"
 
@@ -279,7 +279,7 @@ class TestCreateRoleListing(TestAppModDB):
     def test_createRoleListing(self):
         request_body = {'name': 'HR Director', 
                         'desc': "The HR Director is responsible for establishing the overall talent management strategies.", 
-                        'deadline': '2023-10-31'}
+                        'deadline': '2023-11-30'}
         headers = {'Content-Type': 'application/json'}
         response = requests.post(BASE_URL + "createRoleListing",
                                  data=json.dumps(request_body),
