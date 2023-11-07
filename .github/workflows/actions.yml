@@ -97,7 +97,6 @@ jobs:
         run: |
           cd backend
           ls
-          curl http://127.0.0.1:5000/
 
       # this is wrong cause it runs infinitely.
       - name: Run flask service
