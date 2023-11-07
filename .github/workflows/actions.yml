@@ -109,11 +109,11 @@ jobs:
           python unit_tests.py
           echo "Unit testing run successfully ✨"
 
-      - name: Set up ChromeDriver
-        run: |
-          cd selenium_tests
-          python conftest.py
-  
+      # - name: Set up ChromeDriver
+      #   run: |
+      #     cd selenium_tests
+      #     python conftest.py
+
       - name: Run integration tests
         run: |
           cd selenium_tests
@@ -121,4 +121,3 @@ jobs:
           pytest -m boundary
           pytest -m negative
           echo "Integration testing run successfully ✨"
-  
