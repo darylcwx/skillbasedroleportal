@@ -2,6 +2,9 @@
 
 Skill Based Role Portal: IS212 G2T2 - Ais Kachang
 
+# Link to repo
+https://github.com/darylcwx/skillbasedroleportal.git 
+
 ## Table of Contents
 
 - [Description](#description)
