@@ -46,7 +46,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11.6"
+          python-version: '3.11.6'
 
       - name: Install dependencies
         run: |
@@ -108,26 +108,22 @@ jobs:
           python unit_tests.py
           echo "Unit testing run successfully ✨"
 
-
-
       - name: Download and install Chrome
         run: |
-
-       # Install the chrome and chrome webdriver
-         apt-get install -y xvfb
-         apt-get install -y zip
-         apt-get install -y wget
-         apt-get install -y ca-certificates
-         apt-get install -y libnss3-dev libasound2 libxss1 libappindicator3-1 libindicator7 gconf-service libgconf-2-4 libpango1.0-0 xdg-utils fonts-liberation libgbm1
-         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-         dpkg -i google-chrome*.deb 
-         rm google-chrome*.deb
-         wget -N http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
-         unzip chromedriver_linux64.zip
-         chmod +x chromedriver
-         cp chromedriver /usr/local/bin
-         rm chromedriver_linux64.zip
-         rm chromedriver
+          apt-get install -y xvfb
+          apt-get install -y zip
+          apt-get install -y wget
+          apt-get install -y ca-certificates
+          apt-get install -y libnss3-dev libasound2 libxss1 libappindicator3-1 libindicator7 gconf-service libgconf-2-4 libpango1.0-0 xdg-utils fonts-liberation libgbm1
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+          dpkg -i google-chrome*.deb 
+          rm google-chrome*.deb
+          wget -N http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          cp chromedriver /usr/local/bin
+          rm chromedriver_linux64.zip
+          rm chromedriver
 
       - name: Prepare Selenium
         # https://github.com/marketplace/actions/setup-chromedriver
