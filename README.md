@@ -104,6 +104,29 @@ For styling, refer to :
 - [/frontend/vite.config.js](https://github.com/darylcwx/skillbasedroleportal/blob/main/frontend/vite.config.js)
 - [/frontend/src/scss/custom.scss](https://github.com/darylcwx/skillbasedroleportal/blob/main/frontend/src/scss/custom.scss)
 
+## Automated Testing
+
+Pre Requisites: Launch Wamp/Mamp and python startServices.py in the root directory
+
+```bash
+# In root directory
+python startServices.py
+```
+
+you may run both the frontend Selenium testing for positive, negative, and boundary test cases as the following:
+
+```bash
+# In root directory
+pytest -k "positive or negative" -m boundary
+```
+
+You may run the backend unit and integration tests for positive, negative and boundary as the following:
+
+```bash
+# In /backend/tests/ directory
+python unit_tests.py
+```
+
 ## Roadmap
 
 Tentatively, this application was done up for a school project and will not be maintained in the future.
