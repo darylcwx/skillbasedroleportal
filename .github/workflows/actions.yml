@@ -8,8 +8,15 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
-  frontend:
+  main:
+    env:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: SBRP_Ais_Kachang
+      PAT: ${{ secrets.PAT }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -30,24 +37,11 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      # - name: Run integration tests (NOT YET COMPLETE)
-      #   run: |
-      #     selenium_tests
-      #     echo "Integration testing run successfully ✨"
-
-
-  backend:
-    runs-on: ubuntu-latest
-
-    env:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: SBRP_Ais_Kachang
-      PAT: ${{ secrets.PAT }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Start Vite dev
+        run: |
+          cd frontend
+          nohup npm run dev &
+          echo "App running successfully ✨"
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -113,3 +107,32 @@ jobs:
           cd backend/tests
           python unit_tests.py
           echo "Unit testing run successfully ✨"
+
+      - name: Download and install Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get install -f
+          echo "Chrome installed successfully ✨"
+
+      - name: Prepare Selenium
+        # https://github.com/marketplace/actions/setup-chromedriver
+        uses: nanasess/setup-chromedriver@master
+
+      - name: Run MAIN integration tests
+        run: |
+          cd selenium_tests
+          pytest -m positive
+          pytest -m negative
+          echo "Main integration testing run successfully ✨"
+
+      - name: Load initial data
+        run: |
+          python load_empty_listings_sql.py
+          echo "Data loaded successfully ✨"
+
+      - name: Run BOUNDARY integration tests
+        run: |
+          cd selenium_tests
+          pytest -m boundary
+          echo "Boundary integration testing run successfully ✨"
