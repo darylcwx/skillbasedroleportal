@@ -9,6 +9,7 @@ def driver():
         print("Creating chrome driver")
         options = webdriver.ChromeOptions()
         options.add_argument("--headless=new")
+        options.add_argument("--window-size=1920,1080")
         my_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
         yield my_driver
         print("Closing chrome driver")
