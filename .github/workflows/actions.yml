@@ -67,7 +67,7 @@ jobs:
     env:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: sbrp_ais_kachang
+      MYSQL_DATABASE: SBRP_Ais_Kachang
       PAT: ${{ secrets.PAT }}
 
     steps:
