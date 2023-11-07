@@ -280,7 +280,7 @@ class TestCreateRoleListing(TestAppModDB):
     def test_createRoleListing(self):
         request_body = {'name': 'HR Director', 
                         'desc': "The HR Director is responsible for establishing the overall talent management strategies.", 
-                        'deadline': '2023-11-31'}
+                        'deadline': '2023-11-30'}
         headers = {'Content-Type': 'application/json'}
         response = requests.post(BASE_URL + "createRoleListing",
                                  data=json.dumps(request_body),
