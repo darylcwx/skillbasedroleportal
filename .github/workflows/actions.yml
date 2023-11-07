@@ -30,10 +30,18 @@ jobs:
           npm run build
           echo "Built successfully ✨"
 
-      # - name: Run integration tests (NOT YET COMPLETE)
-      #   run: |
-      #     selenium_tests
-      #     echo "Integration testing run successfully ✨"
+      - name: Set up ChromeDriver
+        run: |
+          cd selenium_tests
+          python conftest.py
+
+      - name: Run integration tests
+        run: |
+          cd selenium_tests
+          pytest -m positive
+          pytest -m boundary
+          pytest -m negative
+          echo "Integration testing run successfully ✨"
 
 
   backend:
