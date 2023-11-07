@@ -85,7 +85,7 @@ class TestNegativeScenarios:
 
         # Verfies "Edit" and "Apply" button are present
         edit_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Edit')]")))
-        driver.execute_script('document.getElementsByTagName("html")[0].style.scrollBehavior = "auto"')
+        time.sleep(3)
         assert edit_button_locator.is_displayed()
         edit_button_locator.click()
 
