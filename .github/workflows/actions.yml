@@ -107,8 +107,6 @@ jobs:
         run: |
           cd backend/tests
           python unit_tests.py
-          cd backend/tests
-          python unit_tests.py
           echo "Unit testing run successfully ✨"
 
       - name: Set up ChromeDriver
