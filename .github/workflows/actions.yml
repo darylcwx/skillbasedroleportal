@@ -120,10 +120,9 @@ jobs:
           cd frontend
           nohup npm run dev &
           echo "App running successfully ✨"
-          
+
       - name: Run integration tests
         run: |
-          cd frontend
           cd selenium_tests
           pytest -m positive
           pytest -m boundary
