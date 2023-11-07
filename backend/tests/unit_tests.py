@@ -31,7 +31,6 @@ class TestApplicant(TestApp):
     # test for getApplicants.py
     def test_getApplicants(self):
         response = requests.get(BASE_URL + "applicants?lid=1").json()
-        print(response)
         expected = {
                         "Applicants": [
                             {
