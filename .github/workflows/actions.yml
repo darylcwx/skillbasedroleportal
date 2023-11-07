@@ -71,7 +71,8 @@ jobs:
           export DB_HOST="localhost"
           export DB_PORT="3306"
           nohup flask run &
-          echo "Flask running successfully ✨"
+          echo "Flask running successfully ✨"\
+        # rsfioeww
 
       - name: Run MySQL service
         run: |
