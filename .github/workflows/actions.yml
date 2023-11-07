@@ -108,6 +108,13 @@ jobs:
           python unit_tests.py
           echo "Unit testing run successfully ✨"
 
+      - name: Download and install Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get install -f
+          echo "Chrome installed successfully ✨"
+
       - name: Prepare Selenium
         # https://github.com/marketplace/actions/setup-chromedriver
         uses: nanasess/setup-chromedriver@master
@@ -129,5 +136,3 @@ jobs:
           cd selenium_tests
           pytest -m boundary
           echo "Boundary integration testing run successfully ✨"
-
-
