@@ -134,15 +134,15 @@ jobs:
           mv * ../backend/scheduler_data/
           echo "Files moved successfully ✨"
 
-      # - name: Load initial data
-      #   run: |
-      #     python load_init_sql.py
-      #     echo "Data loaded successfully ✨"
-
-      - name: Start services
+      - name: Load initial data
         run: |
-          python startservices.py
-          echo "Flask, load_init_sql.py, npm, run successfully ✨"
+          python load_init_sql.py
+          echo "Data loaded successfully ✨"
+
+      # - name: Start services
+      #   run: |
+      #     python startservices.py
+      #     echo "Flask, load_init_sql.py, npm, run successfully ✨"
 
       - name: Run unit tests
         run: |
