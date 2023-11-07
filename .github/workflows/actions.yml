@@ -112,10 +112,22 @@ jobs:
         # https://github.com/marketplace/actions/setup-chromedriver
         uses: nanasess/setup-chromedriver@master
 
-      - name: Run integration tests
+      - name: Run MAIN integration tests
         run: |
           cd selenium_tests
           pytest -m positive
-          pytest -m boundary
           pytest -m negative
-          echo "Integration testing run successfully ✨"
+          echo "Main integration testing run successfully ✨"
+
+      - name: Load initial data
+        run: |
+          python load_empty_listing_sql.py
+          echo "Data loaded successfully ✨"
+
+      - name: Run BOUNDARY integration tests
+        run: |
+          cd selenium_tests
+          pytest -m boundary
+          echo "Boundary integration testing run successfully ✨"
+
+
