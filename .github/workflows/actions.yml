@@ -10,7 +10,13 @@ on:
       - main
 
 jobs:
-  frontend:
+  main:
+    env:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: SBRP_Ais_Kachang
+      PAT: ${{ secrets.PAT }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -36,19 +42,6 @@ jobs:
           cd frontend
           nohup npm run dev &
           echo "App running successfully ✨"
-
-  backend:
-    runs-on: ubuntu-latest
-
-    env:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: SBRP_Ais_Kachang
-      PAT: ${{ secrets.PAT }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
