@@ -11,7 +11,7 @@ class TestPositiveScenarios:
     
     def test_positive_hr_view_navigation(self, driver):
         # Go to webpage
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
         
@@ -33,7 +33,7 @@ class TestPositiveScenarios:
 
         # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Secondary verification by checking the text on the page
         # Looks for later expired listing for testing - to ensure that all testcases are still up and running
@@ -44,7 +44,7 @@ class TestPositiveScenarios:
 
         # Verifies the new URL after clikcing on the "see more" button
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/role/Consultant"
+        assert current_url == "http://127.0.0.1:5173/#/role/Consultant"
 
         # Verfies "Edit" and "Apply" button are present
         edit_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Edit')]")))
@@ -55,7 +55,7 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_positive_user_view_navigation(self, driver):
         # Go to webpage
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
 
@@ -78,7 +78,7 @@ class TestPositiveScenarios:
 
          # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Looks for first role listing provided -- in this case is the developer role listing. 
         role_listing_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(., 'Consultant')]/following-sibling::div//button[contains(., 'See more')]")))
@@ -88,7 +88,7 @@ class TestPositiveScenarios:
 
         # Verifies the new URL after clicking on the "see more" button
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/role/Consultant"
+        assert current_url == "http://127.0.0.1:5173/#/role/Consultant"
         
         # Verfies "Apply" button is present
         apply_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Apply')]")))
@@ -98,7 +98,7 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_positive_user_view_compatibility(self, driver):
         # Go to webpage
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
 
@@ -121,7 +121,7 @@ class TestPositiveScenarios:
 
          # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Look for a role listing that is provided
         role_listing_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[contains(., 'Consultant')]/following-sibling::div//button[contains(., 'See more')]")))
@@ -131,7 +131,7 @@ class TestPositiveScenarios:
 
         # Verfies the URL after clicking on the "see more" button
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/role/Consultant"
+        assert current_url == "http://127.0.0.1:5173/#/role/Consultant"
 
         # Finds the modal first before proceeding
         skills_required_modal = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[contains(@class, 'custom-modal')]//div[contains(text(), 'Skills Required')]")))

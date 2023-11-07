@@ -15,7 +15,7 @@ class TestNegativeScenarios:
     
     @pytest.mark.negative
     def test_negative_search(self, driver):
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
 
@@ -37,7 +37,7 @@ class TestNegativeScenarios:
 
         # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Secondary verification by checking search box
         search_box_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@class='form-control rounded' and @placeholder='IT, human resources, finance']")))
@@ -49,7 +49,7 @@ class TestNegativeScenarios:
     
     @pytest.mark.negative
     def test_negative_editDescription(self, driver):
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
 
@@ -71,7 +71,7 @@ class TestNegativeScenarios:
 
         # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Secondary verification by checking the text on the page
         # Looks for first role listings
@@ -81,7 +81,7 @@ class TestNegativeScenarios:
 
         # Verifies the new URL after clikcing on the "see more" button
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/role/Consultant"
+        assert current_url == "http://127.0.0.1:5173/#/role/Consultant"
 
         # Verfies "Edit" and "Apply" button are present
         edit_button_locator = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Edit')]")))

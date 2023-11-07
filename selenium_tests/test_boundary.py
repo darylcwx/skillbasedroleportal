@@ -10,7 +10,7 @@ class TestBoundaryScenarios:
     @pytest.mark.boundary
     def test_boundary_empty_data(self, driver):
         # Go to webpage
-        driver.get("http://localhost:5173/")
+        driver.get("http://127.0.0.1:5173/")
         # Declare wait for elements load
         wait = WebDriverWait(driver, 20)
         
@@ -32,7 +32,7 @@ class TestBoundaryScenarios:
 
         # Verify if the login was successful by checking the URL
         current_url = driver.current_url
-        assert current_url == "http://localhost:5173/#/home"
+        assert current_url == "http://127.0.0.1:5173/#/home"
 
         # Looks for the "Internal server error message as designed"
         error_message_Locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='flex flex-col']//div[text()=' Oops! Internal Server Error occurred. ']")))
