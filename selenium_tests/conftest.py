@@ -7,7 +7,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 @pytest.fixture()
 def driver():
         print("Creating chrome driver")
-        my_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        options = webdriver.ChromeOptions()
+        options.binary_location = "/usr/bin/google-chrome"
+        my_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options, executable_path="/usr/local/bin/chromedriver")
         yield my_driver
         print("Closing chrome driver")
         my_driver.quit()
