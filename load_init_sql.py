@@ -69,7 +69,6 @@ for file_name in folder:
     if file_name.endswith(".csv"):
         # open the file
         # with open(os.path.join(folder_path, file_name), 'r') as csv_file:
-        print(os.listdir())
         with open(os.path.join(folder_path, file_name), encoding="ISO-8859-1") as csv_file:
             # create a CSV reader object
             csv_reader = csv.reader(csv_file)
@@ -93,7 +92,7 @@ for file_name in folder:
                     placeholders = ','.join(values)
 
                     # special table staff_skill - to append with a NULL column.
-                    if file_name[:-4] == "staff_skill":
+                    if file_name[:-4] == "Staff_Skill":
                         placeholders += ",NULL"
 
                     # create the SQL string
